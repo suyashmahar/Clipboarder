@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clipboarder.Extension", "Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clipboarder.Encryption", "Clipboarder.Encryption\Clipboarder.Encryption.csproj", "{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{4C14020C-206E-43BB-8C49-B054FBAFC763}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C14020C-206E-43BB-8C49-B054FBAFC763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C14020C-206E-43BB-8C49-B054FBAFC763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C14020C-206E-43BB-8C49-B054FBAFC763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C14020C-206E-43BB-8C49-B054FBAFC763}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

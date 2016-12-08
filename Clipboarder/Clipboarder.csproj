@@ -79,6 +79,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Clipboarder.Encryption\Clipboarder.Encryption.csproj">
+      <Project>{42493ae7-77f0-4f3f-ad94-e4d140cd07b5}</Project>
+      <Name>Clipboarder.Encryption</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Clipboarder.Extension\Clipboarder.Extension.csproj">
+      <Project>{a64a1e47-93bc-41cd-8ed2-d85d3fc21a3b}</Project>
+      <Name>Clipboarder.Extension</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
