@@ -9,8 +9,8 @@ namespace Clipboarder.Encryption {
         private const int DerivationIterations = 1000;
 
         public static string Encrypt(string plainText, string passPhrase) {
-            var saltStringBytes = Generate256BitsOfRandomEntropy();
-            var ivStringBytes = Generate256BitsOfRandomEntropy();
+            var saltStringBytes = GenerateEntropy(32);
+            var ivStringBytes = GenerateEntropy(32);
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
             using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations)) {
                 var keyBytes = password.GetBytes(Keysize / 8);
@@ -63,8 +63,8 @@ namespace Clipboarder.Encryption {
             }
         }
 
-        private static byte[] Generate256BitsOfRandomEntropy() {
-            var randomBytes = new byte[32];
+        private static byte[] GenerateEntropy(int size) {
+            var randomBytes = new byte[size];
             using (var rngCsp = new RNGCryptoServiceProvider()) {
                 rngCsp.GetBytes(randomBytes);
             }

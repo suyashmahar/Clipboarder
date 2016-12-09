@@ -17,12 +17,18 @@ namespace UnitTests {
         static void Main(string[] args) {
             Console.WriteLine("Unit Tests for Clipboarder v0.1b");
             Console.WriteLine("Starting Tests...");
-            ImageConversionTests();
+            HashingTests();
+            DatabaseTests();
+            Console.ReadKey();
         }
 
+        /// <summary>
+        /// Tests all mehtods of Clipboarder.Encryption.BCrypt class
+        /// </summary>
         static void HashingTests() {
             Console.WriteLine();
             Console.WriteLine("Starting HashingTest...");
+
             Stopwatch newStopWatch = new Stopwatch();
             
             for (int i = 8; i < 16; i++) {
@@ -35,35 +41,79 @@ namespace UnitTests {
             Console.WriteLine();
             Console.WriteLine("HashingTest Completed.");
         }
-
+        
+        /// <summary>
+        /// Tests all methods of Clipboarder.Extension.DatabaseOperations
+        /// </summary>
         static void DatabaseTests() {
+            Console.WriteLine();
+            Console.WriteLine("Starting DatabaseTest...");
 
-        }
+            Console.WriteLine();
+            Console.WriteLine("Creating database...");
+            DatabaseOperations.CreatesNewDatabase("debug.db"); //Comment this line if database exists
 
-        static void ImageConversionTests() {
-            Image newImage = GetMeImage();
-            if (newImage == null) {
-                MessageBox.Show("This is not going to work");
+            Console.WriteLine("Starting Database Tests...");
+
+            Console.WriteLine("Initializing database..");
+            DatabaseOperations newDatabaseOperations = null;
+
+            try {
+                newDatabaseOperations = new DatabaseOperations();
+                newDatabaseOperations.ConnectDatabase("debug.db");
+                newDatabaseOperations.OpenConnection();
+            } catch (Exception ex) {
+                Console.WriteLine("Error : " + ex.Message);
+                Console.WriteLine("Stack Trace:\n" + ex.StackTrace);
+                return;
             }
-            string base64 = ImageConversion.ImageToBase64(newImage,newImage.RawFormat);
-            Console.WriteLine(base64);
-            newImage = ImageConversion.Base64ToImage(base64);
-            Clipboard.SetImage(newImage);
-        }
-        static Image GetMeImage() {
-            Image res = null;
-            Thread staThread = new Thread(x =>
-            {
-                try {
-                    res = Clipboard.GetImage();
-                } catch (Exception ex) {
-                    Console.WriteLine(ex.Message);
+            
+            Console.WriteLine("\nCleaning database...");
+            newDatabaseOperations.clearTables();
+
+            Console.WriteLine("Is record available for current user : " + newDatabaseOperations.CurrentUserHasID());
+            
+            Console.WriteLine("\nAdding new User...");
+            try {
+                newDatabaseOperations.AddNewUser("This is a password");
+            } catch (Exception ex) {
+                Console.WriteLine("Error : " + ex.Message);
+                Console.WriteLine("Stack Trace:\n" + ex.StackTrace);
+                return;
+            }
+
+            
+            Console.WriteLine("Making entires into database...");
+            try {
+                for (int i = 0; i < 10; i++) {                    
+                    newDatabaseOperations.EnterContentForCurrentUser(i, String.Format("This is a sample string:{0}", i), "This is a sample time");
                 }
-            });
-            staThread.SetApartmentState(ApartmentState.STA);
-            staThread.Start();
-            staThread.Join();
-            return res;
+            } catch (Exception ex) {
+                Console.WriteLine("Error : " + ex.Message);
+                Console.WriteLine("Stack Trace:\n" + ex.StackTrace);
+                return;
+            }
+
+            Console.WriteLine("Reading entries from the database...");
+            try {
+                List<string[]> outputList = newDatabaseOperations.GetData();
+                for (int i = 0; i < outputList.Count; i++) {
+                    string[] outputString = outputList[i];
+                    for (int j = 0; j < outputString.Length; j++) {
+                        Console.Write(outputString[j] + " | ");
+                    }
+                    Console.WriteLine("");
+                }
+            } catch (Exception ex) {
+                Console.WriteLine("Error : " + ex.Message);
+                Console.WriteLine("Stack Trace:\n" + ex.StackTrace);
+                return;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Database Operations completed successfully.");
+            newDatabaseOperations.CloseConnection();
         }
+        
     }
 }
