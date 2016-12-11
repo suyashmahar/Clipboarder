@@ -59,5 +59,45 @@ namespace Clipboarder.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Clipboarder_Clean_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Clipboarder-Clean-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Clipboarder_Debug_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Clipboarder-Debug-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Clipboarder_Gear_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Clipboarder-Gear-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Clipboarder_Menu_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Clipboarder-Menu-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
