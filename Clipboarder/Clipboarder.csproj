@@ -85,6 +85,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AskPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AskPassword.Designer.cs">
+      <DependentUpon>AskPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClipboardMonitor.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -96,6 +102,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="AskPassword.resx">
+      <DependentUpon>AskPassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -143,10 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Clipboarder-Debug-Icon.png" />
+    <None Include="Resources\Clipboarder-Warning-Icon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
