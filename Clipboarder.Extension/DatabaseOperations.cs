@@ -153,13 +153,21 @@ namespace Clipboarder.Extension {
         }
 
         /// <summary>
-        /// Clears all records in tables 'userNameTable' and 'entriesTable'
+        /// Deletes all records in tables 'userNameTable' and 'entriesTable'
         /// </summary>
         public void clearTables() {
             string deleteUsersTablequery = String.Format("DELETE FROM {0};", userNameTable);
             string deleteEntriesTablequery = String.Format("DELETE FROM {0};", entriesTable);
             ExecuteNonQueryCommand(deleteEntriesTablequery);
             ExecuteNonQueryCommand(deleteUsersTablequery);
+        }
+
+        /// <summary>
+        /// Deletes all records corresponding to current user in clipboarderEntries table
+        /// </summary>
+        public void RemoveRecordsForCurrentUsers() {
+            string query = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";", entriesTable, GetCurrentUserID());
+            ExecuteNonQueryCommand(query);
         }
 
         public void CloseConnection() {
