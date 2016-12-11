@@ -62,7 +62,7 @@ namespace Clipboarder
             this.SettingsToolStripMenuItem});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
-            this.MainMenuStrip.Size = new System.Drawing.Size(641, 45);
+            this.MainMenuStrip.Size = new System.Drawing.Size(814, 45);
             this.MainMenuStrip.TabIndex = 6;
             this.MainMenuStrip.Text = "MainMenuStrip";
             // 
@@ -159,9 +159,9 @@ namespace Clipboarder
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.MessageCountLabel});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 320);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 366);
             this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(641, 22);
+            this.MainStatusStrip.Size = new System.Drawing.Size(814, 22);
             this.MainStatusStrip.TabIndex = 8;
             this.MainStatusStrip.Text = "MainStatusStrip";
             // 
@@ -197,7 +197,7 @@ namespace Clipboarder
             this.MainDataGrid.Name = "MainDataGrid";
             this.MainDataGrid.ReadOnly = true;
             this.MainDataGrid.RowHeadersVisible = false;
-            this.MainDataGrid.Size = new System.Drawing.Size(641, 275);
+            this.MainDataGrid.Size = new System.Drawing.Size(814, 321);
             this.MainDataGrid.TabIndex = 9;
             // 
             // Number
@@ -240,7 +240,7 @@ namespace Clipboarder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 342);
+            this.ClientSize = new System.Drawing.Size(814, 388);
             this.Controls.Add(this.clipboardMonitor1);
             this.Controls.Add(this.MainDataGrid);
             this.Controls.Add(this.MainStatusStrip);
