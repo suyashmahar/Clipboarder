@@ -73,7 +73,7 @@ namespace Clipboarder.Extension {
 
         public Boolean CurrentUserHasID() {
             string command = String.Format("SELECT id FROM {0} WHERE userName='{1}';", userNameTable, Environment.UserName);
-            
+
             bool isReadPossible;
 
             using (databaseCommand = new SQLiteCommand(command, databaseConnection)) {
@@ -81,7 +81,7 @@ namespace Clipboarder.Extension {
                 SQLiteDataReader reader = databaseCommand.ExecuteReader();
 
                 isReadPossible = reader.Read();
-                
+
                 if (isReadPossible) {
                     return isReadPossible;
                 }
@@ -103,10 +103,10 @@ namespace Clipboarder.Extension {
                 reader.Read();
                 currentId = (int)reader.GetInt32(0);
             }
-            
+
             return currentId;
         }
-                
+
         /// <summary>
         /// Adds new record to userNameTable corresponding to user currently logged-in
         /// </summary>
@@ -128,13 +128,13 @@ namespace Clipboarder.Extension {
             string query = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", entriesTable, index, content, time, GetCurrentUserID());
             ExecuteNonQueryCommand(query);
         }
-        
+
         /// <summary>
         /// Pulls entries for current user from database and returns list of string array with encrypted  content.
         /// </summary>
         /// <returns>List of string[3] where string[0], [1] & [2] corresponds to Index, content and Time respectively</returns>
         public List<string[]> GetData() {
-            string query = String.Format("SELECT * FROM {0} where byUser='{1}';",entriesTable, GetCurrentUserID());
+            string query = String.Format("SELECT * FROM {0} where byUser='{1}';", entriesTable, GetCurrentUserID());
             databaseCommand.CommandText = query;
             databaseDataReader = databaseCommand.ExecuteReader();
 
@@ -146,7 +146,7 @@ namespace Clipboarder.Extension {
                 stringToAdd[0] = "" + databaseDataReader.GetInt32(1); //Index of record acording to clipboarder entry
                 stringToAdd[1] = databaseDataReader.GetString(2);   //content
                 stringToAdd[2] = databaseDataReader.GetString(3);   //time of entry in clipboarder
-                    
+
                 outputList.Add(stringToAdd);
             }
             return outputList;
@@ -170,9 +170,18 @@ namespace Clipboarder.Extension {
             ExecuteNonQueryCommand(query);
         }
 
+        public string GetUserPassword() {
+            string query = String.Format("SELECT * FROM {0} where id='{1}';", userNameTable, GetCurrentUserID());
+            databaseCommand.CommandText = query;
+            databaseDataReader = databaseCommand.ExecuteReader();
+
+            databaseDataReader.Read();
+            return databaseDataReader.GetString(2);   //password       
+        }
+
         public void CloseConnection() {
             databaseConnection.Close();
         }
-        
+
     }
 }
