@@ -109,28 +109,28 @@ namespace Clipboarder
             // saveContentToolStripMenuItem
             // 
             this.saveContentToolStripMenuItem.Name = "saveContentToolStripMenuItem";
-            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveContentToolStripMenuItem.Text = "Save Content";
             this.saveContentToolStripMenuItem.Click += new System.EventHandler(this.saveContentToolStripMenuItem_Click);
             // 
             // loadContentToolStripMenuItem
             // 
             this.loadContentToolStripMenuItem.Name = "loadContentToolStripMenuItem";
-            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.loadContentToolStripMenuItem.Text = "Load Content";
             this.loadContentToolStripMenuItem.Click += new System.EventHandler(this.loadContentToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
             // 
             // SaveAllToolStripMenuItem
             // 
             this.SaveAllToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
             this.SaveAllToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(152, 20);
+            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(146, 20);
             this.SaveAllToolStripMenuItem.Text = "Exit";
             this.SaveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItem_Click);
             // 
@@ -168,6 +168,7 @@ namespace Clipboarder
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(164, 22);
             this.toolStripMenuItem3.Text = "Clear clipboarder";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem4
             // 

@@ -16,7 +16,7 @@ namespace Clipboarder {
         public string password = null;
         Image LastClipboardImage = null;
 
-        public MainForm(){
+        public MainForm() {
             InitializeComponent();
         }
 
@@ -31,6 +31,7 @@ namespace Clipboarder {
         }
 
         #region MenuStripItems
+
         private void SaveAllToolStripMenuItem_Click(object sender, EventArgs e) {
             Close();
         }
@@ -46,22 +47,22 @@ namespace Clipboarder {
         private void toolStripMenuItem4_Click(object sender, EventArgs e) {
             Clipboard.Clear();
         }
-        #endregion
 
-        private void clipboardMonitor1_ClipboardChanged(object sender, Cllipboarder.ClipboardChangedEventArgs e) {
-            if (Clipboard.ContainsText()) {
-                if (!(Clipboard.GetText() == LastClipboardText)) {
-                    MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
-                    AddClipboardTextRow();
-                }
-            } else if (Clipboard.ContainsImage()) {
-                if (!(Clipboard.GetImage() == LastClipboardImage)) {
-                    MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
-                    AddClipboardImageRow();
-                }
-            }
+        private void toolStripMenuItem3_Click(object sender, EventArgs e) {
+            textDataGrid.Rows.Clear();
         }
 
+        private void saveContentToolStripMenuItem_Click(object sender, EventArgs e) {
+            ExportEntries();
+        }
+
+        private void loadContentToolStripMenuItem_Click(object sender, EventArgs e) {
+            ImportEntries();
+        }
+
+        #endregion
+
+        #region AddRows
         private void AddClipboardTextRow() {
             DataGridViewRow NewRow = new DataGridViewRow();
             NewRow.CreateCells(textDataGrid);
@@ -83,37 +84,30 @@ namespace Clipboarder {
             NewRow.Cells[0].Value = imageDataGrid.RowCount + 1;
             NewRow.Cells[1].Value = Clipboard.GetImage();
             NewRow.Cells[2].Value = DateTime.Now.ToShortTimeString();
-            
+
             imageDataGrid.Rows.Insert(imageDataGrid.RowCount, NewRow);
         }
+        #endregion
 
-        private void saveContentToolStripMenuItem_Click(object sender, EventArgs e) {
-            ExportEntries();
-        }
+        #region ImportExport
 
-        private void loadContentToolStripMenuItem_Click(object sender, EventArgs e) {
-            ImportEntries();
-        }
-
+        /// <summary>
+        /// Imports entries from database file earlier exported to.
+        /// </summary>
         private void ImportEntries() {
             if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, "contents.db"))) {
                 MessageBox.Show("No content to load. \n\n Use Menu > Save Content to save entries.", "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             } else {
-                AskPasswordEncrypt askPassword = new AskPasswordEncrypt(this);
-                DialogResult result = askPassword.ShowDialog();
-
                 // Uses DatabaseOperations class object to connect and write to database
                 DatabaseOperations dbOperations = new DatabaseOperations();
                 
-                if (result == DialogResult.OK) {
-                    if (!Properties.Settings.Default.doesDatabaseExists) {
-                        //Creates new Database
-                        DatabaseOperations.CreatesNewDatabase(databaseName);
-                        Properties.Settings.Default.doesDatabaseExists = true;
-                    }
+                if (!Properties.Settings.Default.doesDatabaseExists) {
+                    //Creates new Database
+                    DatabaseOperations.CreatesNewDatabase(databaseName);
+                    Properties.Settings.Default.doesDatabaseExists = true;
                 }
-
+                
                 // Connects to database and opens connection
                 try {
                     dbOperations = new DatabaseOperations();
@@ -124,18 +118,20 @@ namespace Clipboarder {
                     return;
                 }
 
-                // Checks equality of password provided and stored
-                if (!dbOperations.CurrentUserHasID() || !BCrypt.CheckPassword(password, dbOperations.GetUserPassword())) {
-                    if (!dbOperations.CurrentUserHasID()) {
-                        MessageBox.Show("Datbase for current user doesn't exists.  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    }
-                    if (!BCrypt.CheckPassword(password, dbOperations.GetUserPassword())) {
-                        Debug.WriteLine(password);
-                        MessageBox.Show("Password Incorrect.  \n\nOperation aborted.\n" , "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    }
+                AskPasswordDecrypt askPassword = new AskPasswordDecrypt(this, dbOperations.GetUserPassword());
+                DialogResult result = askPassword.ShowDialog();
 
+                if (result != DialogResult.OK){
                     return;
-                }else {
+                }
+
+                // Checks equality of password provided and stored
+                if (!dbOperations.CurrentUserHasID()) {
+                    if (!dbOperations.CurrentUserHasID()) {
+                        MessageBox.Show("Database for current user doesn't exists.  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    return;
+                } else {
                     try {
                         List<string[]> outputList = dbOperations.GetData();
 
@@ -144,7 +140,7 @@ namespace Clipboarder {
 
                         for (int i = 0; i < outputList.Count; i++) {
                             string[] outputString = outputList[i];
-                            
+
                             // Removes prefix "[text]" Incase of image duplicate line and replace "[text]" with "[image]"
                             outputString[1] = outputString[1].IndexOf("[text]") == -1 ? outputString[1] : outputString[1].Substring(6);
 
@@ -160,13 +156,13 @@ namespace Clipboarder {
                             }
                             textDataGrid.Rows.Insert(i, newRow);
                         }
-                    } catch (Exception ex) {
+                    } catch (Exception) {
                         MessageBox.Show("Error filling table with values. \n  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
                 }
-            }
-        }
+            } // Else statement for check on file existence
+        }   // Import Entries
 
         /// <summary>
         /// Exports all clipboarder entries to database
@@ -240,6 +236,23 @@ namespace Clipboarder {
                     }
                 }
                 password = null;
+            }
+        }
+
+        #endregion
+
+
+        private void clipboardMonitor1_ClipboardChanged(object sender, Cllipboarder.ClipboardChangedEventArgs e) {
+            if (Clipboard.ContainsText()) {
+                if (!(Clipboard.GetText() == LastClipboardText)) {
+                    MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
+                    AddClipboardTextRow();
+                }
+            } else if (Clipboard.ContainsImage()) {
+                if (!(Clipboard.GetImage() == LastClipboardImage)) {
+                    MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
+                    AddClipboardImageRow();
+                }
             }
         }
     }

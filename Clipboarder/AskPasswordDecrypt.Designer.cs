@@ -33,12 +33,14 @@
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.Enabled = false;
             this.okButton.Location = new System.Drawing.Point(158, 95);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 18;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // closeButton
             // 
@@ -49,6 +51,7 @@
             this.closeButton.TabIndex = 19;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // label3
             // 
@@ -70,6 +73,7 @@
             this.passwordBox.PasswordChar = '•';
             this.passwordBox.Size = new System.Drawing.Size(205, 20);
             this.passwordBox.TabIndex = 15;
+            this.passwordBox.TextChanged += new System.EventHandler(this.passwordBox_TextChanged);
             // 
             // label1
             // 
