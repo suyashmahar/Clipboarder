@@ -1,23 +1,23 @@
 ﻿// Blue Color : #FF0766FF
-
+// TODO check for pass within AskDecrypt
 using System;
 using System.Windows.Forms;
 using System.Drawing;
 using Clipboarder.Encryption;
 using Clipboarder.Extension;
 using System.Diagnostics;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Clipboarder {
     public partial class MainForm : Form {
         string LastClipboardText = "sample";
-        Image LastClipboardImage = null;
-
+        string databaseName = "contents.db";
         public string password = null;
+        Image LastClipboardImage = null;
 
         public MainForm(){
             InitializeComponent();
-            MessageBox.Show("Error connecting database. \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -41,6 +41,10 @@ namespace Clipboarder {
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e) {
             MessageCountLabel.Visible = true;
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e) {
+            Clipboard.Clear();
         }
         #endregion
 
@@ -84,56 +88,158 @@ namespace Clipboarder {
         }
 
         private void saveContentToolStripMenuItem_Click(object sender, EventArgs e) {
-            AskPassword askPassword = new AskPassword(this);
-            DialogResult result = askPassword.ShowDialog();
-            // Uses DatabaseOperations class to connect and write to database
-            DatabaseOperations dbOperations = new DatabaseOperations(); 
+            ExportEntries();
+        }
 
-            if (result == DialogResult.OK) {
-                if (!Properties.Settings.Default.doesDatabaseExists) {
-                    //Creates new Database
-                    DatabaseOperations.CreatesNewDatabase("contents.db");
-                    Properties.Settings.Default.doesDatabaseExists = true;
+        private void loadContentToolStripMenuItem_Click(object sender, EventArgs e) {
+            ImportEntries();
+        }
+
+        private void ImportEntries() {
+            if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, "contents.db"))) {
+                MessageBox.Show("No content to load. \n\n Use Menu > Save Content to save entries.", "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            } else {
+                AskPasswordEncrypt askPassword = new AskPasswordEncrypt(this);
+                DialogResult result = askPassword.ShowDialog();
+
+                // Uses DatabaseOperations class object to connect and write to database
+                DatabaseOperations dbOperations = new DatabaseOperations();
+                
+                if (result == DialogResult.OK) {
+                    if (!Properties.Settings.Default.doesDatabaseExists) {
+                        //Creates new Database
+                        DatabaseOperations.CreatesNewDatabase(databaseName);
+                        Properties.Settings.Default.doesDatabaseExists = true;
+                    }
                 }
 
                 // Connects to database and opens connection
                 try {
                     dbOperations = new DatabaseOperations();
-                    dbOperations.ConnectDatabase("contents.db");
+                    dbOperations.ConnectDatabase(databaseName);
                     dbOperations.OpenConnection();
                 } catch (Exception ex) {
-                    MessageBox.Show("Error connecting database. \n\nOperation aborted.\n" + ex.ToString() ,"Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    return;
-                }
-                
-                // Hashes password using BCrypt Class and adds new record to userName table in database
-                try {
-                     dbOperations.AddNewUser(BCrypt.HashPassword(password,BCrypt.GenerateSalt(10)));
-                } catch (Exception ex) {
-                    MessageBox.Show("Error adding current user record to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Error connecting database, database does not exists or is unreachable.  \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return;
                 }
 
-                //  Adds Content to databased as it is encrypted using password provided by the user
-                for (int i = 0; i < textDataGrid.RowCount; i++) {
-                    DataGridViewRow row = (DataGridViewRow)textDataGrid.Rows[i].Clone();
-                    for (int j = 0; j < 3; j++) {
-                        row.Cells[j].Value = textDataGrid.Rows[i].Cells[j].Value;
+                // Checks equality of password provided and stored
+                if (!dbOperations.CurrentUserHasID() || !BCrypt.CheckPassword(password, dbOperations.GetUserPassword())) {
+                    if (!dbOperations.CurrentUserHasID()) {
+                        MessageBox.Show("Datbase for current user doesn't exists.  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     }
-                    
-                    // Encrypts content and time 
-                    // '[text]' or '[image]' is appended to the begining of the content according to the content to identify decryption. 
-                    row.Cells[1].Value = "[text]" + StringCipher.Encrypt((string)row.Cells[1].Value, password);
-                    row.Cells[2].Value =  StringCipher.Encrypt((string)row.Cells[2].Value, password);
+                    if (!BCrypt.CheckPassword(password, dbOperations.GetUserPassword())) {
+                        Debug.WriteLine(password);
+                        MessageBox.Show("Password Incorrect.  \n\nOperation aborted.\n" , "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
 
-                    // Writing data to database
+                    return;
+                }else {
                     try {
-                        dbOperations.EnterContentForCurrentUser((int)row.Cells[0].Value, (string)row.Cells[1].Value, (string)row.Cells[2].Value);
+                        List<string[]> outputList = dbOperations.GetData();
+
+                        //clears current grid
+                        textDataGrid.Rows.Clear();
+
+                        for (int i = 0; i < outputList.Count; i++) {
+                            string[] outputString = outputList[i];
+                            
+                            // Removes prefix "[text]" Incase of image duplicate line and replace "[text]" with "[image]"
+                            outputString[1] = outputString[1].IndexOf("[text]") == -1 ? outputString[1] : outputString[1].Substring(6);
+
+                            //Decrypts strings 
+                            outputString[1] = StringCipher.Decrypt(outputString[1], password);
+                            outputString[2] = StringCipher.Decrypt(outputString[2], password);
+
+                            DataGridViewRow newRow = new DataGridViewRow();
+                            newRow.CreateCells(textDataGrid);
+
+                            for (int j = 0; j < outputString.Length; j++) {
+                                newRow.Cells[j].Value = outputString[j];
+                            }
+                            textDataGrid.Rows.Insert(i, newRow);
+                        }
                     } catch (Exception ex) {
-                        MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        MessageBox.Show("Error filling table with values. \n  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Exports all clipboarder entries to database
+        /// </summary>
+        public void ExportEntries() {
+            if (textDataGrid.RowCount == 0) {
+                MessageBox.Show("No entries to save.", "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            } else {
+                AskPasswordEncrypt askPassword = new AskPasswordEncrypt(this);
+                DialogResult result = askPassword.ShowDialog();
+
+                // Uses DatabaseOperations class object to connect and write to database
+                DatabaseOperations dbOperations = new DatabaseOperations();
+
+                if (result == DialogResult.OK) {
+                    if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, databaseName))) {
+                        //Creates new Database
+                        DatabaseOperations.CreatesNewDatabase(databaseName);
+                        Properties.Settings.Default.doesDatabaseExists = true;
+                    }
+
+                    // Connects to database and opens connection
+                    try {
+                        dbOperations = new DatabaseOperations();
+                        dbOperations.ConnectDatabase(databaseName);
+                        dbOperations.OpenConnection();
+                    } catch (Exception ex) {
+                        MessageBox.Show("Error connecting database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+
+                    // Deletes existing content for current user if corresponding record exists in userTable
+                    if (dbOperations.CurrentUserHasID()) {
+                        try {
+                            dbOperations.RemoveRecordsForCurrentUsers();
+                        } catch (Exception ex) {
+                            DialogResult messageResult = MessageBox.Show("Error adding current user record to database. \n\nDo you want to continue?.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                            if (messageResult == DialogResult.No) return;
+                        }
+                    } else {
+
+                        // Hashes password using BCrypt Class and adds new record to userName table in database
+                        try {
+                            dbOperations.AddNewUser(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
+                        } catch (Exception ex) {
+                            MessageBox.Show("Error adding current user record to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            return;
+                        }
+                    }
+
+                    //  Adds Content to databased as it is encrypted using password provided by the user
+                    for (int i = 0; i < textDataGrid.RowCount; i++) {
+                        DataGridViewRow row = (DataGridViewRow)textDataGrid.Rows[i].Clone();
+                        for (int j = 0; j < 3; j++) {
+                            row.Cells[j].Value = textDataGrid.Rows[i].Cells[j].Value;
+                        }
+
+                        // Encrypts content and time 
+                        // '[text]' or '[image]' is appended to the begining of the content according to the content to identify decryption. 
+                        row.Cells[1].Value = "[text]" + StringCipher.Encrypt((string)row.Cells[1].Value, password);
+                        row.Cells[2].Value = StringCipher.Encrypt((string)row.Cells[2].Value, password);
+
+                        // Writing data to database
+                        try {
+                            dbOperations.EnterContentForCurrentUser((int)row.Cells[0].Value, (string)row.Cells[1].Value, (string)row.Cells[2].Value);
+                        } catch (Exception ex) {
+                            MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            return;
+                        }
+                    }
+                }
+                password = null;
             }
         }
     }

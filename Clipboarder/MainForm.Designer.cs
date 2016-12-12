@@ -31,10 +31,10 @@ namespace Clipboarder
         private void InitializeComponent()
         {
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.MessageCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,22 +42,23 @@ namespace Clipboarder
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insertDataGridViewRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.MessageCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.clipboardMonitor1 = new Cllipboarder.ClipboardMonitor();
-            this.saveContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.imagePage = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.imageDataGrid = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textPage = new System.Windows.Forms.TabPage();
             this.textDataGrid = new System.Windows.Forms.DataGridView();
-            this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.MainMenuStrip.SuspendLayout();
             this.MainStatusStrip.SuspendLayout();
@@ -66,8 +67,8 @@ namespace Clipboarder
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.textPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.MainTabControl.SuspendLayout();
@@ -87,30 +88,6 @@ namespace Clipboarder
             this.MainMenuStrip.TabIndex = 6;
             this.MainMenuStrip.Text = "MainMenuStrip";
             // 
-            // MainStatusStrip
-            // 
-            this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.MessageCountLabel});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 366);
-            this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(814, 22);
-            this.MainStatusStrip.TabIndex = 8;
-            this.MainStatusStrip.Text = "MainStatusStrip";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
-            this.toolStripStatusLabel1.Text = "Ready";
-            // 
-            // MessageCountLabel
-            // 
-            this.MessageCountLabel.Name = "MessageCountLabel";
-            this.MessageCountLabel.Size = new System.Drawing.Size(47, 17);
-            this.MessageCountLabel.Text = "No Text";
-            this.MessageCountLabel.Visible = false;
-            // 
             // ToolsToolStripMenuItem
             // 
             this.ToolsToolStripMenuItem.AutoSize = false;
@@ -118,6 +95,7 @@ namespace Clipboarder
             this.ToolsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveContentToolStripMenuItem,
+            this.loadContentToolStripMenuItem,
             this.toolStripSeparator1,
             this.SaveAllToolStripMenuItem});
             this.ToolsToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Menu_Icon;
@@ -127,6 +105,25 @@ namespace Clipboarder
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(50, 50);
             this.ToolsToolStripMenuItem.Text = "Tools";
             this.ToolsToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // saveContentToolStripMenuItem
+            // 
+            this.saveContentToolStripMenuItem.Name = "saveContentToolStripMenuItem";
+            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveContentToolStripMenuItem.Text = "Save Content";
+            this.saveContentToolStripMenuItem.Click += new System.EventHandler(this.saveContentToolStripMenuItem_Click);
+            // 
+            // loadContentToolStripMenuItem
+            // 
+            this.loadContentToolStripMenuItem.Name = "loadContentToolStripMenuItem";
+            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadContentToolStripMenuItem.Text = "Load Content";
+            this.loadContentToolStripMenuItem.Click += new System.EventHandler(this.loadContentToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // SaveAllToolStripMenuItem
             // 
@@ -178,6 +175,7 @@ namespace Clipboarder
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(164, 22);
             this.toolStripMenuItem4.Text = "Clear clipboard";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // SettingsToolStripMenuItem
             // 
@@ -201,6 +199,30 @@ namespace Clipboarder
             this.insertDataGridViewRowToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.insertDataGridViewRowToolStripMenuItem.Text = "Insert DataGridViewRow";
             // 
+            // MainStatusStrip
+            // 
+            this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.MessageCountLabel});
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 366);
+            this.MainStatusStrip.Name = "MainStatusStrip";
+            this.MainStatusStrip.Size = new System.Drawing.Size(814, 22);
+            this.MainStatusStrip.TabIndex = 8;
+            this.MainStatusStrip.Text = "MainStatusStrip";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatusLabel1.Text = "Ready";
+            // 
+            // MessageCountLabel
+            // 
+            this.MessageCountLabel.Name = "MessageCountLabel";
+            this.MessageCountLabel.Size = new System.Drawing.Size(47, 17);
+            this.MessageCountLabel.Text = "No Text";
+            this.MessageCountLabel.Visible = false;
+            // 
             // clipboardMonitor1
             // 
             this.clipboardMonitor1.BackColor = System.Drawing.Color.Red;
@@ -211,18 +233,6 @@ namespace Clipboarder
             this.clipboardMonitor1.Text = "clipboardMonitor1";
             this.clipboardMonitor1.Visible = false;
             this.clipboardMonitor1.ClipboardChanged += new System.EventHandler<Cllipboarder.ClipboardChangedEventArgs>(this.clipboardMonitor1_ClipboardChanged);
-            // 
-            // saveContentToolStripMenuItem
-            // 
-            this.saveContentToolStripMenuItem.Name = "saveContentToolStripMenuItem";
-            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveContentToolStripMenuItem.Text = "Save Content";
-            this.saveContentToolStripMenuItem.Click += new System.EventHandler(this.saveContentToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // imagePage
             // 
@@ -253,28 +263,6 @@ namespace Clipboarder
             this.splitContainer1.SplitterDistance = 628;
             this.splitContainer1.TabIndex = 0;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(168, 286);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.ForeColor = System.Drawing.Color.DarkGray;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 286);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Preview pane";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // imageDataGrid
             // 
             this.imageDataGrid.AllowUserToAddRows = false;
@@ -297,12 +285,15 @@ namespace Clipboarder
             this.imageDataGrid.Size = new System.Drawing.Size(628, 286);
             this.imageDataGrid.TabIndex = 12;
             // 
-            // dataGridViewTextBoxColumn3
+            // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn3.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Time";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Index";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.Width = 66;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -313,15 +304,34 @@ namespace Clipboarder
             this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // dataGridViewTextBoxColumn1
+            // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Index";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.Width = 66;
+            this.dataGridViewTextBoxColumn3.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Time";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.ForeColor = System.Drawing.Color.DarkGray;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 286);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Preview pane";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(168, 286);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // textPage
             // 
@@ -356,21 +366,6 @@ namespace Clipboarder
             this.textDataGrid.Size = new System.Drawing.Size(806, 292);
             this.textDataGrid.TabIndex = 10;
             // 
-            // TimeColumn
-            // 
-            this.TimeColumn.FillWeight = 50F;
-            this.TimeColumn.HeaderText = "Time";
-            this.TimeColumn.Name = "TimeColumn";
-            this.TimeColumn.ReadOnly = true;
-            // 
-            // Content
-            // 
-            this.Content.FillWeight = 226.3333F;
-            this.Content.HeaderText = "Data";
-            this.Content.Name = "Content";
-            this.Content.ReadOnly = true;
-            this.Content.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
             // Number
             // 
             this.Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -380,6 +375,21 @@ namespace Clipboarder
             this.Number.ReadOnly = true;
             this.Number.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Number.Width = 66;
+            // 
+            // Content
+            // 
+            this.Content.FillWeight = 226.3333F;
+            this.Content.HeaderText = "Data";
+            this.Content.Name = "Content";
+            this.Content.ReadOnly = true;
+            this.Content.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // TimeColumn
+            // 
+            this.TimeColumn.FillWeight = 50F;
+            this.TimeColumn.HeaderText = "Time";
+            this.TimeColumn.Name = "TimeColumn";
+            this.TimeColumn.ReadOnly = true;
             // 
             // MainTabControl
             // 
@@ -415,8 +425,8 @@ namespace Clipboarder
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.textPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).EndInit();
             this.MainTabControl.ResumeLayout(false);
@@ -456,6 +466,7 @@ namespace Clipboarder
         private System.Windows.Forms.DataGridViewTextBoxColumn Content;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
         private System.Windows.Forms.TabControl MainTabControl;
+        private System.Windows.Forms.ToolStripMenuItem loadContentToolStripMenuItem;
     }
 }
 

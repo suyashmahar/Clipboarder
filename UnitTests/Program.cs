@@ -17,7 +17,7 @@ namespace UnitTests {
         static void Main(string[] args) {
             Console.WriteLine("Unit Tests for Clipboarder v0.1b");
             Console.WriteLine("Starting Tests...");
-            HashingTests();
+            //HashingTests();
             DatabaseTests();
             Console.ReadKey();
         }
@@ -109,6 +109,10 @@ namespace UnitTests {
                 Console.WriteLine("Stack Trace:\n" + ex.StackTrace);
                 return;
             }
+
+            Console.WriteLine();
+            Console.WriteLine("Reading password for current user...");
+            Console.WriteLine(newDatabaseOperations.GetUserPassword());
 
             Console.WriteLine();
             Console.WriteLine("Database Operations completed successfully.");

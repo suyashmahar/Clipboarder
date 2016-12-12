@@ -8,10 +8,10 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace Clipboarder {
-    public partial class AskPassword : Form {
+    public partial class AskPasswordEncrypt : Form {
         MainForm mainForm;
 
-        public AskPassword(MainForm mainForm) {
+        public AskPasswordEncrypt(MainForm mainForm) {
             this.mainForm = mainForm;
             InitializeComponent();
         }

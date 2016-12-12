@@ -1,5 +1,5 @@
 ﻿namespace Clipboarder {
-    partial class AskPassword {
+    partial class AskPasswordEncrypt {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -78,7 +78,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(92, 9);
+            this.label3.Location = new System.Drawing.Point(92, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(150, 13);
             this.label3.TabIndex = 4;
@@ -119,7 +119,7 @@
             this.warningSign.TabStop = false;
             this.warningSign.Visible = false;
             // 
-            // AskPassword
+            // AskPasswordEncrypt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -134,7 +134,7 @@
             this.Controls.Add(this.passwordBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "AskPassword";
+            this.Name = "AskPasswordEncrypt";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
