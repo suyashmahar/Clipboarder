@@ -40,5 +40,11 @@ namespace Clipboarder {
                 okButton.Enabled = true;
             }
         }
+
+        private void passwordBox_KeyUp(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter && okButton.Enabled == true) {
+                okButton.PerformClick();
+            }
+        }
     }
 }

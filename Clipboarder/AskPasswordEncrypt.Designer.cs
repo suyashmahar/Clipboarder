@@ -63,6 +63,7 @@
             this.passwordReEnterBox.Size = new System.Drawing.Size(207, 20);
             this.passwordReEnterBox.TabIndex = 2;
             this.passwordReEnterBox.TextChanged += new System.EventHandler(this.passwordReEnterBox_TextChanged);
+            this.passwordReEnterBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passwordReEnterBox_KeyDown);
             // 
             // label2
             // 
@@ -98,6 +99,7 @@
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.Enabled = false;
             this.okButton.Location = new System.Drawing.Point(159, 105);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);

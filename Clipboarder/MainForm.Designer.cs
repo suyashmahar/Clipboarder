@@ -36,14 +36,15 @@ namespace Clipboarder
             this.loadContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertDataGridViewRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.registerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unregisterHotkeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MessageCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.clipboardMonitor1 = new Cllipboarder.ClipboardMonitor();
             this.imagePage = new System.Windows.Forms.TabPage();
@@ -79,9 +80,9 @@ namespace Clipboarder
             this.MainMenuStrip.AutoSize = false;
             this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolsToolStripMenuItem,
-            this.toolStripMenuItem1,
+            this.toolStripMenuItem5,
             this.toolStripMenuItem2,
-            this.SettingsToolStripMenuItem});
+            this.toolStripMenuItem1});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
             this.MainMenuStrip.Size = new System.Drawing.Size(814, 45);
@@ -134,18 +135,19 @@ namespace Clipboarder
             this.SaveAllToolStripMenuItem.Text = "Exit";
             this.SaveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem1
+            // toolStripMenuItem5
             // 
-            this.toolStripMenuItem1.AutoSize = false;
-            this.toolStripMenuItem1.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripMenuItem1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.toolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripMenuItem1.Image = global::Clipboarder.Properties.Resources.Clipboarder_Gear_Icon;
-            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(50, 50);
-            this.toolStripMenuItem1.Text = "Settings";
-            this.toolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripMenuItem5.AutoSize = false;
+            this.toolStripMenuItem5.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItem5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.toolStripMenuItem5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripMenuItem5.Image = global::Clipboarder.Properties.Resources.Clipboarder_Gear_Icon;
+            this.toolStripMenuItem5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(50, 50);
+            this.toolStripMenuItem5.Text = "Settings";
+            this.toolStripMenuItem5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -178,32 +180,38 @@ namespace Clipboarder
             this.toolStripMenuItem4.Text = "Clear clipboard";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
-            // SettingsToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            this.SettingsToolStripMenuItem.AutoSize = false;
-            this.SettingsToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
-            this.SettingsToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.SettingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.insertDataGridViewRowToolStripMenuItem});
-            this.SettingsToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Debug_Icon;
-            this.SettingsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
-            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(50, 50);
-            this.SettingsToolStripMenuItem.Text = "Settings";
-            this.SettingsToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.SettingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
+            this.toolStripMenuItem1.AutoSize = false;
+            this.toolStripMenuItem1.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItem1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.toolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registerToolStripMenuItem,
+            this.unregisterHotkeyToolStripMenuItem});
+            this.toolStripMenuItem1.Image = global::Clipboarder.Properties.Resources.Clipboarder_Debug_Icon;
+            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(50, 50);
+            this.toolStripMenuItem1.Text = "Settings";
+            this.toolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // insertDataGridViewRowToolStripMenuItem
+            // registerToolStripMenuItem
             // 
-            this.insertDataGridViewRowToolStripMenuItem.Name = "insertDataGridViewRowToolStripMenuItem";
-            this.insertDataGridViewRowToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.insertDataGridViewRowToolStripMenuItem.Text = "Insert DataGridViewRow";
+            this.registerToolStripMenuItem.Name = "registerToolStripMenuItem";
+            this.registerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.registerToolStripMenuItem.Text = "Register Hotkey";
+            // 
+            // unregisterHotkeyToolStripMenuItem
+            // 
+            this.unregisterHotkeyToolStripMenuItem.Name = "unregisterHotkeyToolStripMenuItem";
+            this.unregisterHotkeyToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.unregisterHotkeyToolStripMenuItem.Text = "Unregister Hotkey";
             // 
             // MainStatusStrip
             // 
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
+            this.statusLabel,
             this.MessageCountLabel});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 366);
             this.MainStatusStrip.Name = "MainStatusStrip";
@@ -211,11 +219,11 @@ namespace Clipboarder
             this.MainStatusStrip.TabIndex = 8;
             this.MainStatusStrip.Text = "MainStatusStrip";
             // 
-            // toolStripStatusLabel1
+            // statusLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
-            this.toolStripStatusLabel1.Text = "Ready";
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(39, 17);
+            this.statusLabel.Text = "Ready";
             // 
             // MessageCountLabel
             // 
@@ -364,6 +372,7 @@ namespace Clipboarder
             this.textDataGrid.Name = "textDataGrid";
             this.textDataGrid.ReadOnly = true;
             this.textDataGrid.RowHeadersVisible = false;
+            this.textDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.textDataGrid.Size = new System.Drawing.Size(806, 292);
             this.textDataGrid.TabIndex = 10;
             // 
@@ -441,14 +450,12 @@ namespace Clipboarder
         internal System.Windows.Forms.MenuStrip MainMenuStrip;
         internal System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem SaveAllToolStripMenuItem;
-        internal System.Windows.Forms.ToolStripMenuItem SettingsToolStripMenuItem;
         internal System.Windows.Forms.StatusStrip MainStatusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem insertDataGridViewRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel MessageCountLabel;
         private Cllipboarder.ClipboardMonitor clipboardMonitor1;
         private System.Windows.Forms.ToolStripMenuItem saveContentToolStripMenuItem;
@@ -468,6 +475,9 @@ namespace Clipboarder
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
         private System.Windows.Forms.TabControl MainTabControl;
         private System.Windows.Forms.ToolStripMenuItem loadContentToolStripMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem registerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unregisterHotkeyToolStripMenuItem;
     }
 }
 

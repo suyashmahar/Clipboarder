@@ -39,5 +39,11 @@ namespace Clipboarder {
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        private void passwordReEnterBox_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter && okButton.Enabled == true) {
+                okButton.PerformClick();
+            }
+        }
     }
 }

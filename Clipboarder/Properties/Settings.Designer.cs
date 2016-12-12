@@ -34,5 +34,29 @@ namespace Clipboarder.Properties {
                 this["doesDatabaseExists"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int shortCuts {
+            get {
+                return ((int)(this["shortCuts"]));
+            }
+            set {
+                this["shortCuts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool areShortcutsEnabled {
+            get {
+                return ((bool)(this["areShortcutsEnabled"]));
+            }
+            set {
+                this["areShortcutsEnabled"] = value;
+            }
+        }
     }
 }

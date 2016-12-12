@@ -1,5 +1,4 @@
 ﻿// Blue Color : #FF0766FF
-// TODO check for pass within AskDecrypt
 using System;
 using System.Windows.Forms;
 using System.Drawing;
@@ -15,11 +14,16 @@ namespace Clipboarder {
         string databaseName = "contents.db";
         public string password = null;
         Image LastClipboardImage = null;
+        List<Hotkey> hotkeys = new List<Hotkey>();
+
+        Keys[] numKeys = {Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9}; //Number keys
 
         public MainForm() {
             InitializeComponent();
+            this.FormClosing += OnFormClosing;
+            RegisterShortcuts();
         }
-
+        
         private void Form1_Load(object sender, EventArgs e) {
             if (Clipboard.ContainsText()) {
                 MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
@@ -29,6 +33,71 @@ namespace Clipboarder {
                 AddClipboardImageRow();
             }
         }
+
+        // Calls for application key binding.
+        #region Key Binding
+        protected void OnFormClosing(Object sender, FormClosingEventArgs e) {
+            //if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            //e.Cancel = true;
+            //WindowState = FormWindowState.Minimized;
+            for (int i = 0; i < hotkeys.Count; i++) {
+                
+            }
+        }
+
+        /// <summary>
+        /// Registers hotkeys using HotKey class
+        /// </summary>
+        private void RegisterShortcuts() {
+            if (Properties.Settings.Default.areShortcutsEnabled) {
+                int keyboardShortcuts = Properties.Settings.Default.shortCuts;
+                for (int i = 0; i < keyboardShortcuts; i++) {
+                    Hotkey newHotkey = new Hotkey();
+
+                    // Ctrl + Shift + i
+                    newHotkey.Control = true;
+                    newHotkey.Shift = true;
+                    newHotkey.KeyCode = numKeys[i];
+
+                    // Modifies behaviour for abvoe key combination
+                    newHotkey.Pressed += delegate { onHotkeyPress(newHotkey); };
+                    try {
+                        newHotkey.Register(this);
+                    } catch (Exception ex) {
+                        MessageBox.Show("Error registering hotkeys. \n\nOperation aborted.\n\nError:" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+                    hotkeys.Add(newHotkey);
+                }
+            }
+        }
+
+        public void UnregisterShortcuts(bool reregisterKeys) {
+            for (int i = 0; i < hotkeys.Count; i++) {
+                hotkeys[i].Unregister();
+            }
+            
+            if (reregisterKeys) {
+                RegisterShortcuts();
+            }
+        }
+
+        private void onHotkeyPress(Hotkey key) {
+            if (Array.IndexOf(numKeys, key.KeyCode) < textDataGrid.RowCount) {
+                string temp = null;
+                if (Clipboard.ContainsText()) temp = Clipboard.GetText();
+
+                LastClipboardText = (string)textDataGrid.Rows[textDataGrid.RowCount - Array.IndexOf(numKeys, key.KeyCode) - 2].Cells[1].Value;
+                Clipboard.SetText(LastClipboardText);
+                SendKeys.SendWait("^v");
+
+                if (temp != null) {
+                    LastClipboardText = temp;
+                    Clipboard.SetText(LastClipboardText);
+                }
+            }
+        }
+        #endregion
 
         #region MenuStripItems
 
@@ -161,7 +230,10 @@ namespace Clipboarder {
                         return;
                     }
                 }
+                dbOperations.CloseConnection();
+                statusLabel.Text = "Export Completed";
             } // Else statement for check on file existence
+            password = "";
         }   // Import Entries
 
         /// <summary>
@@ -234,13 +306,14 @@ namespace Clipboarder {
                             return;
                         }
                     }
+                    dbOperations.CloseConnection();
                 }
                 password = null;
+                statusLabel.Text = "Export Completed";
             }
         }
 
         #endregion
-
 
         private void clipboardMonitor1_ClipboardChanged(object sender, Cllipboarder.ClipboardChangedEventArgs e) {
             if (Clipboard.ContainsText()) {
@@ -254,6 +327,11 @@ namespace Clipboarder {
                     AddClipboardImageRow();
                 }
             }
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e) {
+            SettingsForm settings = new SettingsForm(this);
+            settings.ShowDialog();
         }
     }
 }
