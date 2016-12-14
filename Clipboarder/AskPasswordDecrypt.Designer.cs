@@ -26,7 +26,7 @@
             this.okButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.passwordBox = new System.Windows.Forms.TextBox();
+            this.passwordBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -64,17 +64,17 @@
             this.label3.TabIndex = 20;
             this.label3.Text = "Password for securing content";
             // 
-            // passwordBox
+            // passwordBox1
             // 
-            this.passwordBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.passwordBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.passwordBox.Location = new System.Drawing.Point(109, 55);
-            this.passwordBox.Name = "passwordBox";
-            this.passwordBox.PasswordChar = '•';
-            this.passwordBox.Size = new System.Drawing.Size(205, 20);
-            this.passwordBox.TabIndex = 15;
-            this.passwordBox.TextChanged += new System.EventHandler(this.passwordBox_TextChanged);
-            this.passwordBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.passwordBox_KeyUp);
+            this.passwordBox1.Location = new System.Drawing.Point(109, 55);
+            this.passwordBox1.Name = "passwordBox1";
+            this.passwordBox1.PasswordChar = '•';
+            this.passwordBox1.Size = new System.Drawing.Size(205, 20);
+            this.passwordBox1.TabIndex = 15;
+            this.passwordBox1.TextChanged += new System.EventHandler(this.passwordBox_TextChanged);
+            this.passwordBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.passwordBox_KeyUp);
             // 
             // label1
             // 
@@ -94,11 +94,12 @@
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.passwordBox);
+            this.Controls.Add(this.passwordBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AskPasswordDecrypt";
             this.Text = "Clipboarder";
+            this.Load += new System.EventHandler(this.AskPasswordDecrypt_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,7 +110,7 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox passwordBox;
+        private System.Windows.Forms.TextBox passwordBox1;
         private System.Windows.Forms.Label label1;
     }
 }

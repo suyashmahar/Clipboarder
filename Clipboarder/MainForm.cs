@@ -7,6 +7,7 @@ using Clipboarder.Extension;
 using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Clipboarder {
     public partial class MainForm : Form {
@@ -235,12 +236,16 @@ namespace Clipboarder {
 
                         //clears current grid
                         imageDataGrid.Rows.Clear();
+
+                        //progress bar values
                         progressBar.Value = 0;
+                        progressBar.Visible = true;
+
                         for (int i = 0; i < outputList.Count; i++) {
                             progressBar.Value = (progressBar.Maximum / outputList.Count) * i;
                             string[] outputString = outputList[i];
                             
-                            //Decrypts strings 
+                            //Decrypts strings jy
                             outputString[1] = StringCipher.Decrypt(outputString[1], password);
                             outputString[2] = StringCipher.Decrypt(outputString[2], password);
 
@@ -323,7 +328,11 @@ namespace Clipboarder {
 
                     // Exports text Entries
                     if (textDataGrid.RowCount != 0) {
+                        progressBar.Visible = true;
+                        progressBar.Value = 0;
+
                         for (int i = 0; i < textDataGrid.RowCount; i++) {
+                            progressBar.Value = (progressBar.Maximum / textDataGrid.RowCount) * (i + 1);
                             DataGridViewRow row = (DataGridViewRow)textDataGrid.Rows[i].Clone();
                             for (int j = 0; j < 3; j++) {
                                 row.Cells[j].Value = textDataGrid.Rows[i].Cells[j].Value;
@@ -341,11 +350,17 @@ namespace Clipboarder {
                                 return;
                             }
                         }
+                        progressBar.Value = 0;
+                        progressBar.Visible = false;
                     }
 
                     // Exports image Entries
                     if (imageDataGrid.RowCount != 0) {
+                        progressBar.Visible = true;
+                        progressBar.Value = 0;
+
                         for (int i = 0; i < imageDataGrid.RowCount; i++) {
+                            progressBar.Value = (progressBar.Maximum / textDataGrid.RowCount) * (i + 1);
                             DataGridViewRow row = (DataGridViewRow)imageDataGrid.Rows[i].Clone();
                             for (int j = 0; j < 3; j++) {
                                 row.Cells[j].Value = imageDataGrid.Rows[i].Cells[j].Value;
@@ -363,11 +378,14 @@ namespace Clipboarder {
                                 return;
                             }
                         }
+                        progressBar.Value = 0;
+                        progressBar.Visible = false;
                     }
                     dbOperations.CloseConnection();
                 }
                 password = null;
                 statusLabel.Text = "Export Completed";
+                dbOperations.CloseConnection();
             }
         }
 
@@ -388,6 +406,43 @@ namespace Clipboarder {
         private void toolStripMenuItem5_Click(object sender, EventArgs e) {
             SettingsForm settings = new SettingsForm(this);
             settings.ShowDialog();
+        }
+        
+        public void reIndexDataGridContent() {
+            // Reindexing textDataGridView
+            for (int i = 0; i < textDataGrid.RowCount; i++) {
+                DataGridViewRow row = textDataGrid.Rows[i];
+                row.Cells[0].Value = i + 1;
+            }
+            
+            // Reindexing imageDataGridView
+            for (int i = 0; i < imageDataGrid.RowCount; i++) {
+                DataGridViewRow row = imageDataGrid.Rows[i];
+                row.Cells[0].Value = i + 1;
+            }
+        }
+
+        private void reindexRowsToolStripMenuItem_Click(object sender, EventArgs e) {
+            reIndexDataGridContent();
+        }
+
+        private void textDataGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) {
+            reIndexDataGridContent();
+        }
+
+        private void imageDataGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) {
+            reIndexDataGridContent();
+        }
+
+        private void fillWithGarbageToolStripMenuItem_Click(object sender, EventArgs e) {
+            for (int i = 0; i < 100; i++) {
+                //Thread.Sleep(200);
+                Clipboard.SetText(String.Format("{0}{1}{2}{3}{4}{5}",i,i+8,i*i,Math.Log(i),Math.Log10(i), Math.Sin(i)));
+            }
+        }
+
+        private void progressBar_Click(object sender, EventArgs e) {
+
         }
     }
 }
