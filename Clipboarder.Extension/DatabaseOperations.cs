@@ -16,16 +16,17 @@ namespace Clipboarder.Extension {
         SQLiteDataReader databaseDataReader;
 
         static string userNameTable = "users";  // Table name corresponding to table containing records of Users
-        static string entriesTable = "clipboarderEntries";   // Table name corresponding to table containing entries of Clipboard
-
+        static string textEntriesTable = "clipboarderTextEntries";   // Table name corresponding to table containing text entries of Clipboard
+        static string imageEntriesTable = "clipboarderImageEntries";   // Table name corresponding to table containing image entries of Clipboard
         /// <summary>
         /// Creates new database along with all tables and releationships among tables.
         /// </summary>
         /// <param name="databaseName">Path or name of new database.</param>
         public static void CreatesNewDatabase(string databaseName) {
             string createUsersTableQuery = String.Format("CREATE TABLE \"{0}\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"userName\" TEXT NOT NULL  UNIQUE , \"password\" TEXT);", userNameTable);
-            string createEntriesTableQuery = String.Format("CREATE TABLE \"{0}\" (id INTEGER PRIMARY KEY  AUTOINCREMENT, indexNumber INTEGER, content TEXT, time TEXT, byUser TEXT NOT NULL, FOREIGN KEY(byUser) REFERENCES users(id));", entriesTable);
-
+            string createTextEntriesTableQuery = String.Format("CREATE TABLE \"{0}\" (id INTEGER PRIMARY KEY  AUTOINCREMENT, indexNumber INTEGER, content TEXT, time TEXT, byUser TEXT NOT NULL, FOREIGN KEY(byUser) REFERENCES users(id));", textEntriesTable);
+            string createImageEntriesTableQuery = String.Format("CREATE TABLE \"{0}\" (id INTEGER PRIMARY KEY  AUTOINCREMENT, indexNumber INTEGER, content TEXT, time TEXT, byUser TEXT NOT NULL, FOREIGN KEY(byUser) REFERENCES users(id));", imageEntriesTable);
+            
             // Description of connection string at : http://adodotnetsqlite.sourceforge.net/documentation/SQLiteConnection/ConnectionString.php.
             // Creating new file with compression turned off.
             try {
@@ -34,7 +35,9 @@ namespace Clipboarder.Extension {
 
                 SQLiteCommand newCommand = new SQLiteCommand(createUsersTableQuery, newConnection);
                 newCommand.ExecuteNonQuery();
-                newCommand = new SQLiteCommand(createEntriesTableQuery, newConnection);
+                newCommand = new SQLiteCommand(createTextEntriesTableQuery, newConnection); // Creates table for text content
+                newCommand.ExecuteNonQuery();
+                newCommand = new SQLiteCommand(createImageEntriesTableQuery, newConnection);// Creates table for storing image in Base64 format
                 newCommand.ExecuteNonQuery();
 
                 newConnection.Close();
@@ -124,8 +127,19 @@ namespace Clipboarder.Extension {
         /// <param name="index">Index of content.</param>
         /// <param name="content">Content to be written to the database, if security is a concern content should be encrypted.</param>
         /// <param name="time">Time of entry in clipboarder.</param>
-        public void EnterContentForCurrentUser(int index, string content, string time) {
-            string query = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", entriesTable, index, content, time, GetCurrentUserID());
+        public void EnterTextContentForCurrentUser(int index, string content, string time) {
+            string query = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", textEntriesTable, index, content, time, GetCurrentUserID());
+            ExecuteNonQueryCommand(query);
+        }
+
+        /// <summary>
+        /// Adds record to database entriesTable. Note - content column should be encrypted 
+        /// </summary>
+        /// <param name="index">Index of content.</param>
+        /// <param name="content">Content to be written to the database, if security is a concern content should be encrypted.</param>
+        /// <param name="time">Time of entry in clipboarder.</param>
+        public void EnterImageContentForCurrentUser(int index, string content, string time) {
+            string query = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", imageEntriesTable, index, content, time, GetCurrentUserID());
             ExecuteNonQueryCommand(query);
         }
 
@@ -133,8 +147,31 @@ namespace Clipboarder.Extension {
         /// Pulls entries for current user from database and returns list of string array with encrypted  content.
         /// </summary>
         /// <returns>List of string[3] where string[0], [1] & [2] corresponds to Index, content and Time respectively</returns>
-        public List<string[]> GetData() {
-            string query = String.Format("SELECT * FROM {0} where byUser='{1}';", entriesTable, GetCurrentUserID());
+        public List<string[]> GetTextData() {
+            string query = String.Format("SELECT * FROM {0} where byUser='{1}';", textEntriesTable, GetCurrentUserID());
+            databaseCommand.CommandText = query;
+            databaseDataReader = databaseCommand.ExecuteReader();
+
+            List<string[]> outputList = new List<string[]>();
+            while (databaseDataReader.Read()) {
+                string[] stringToAdd = new String[3];
+
+                //ignored value at [0] since id of record is of no use in this context.
+                stringToAdd[0] = "" + databaseDataReader.GetInt32(1); //Index of record acording to clipboarder entry
+                stringToAdd[1] = databaseDataReader.GetString(2);   //content
+                stringToAdd[2] = databaseDataReader.GetString(3);   //time of entry in clipboarder
+
+                outputList.Add(stringToAdd);
+            }
+            return outputList;
+        }
+
+        /// <summary>
+        /// Pulls entries from image table for current user from database and returns list of string array with encrypted  content.
+        /// </summary>
+        /// <returns>List of string[3] where string[0], [1] & [2] corresponds to Index, content and Time respectively</returns>
+        public List<string[]> GetImageData() {
+            string query = String.Format("SELECT * FROM {0} where byUser='{1}';", imageEntriesTable, GetCurrentUserID());
             databaseCommand.CommandText = query;
             databaseDataReader = databaseCommand.ExecuteReader();
 
@@ -157,8 +194,11 @@ namespace Clipboarder.Extension {
         /// </summary>
         public void clearTables() {
             string deleteUsersTablequery = String.Format("DELETE FROM {0};", userNameTable);
-            string deleteEntriesTablequery = String.Format("DELETE FROM {0};", entriesTable);
-            ExecuteNonQueryCommand(deleteEntriesTablequery);
+            string deleteTextEntriesTablequery = String.Format("DELETE FROM {0};", textEntriesTable);
+            string deleteImageEntriesTablequery = String.Format("DELETE FROM {0};", imageEntriesTable);
+
+            ExecuteNonQueryCommand(deleteTextEntriesTablequery);
+            ExecuteNonQueryCommand(deleteImageEntriesTablequery);
             ExecuteNonQueryCommand(deleteUsersTablequery);
         }
 
@@ -166,8 +206,10 @@ namespace Clipboarder.Extension {
         /// Deletes all records corresponding to current user in clipboarderEntries table
         /// </summary>
         public void RemoveRecordsForCurrentUsers() {
-            string query = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";", entriesTable, GetCurrentUserID());
-            ExecuteNonQueryCommand(query);
+            string removeTextContentQuery = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";", textEntriesTable, GetCurrentUserID());
+            string removeImageContentQuery = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";", imageEntriesTable, GetCurrentUserID());
+            ExecuteNonQueryCommand(removeTextContentQuery);
+            ExecuteNonQueryCommand(removeImageContentQuery);
         }
 
         public string GetUserPassword() {

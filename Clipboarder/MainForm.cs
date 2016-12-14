@@ -26,10 +26,8 @@ namespace Clipboarder {
         
         private void Form1_Load(object sender, EventArgs e) {
             if (Clipboard.ContainsText()) {
-                MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
-                AddClipboardTextRow();
+               AddClipboardTextRow();
             } else if (Clipboard.ContainsImage()) {
-                MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
                 AddClipboardImageRow();
             }
         }
@@ -110,7 +108,7 @@ namespace Clipboarder {
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e) {
-            MessageCountLabel.Visible = true;
+            //MessageCountLabel.Visible = true;
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e) {
@@ -142,6 +140,8 @@ namespace Clipboarder {
             NewRow.Cells[2].Value = System.DateTime.Now.ToShortTimeString();
 
             textDataGrid.Rows.Insert(textDataGrid.RowCount, NewRow);
+
+            MainTabControl.SelectedIndex = 0;   // Selects text tab
         }
 
         private void AddClipboardImageRow() {
@@ -155,6 +155,8 @@ namespace Clipboarder {
             NewRow.Cells[2].Value = DateTime.Now.ToShortTimeString();
 
             imageDataGrid.Rows.Insert(imageDataGrid.RowCount, NewRow);
+
+            MainTabControl.SelectedIndex = 1;   // Selects image tab
         }
         #endregion
 
@@ -202,17 +204,14 @@ namespace Clipboarder {
                     return;
                 } else {
                     try {
-                        List<string[]> outputList = dbOperations.GetData();
+                        List<string[]> outputList = dbOperations.GetTextData();
 
                         //clears current grid
                         textDataGrid.Rows.Clear();
 
                         for (int i = 0; i < outputList.Count; i++) {
                             string[] outputString = outputList[i];
-
-                            // Removes prefix "[text]" Incase of image duplicate line and replace "[text]" with "[image]"
-                            outputString[1] = outputString[1].IndexOf("[text]") == -1 ? outputString[1] : outputString[1].Substring(6);
-
+                            
                             //Decrypts strings 
                             outputString[1] = StringCipher.Decrypt(outputString[1], password);
                             outputString[2] = StringCipher.Decrypt(outputString[2], password);
@@ -229,6 +228,40 @@ namespace Clipboarder {
                         MessageBox.Show("Error filling table with values. \n  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
+
+
+                    try {
+                        List<string[]> outputList = dbOperations.GetImageData();
+
+                        //clears current grid
+                        imageDataGrid.Rows.Clear();
+                        progressBar.Value = 0;
+                        for (int i = 0; i < outputList.Count; i++) {
+                            progressBar.Value = (progressBar.Maximum / outputList.Count) * i;
+                            string[] outputString = outputList[i];
+                            
+                            //Decrypts strings 
+                            outputString[1] = StringCipher.Decrypt(outputString[1], password);
+                            outputString[2] = StringCipher.Decrypt(outputString[2], password);
+
+                            DataGridViewRow newRow = new DataGridViewRow();
+                            newRow.CreateCells(imageDataGrid);
+
+                            newRow.Cells[0].Value = outputString[0];
+                            try {
+                                newRow.Cells[1].Value = ImageConversion.Base64ToImage(outputString[1]);
+                            } catch (Exception ex) {
+                                MessageBox.Show("Error Decrypting content.", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            }
+                            newRow.Cells[2].Value = outputString[2];
+
+                            imageDataGrid.Rows.Insert(i, newRow);
+                        }
+                        progressBar.Value = 0;
+                    } catch (Exception) {
+                        MessageBox.Show("Error filling table with values. \n  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
                 }
                 dbOperations.CloseConnection();
                 statusLabel.Text = "Export Completed";
@@ -240,7 +273,7 @@ namespace Clipboarder {
         /// Exports all clipboarder entries to database
         /// </summary>
         public void ExportEntries() {
-            if (textDataGrid.RowCount == 0) {
+            if (textDataGrid.RowCount == 0 && imageDataGrid.RowCount == 0) {
                 MessageBox.Show("No entries to save.", "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             } else {
@@ -287,23 +320,48 @@ namespace Clipboarder {
                     }
 
                     //  Adds Content to databased as it is encrypted using password provided by the user
-                    for (int i = 0; i < textDataGrid.RowCount; i++) {
-                        DataGridViewRow row = (DataGridViewRow)textDataGrid.Rows[i].Clone();
-                        for (int j = 0; j < 3; j++) {
-                            row.Cells[j].Value = textDataGrid.Rows[i].Cells[j].Value;
+
+                    // Exports text Entries
+                    if (textDataGrid.RowCount != 0) {
+                        for (int i = 0; i < textDataGrid.RowCount; i++) {
+                            DataGridViewRow row = (DataGridViewRow)textDataGrid.Rows[i].Clone();
+                            for (int j = 0; j < 3; j++) {
+                                row.Cells[j].Value = textDataGrid.Rows[i].Cells[j].Value;
+                            }
+
+                            // Encrypts content and time 
+                            row.Cells[1].Value = StringCipher.Encrypt((string)row.Cells[1].Value, password);
+                            row.Cells[2].Value = StringCipher.Encrypt((string)row.Cells[2].Value, password);
+
+                            // Writing data to database
+                            try {
+                                dbOperations.EnterTextContentForCurrentUser((int)row.Cells[0].Value, (string)row.Cells[1].Value, (string)row.Cells[2].Value);
+                            } catch (Exception ex) {
+                                MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                return;
+                            }
                         }
+                    }
 
-                        // Encrypts content and time 
-                        // '[text]' or '[image]' is appended to the begining of the content according to the content to identify decryption. 
-                        row.Cells[1].Value = "[text]" + StringCipher.Encrypt((string)row.Cells[1].Value, password);
-                        row.Cells[2].Value = StringCipher.Encrypt((string)row.Cells[2].Value, password);
+                    // Exports image Entries
+                    if (imageDataGrid.RowCount != 0) {
+                        for (int i = 0; i < imageDataGrid.RowCount; i++) {
+                            DataGridViewRow row = (DataGridViewRow)imageDataGrid.Rows[i].Clone();
+                            for (int j = 0; j < 3; j++) {
+                                row.Cells[j].Value = imageDataGrid.Rows[i].Cells[j].Value;
+                            }
 
-                        // Writing data to database
-                        try {
-                            dbOperations.EnterContentForCurrentUser((int)row.Cells[0].Value, (string)row.Cells[1].Value, (string)row.Cells[2].Value);
-                        } catch (Exception ex) {
-                            MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                            return;
+                            // Encrypts content and time 
+                            row.Cells[1].Value = StringCipher.Encrypt(ImageConversion.ImageToBase64((Image)row.Cells[1].Value, System.Drawing.Imaging.ImageFormat.Png), password);
+                            row.Cells[2].Value = StringCipher.Encrypt((string)row.Cells[2].Value, password);
+
+                            // Writing data to database
+                            try {
+                                dbOperations.EnterImageContentForCurrentUser((int)row.Cells[0].Value, (string)row.Cells[1].Value, (string)row.Cells[2].Value);
+                            } catch (Exception ex) {
+                                MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                return;
+                            }
                         }
                     }
                     dbOperations.CloseConnection();
@@ -318,12 +376,10 @@ namespace Clipboarder {
         private void clipboardMonitor1_ClipboardChanged(object sender, Cllipboarder.ClipboardChangedEventArgs e) {
             if (Clipboard.ContainsText()) {
                 if (!(Clipboard.GetText() == LastClipboardText)) {
-                    MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
                     AddClipboardTextRow();
                 }
             } else if (Clipboard.ContainsImage()) {
                 if (!(Clipboard.GetImage() == LastClipboardImage)) {
-                    MessageCountLabel.Text = LastClipboardText = Clipboard.GetText();
                     AddClipboardImageRow();
                 }
             }

@@ -18,7 +18,8 @@ namespace UnitTests {
             Console.WriteLine("Unit Tests for Clipboarder v0.1b");
             Console.WriteLine("Starting Tests...");
             //HashingTests();
-            DatabaseTests();
+            //DatabaseTests();
+            ImageConversionTests();
             Console.ReadKey();
         }
 
@@ -51,7 +52,9 @@ namespace UnitTests {
 
             Console.WriteLine();
             Console.WriteLine("Creating database...");
-            DatabaseOperations.CreatesNewDatabase("debug.db"); //Comment this line if database exists
+            if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, "debug.db"))) {
+                DatabaseOperations.CreatesNewDatabase("debug.db"); //Comment this line if database exists
+            }
 
             Console.WriteLine("Starting Database Tests...");
 
@@ -82,11 +85,11 @@ namespace UnitTests {
                 return;
             }
 
-            
-            Console.WriteLine("Making entires into database...");
+
+            Console.WriteLine("Making text entires into database...");
             try {
-                for (int i = 0; i < 10; i++) {                    
-                    newDatabaseOperations.EnterContentForCurrentUser(i, String.Format("This is a sample string:{0}", i), "This is a sample time");
+                for (int i = 0; i < 10; i++) {
+                    newDatabaseOperations.EnterTextContentForCurrentUser(i, String.Format("This is a sample string:{0}", i), "This is a sample time");
                 }
             } catch (Exception ex) {
                 Console.WriteLine("Error : " + ex.Message);
@@ -94,9 +97,36 @@ namespace UnitTests {
                 return;
             }
 
-            Console.WriteLine("Reading entries from the database...");
+            Console.WriteLine("Making image entires into database...");
             try {
-                List<string[]> outputList = newDatabaseOperations.GetData();
+                for (int i = 0; i < 10; i++) {
+                    newDatabaseOperations.EnterImageContentForCurrentUser(i, String.Format("This is a sample string:{0}", i), "This is a sample time");
+                }
+            } catch (Exception ex) {
+                Console.WriteLine("Error : " + ex.Message);
+                Console.WriteLine("Stack Trace:\n" + ex.StackTrace);
+                return;
+            }
+
+            Console.WriteLine("Reading text entries from the database...");
+            try {
+                List<string[]> outputList = newDatabaseOperations.GetTextData();
+                for (int i = 0; i < outputList.Count; i++) {
+                    string[] outputString = outputList[i];
+                    for (int j = 0; j < outputString.Length; j++) {
+                        Console.Write(outputString[j] + " | ");
+                    }
+                    Console.WriteLine("");
+                }
+            } catch (Exception ex) {
+                Console.WriteLine("Error : " + ex.Message);
+                Console.WriteLine("Stack Trace:\n" + ex.StackTrace);
+                return;
+            }
+
+            Console.WriteLine("Reading image entries from the database...");
+            try {
+                List<string[]> outputList = newDatabaseOperations.GetImageData();
                 for (int i = 0; i < outputList.Count; i++) {
                     string[] outputString = outputList[i];
                     for (int j = 0; j < outputString.Length; j++) {
@@ -119,5 +149,44 @@ namespace UnitTests {
             newDatabaseOperations.CloseConnection();
         }
         
+        
+        static void ImageConversionTests() {
+            Console.Write("Waiting for image in clipboard  ");
+
+            string[] animation = { ".", "o", "0", "o" };
+            while (!Clipboard.ContainsImage()) {
+                for (int i = 0; i < animation.Length; i++) {
+                    Thread.Sleep(100);
+                    Console.Write("\b" + animation[i]);
+                }
+            }
+            Console.WriteLine(ImageConversion.ImageToBase64(Clipboard.GetImage(), System.Drawing.Imaging.ImageFormat.Png));
+            Console.WriteLine("\nExiting test. Exit Code : e^(i*Pi)");
+        }
+
+    }
+}
+
+class ConsoleSpinner {
+    int counter;
+    string[] sequence;
+
+    public ConsoleSpinner() {
+        counter = 0;
+        sequence = new string[] { "/", "-", "\\", "|" };
+        sequence = new string[] { ".", "o", "0", "o" };
+        sequence = new string[] { "+", "x" };
+        sequence = new string[] { "V", "<", "^", ">" };
+        sequence = new string[] { ".   ", "..  ", "... ", "...." };
+    }
+
+    public void Turn() {
+        counter++;
+
+        if (counter >= sequence.Length)
+            counter = 0;
+
+        Console.Write(sequence[counter]);
+        Console.SetCursorPosition(Console.CursorLeft - sequence[counter].Length, Console.CursorTop);
     }
 }

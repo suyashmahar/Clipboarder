@@ -40,12 +40,9 @@ namespace Clipboarder
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.registerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unregisterHotkeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.MessageCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.clipboardMonitor1 = new Cllipboarder.ClipboardMonitor();
             this.imagePage = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -53,8 +50,6 @@ namespace Clipboarder
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textPage = new System.Windows.Forms.TabPage();
             this.textDataGrid = new System.Windows.Forms.DataGridView();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,10 +61,8 @@ namespace Clipboarder
             this.imagePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.textPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.MainTabControl.SuspendLayout();
@@ -81,8 +74,7 @@ namespace Clipboarder
             this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolsToolStripMenuItem,
             this.toolStripMenuItem5,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem2});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
             this.MainMenuStrip.Size = new System.Drawing.Size(814, 45);
@@ -180,39 +172,11 @@ namespace Clipboarder
             this.toolStripMenuItem4.Text = "Clear clipboard";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.AutoSize = false;
-            this.toolStripMenuItem1.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripMenuItem1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.toolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registerToolStripMenuItem,
-            this.unregisterHotkeyToolStripMenuItem});
-            this.toolStripMenuItem1.Image = global::Clipboarder.Properties.Resources.Clipboarder_Debug_Icon;
-            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(50, 50);
-            this.toolStripMenuItem1.Text = "Settings";
-            this.toolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // registerToolStripMenuItem
-            // 
-            this.registerToolStripMenuItem.Name = "registerToolStripMenuItem";
-            this.registerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.registerToolStripMenuItem.Text = "Register Hotkey";
-            // 
-            // unregisterHotkeyToolStripMenuItem
-            // 
-            this.unregisterHotkeyToolStripMenuItem.Name = "unregisterHotkeyToolStripMenuItem";
-            this.unregisterHotkeyToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.unregisterHotkeyToolStripMenuItem.Text = "Unregister Hotkey";
-            // 
             // MainStatusStrip
             // 
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel,
-            this.MessageCountLabel});
+            this.progressBar});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 366);
             this.MainStatusStrip.Name = "MainStatusStrip";
             this.MainStatusStrip.Size = new System.Drawing.Size(814, 22);
@@ -225,12 +189,10 @@ namespace Clipboarder
             this.statusLabel.Size = new System.Drawing.Size(39, 17);
             this.statusLabel.Text = "Ready";
             // 
-            // MessageCountLabel
+            // progressBar
             // 
-            this.MessageCountLabel.Name = "MessageCountLabel";
-            this.MessageCountLabel.Size = new System.Drawing.Size(47, 17);
-            this.MessageCountLabel.Text = "No Text";
-            this.MessageCountLabel.Visible = false;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // clipboardMonitor1
             // 
@@ -248,7 +210,6 @@ namespace Clipboarder
             this.imagePage.Controls.Add(this.splitContainer1);
             this.imagePage.Location = new System.Drawing.Point(4, 25);
             this.imagePage.Name = "imagePage";
-            this.imagePage.Padding = new System.Windows.Forms.Padding(3);
             this.imagePage.Size = new System.Drawing.Size(806, 292);
             this.imagePage.TabIndex = 1;
             this.imagePage.Text = "Image";
@@ -257,19 +218,15 @@ namespace Clipboarder
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.imageDataGrid);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 286);
-            this.splitContainer1.SplitterDistance = 628;
+            this.splitContainer1.Panel2Collapsed = true;
+            this.splitContainer1.Size = new System.Drawing.Size(806, 292);
+            this.splitContainer1.SplitterDistance = 734;
             this.splitContainer1.TabIndex = 0;
             // 
             // imageDataGrid
@@ -279,7 +236,7 @@ namespace Clipboarder
             this.imageDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.imageDataGrid.BackgroundColor = System.Drawing.SystemColors.Window;
             this.imageDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.imageDataGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.imageDataGrid.ColumnHeadersHeight = 27;
             this.imageDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
@@ -288,10 +245,12 @@ namespace Clipboarder
             this.imageDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.imageDataGrid.GridColor = System.Drawing.SystemColors.AppWorkspace;
             this.imageDataGrid.Location = new System.Drawing.Point(0, 0);
+            this.imageDataGrid.Margin = new System.Windows.Forms.Padding(0);
             this.imageDataGrid.Name = "imageDataGrid";
             this.imageDataGrid.ReadOnly = true;
             this.imageDataGrid.RowHeadersVisible = false;
-            this.imageDataGrid.Size = new System.Drawing.Size(628, 286);
+            this.imageDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.imageDataGrid.Size = new System.Drawing.Size(806, 292);
             this.imageDataGrid.TabIndex = 12;
             // 
             // dataGridViewTextBoxColumn1
@@ -320,28 +279,6 @@ namespace Clipboarder
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
-            // label1
-            // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.ForeColor = System.Drawing.Color.DarkGray;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 286);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Preview pane";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(168, 286);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // textPage
             // 
             this.textPage.Controls.Add(this.textDataGrid);
@@ -361,6 +298,7 @@ namespace Clipboarder
             this.textDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.textDataGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.textDataGrid.ColumnHeadersHeight = 27;
             this.textDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
             this.Content,
@@ -432,11 +370,9 @@ namespace Clipboarder
             this.MainStatusStrip.PerformLayout();
             this.imagePage.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.textPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).EndInit();
             this.MainTabControl.ResumeLayout(false);
@@ -452,11 +388,9 @@ namespace Clipboarder
         internal System.Windows.Forms.ToolStripMenuItem SaveAllToolStripMenuItem;
         internal System.Windows.Forms.StatusStrip MainStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-        internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripStatusLabel MessageCountLabel;
         private Cllipboarder.ClipboardMonitor clipboardMonitor1;
         private System.Windows.Forms.ToolStripMenuItem saveContentToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -466,8 +400,6 @@ namespace Clipboarder
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TabPage textPage;
         internal System.Windows.Forms.DataGridView textDataGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
@@ -476,8 +408,7 @@ namespace Clipboarder
         private System.Windows.Forms.TabControl MainTabControl;
         private System.Windows.Forms.ToolStripMenuItem loadContentToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem registerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unregisterHotkeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
     }
 }
 
