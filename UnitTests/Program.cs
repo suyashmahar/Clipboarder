@@ -17,10 +17,78 @@ namespace UnitTests {
         static void Main(string[] args) {
             Console.WriteLine("Unit Tests for Clipboarder v0.1b");
             Console.WriteLine("Starting Tests...");
-            //HashingTests();
-            //DatabaseTests();
-            ImageConversionTests();
+            if (args.Length != 1) {
+                Console.WriteLine("\nIllegal arguments showing help");
+                ShowHelp();
+            }
+            
+            for (int i = 0; i < args.Length; i++) {
+                if (args[i] == "--help" | args[i] == "--h") {
+                    ShowHelp();
+                    return;
+                }
+            }
+
+            for (int i = 0; i < args.Length; i++) {
+                switch (args[i]) {
+                    case "--ht":
+                        HashingTests();
+                        break;
+                    case "--dt":
+                        DatabaseTests();
+                        break;
+                    case "--ch":
+                        CustomHashes();
+                        break;
+                    case "--ic":
+                        ImageConversionTests();
+                        break;
+                    case "--all":
+                        HashingTests();
+                        DatabaseTests();
+                        CustomHashes();
+                        ImageConversionTests();
+                        break;
+                    default:
+                        Console.WriteLine("Illegal argument : " + args[i]);
+                        break;
+                }
+            }
+            Console.Write("Press any continue...");
             Console.ReadKey();
+        }
+
+        static void ShowHelp() {
+            Console.WriteLine("Help : ");
+            Console.WriteLine(@"Unit Tests for CLipboarder
+
+Parameter           Usages
+
+--help|--h          Displays help
+--ht                Runs Hashing tests using BCrypt
+--ch                Runs customizable Hashing tests on given string using BCrypt
+--ic                Runs tests on class ImageConversion.cs
+--all               Runs all tests.
+");
+
+        }
+
+        static void CustomHashes() {
+            Console.WriteLine();
+            Console.Write("Enter text to generate its hash : ");
+            string text = Console.ReadLine();
+            Console.WriteLine();
+            Console.Write("Enter salt length : ");
+            int saltLength;
+            try {
+                saltLength = Convert.ToInt32(Console.ReadLine());
+            } catch (IOException ex) {
+                Console.WriteLine("Error : Invalid format \nStack trace : " + ex.StackTrace);
+                return;
+            }
+            Console.WriteLine("Using salt of length :" + saltLength);
+            Console.WriteLine("Hash : \n" + BCrypt.HashPassword(text, BCrypt.GenerateSalt(saltLength)));
+
         }
 
         /// <summary>
