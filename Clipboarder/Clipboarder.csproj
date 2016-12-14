@@ -71,6 +71,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Clipboarder-Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -171,7 +174,14 @@
     <None Include="Resources\Clipboarder-Clean-Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Clipboarder-Close-Icon.png" />
+    <None Include="Resources\Clipboarder-Clipboard_Clear-Icon.png" />
+    <None Include="Resources\Clipboarder-Clipboarder_clear-Icon.png" />
+    <Content Include="Clipboarder-Icon.ico" />
     <Content Include="Resources\Clipboarder-Debug-Icon.png" />
+    <None Include="Resources\Clipboarder-Import-Icon.png" />
+    <None Include="Resources\Clipboarder-Export-Icon.png" />
+    <None Include="Resources\Clipboarder-Save-Icon.png" />
     <None Include="Resources\Clipboarder-Warning-Icon.png" />
   </ItemGroup>
   <ItemGroup />

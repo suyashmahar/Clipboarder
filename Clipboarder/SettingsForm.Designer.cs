@@ -23,12 +23,13 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.shortcutsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.shortcutsEnabledCheckbox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.shortcutsNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.okButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
-            this.shortcutsEnabledCheckbox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shortcutsNumericUpDown)).BeginInit();
             this.SuspendLayout();
@@ -46,6 +47,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Short-Cuts";
+            // 
+            // shortcutsEnabledCheckbox
+            // 
+            this.shortcutsEnabledCheckbox.AutoSize = true;
+            this.shortcutsEnabledCheckbox.Location = new System.Drawing.Point(9, 29);
+            this.shortcutsEnabledCheckbox.Name = "shortcutsEnabledCheckbox";
+            this.shortcutsEnabledCheckbox.Size = new System.Drawing.Size(105, 17);
+            this.shortcutsEnabledCheckbox.TabIndex = 2;
+            this.shortcutsEnabledCheckbox.Text = "Enable shortcuts";
+            this.shortcutsEnabledCheckbox.UseVisualStyleBackColor = true;
+            this.shortcutsEnabledCheckbox.CheckedChanged += new System.EventHandler(this.shortcutsEnabledCheckbox_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Total number of shortcuts ";
             // 
             // shortcutsNumericUpDown
             // 
@@ -69,15 +90,6 @@
             0,
             0});
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 55);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Total number of shortcuts ";
-            // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -100,17 +112,6 @@
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
-            // shortcutsEnabledCheckbox
-            // 
-            this.shortcutsEnabledCheckbox.AutoSize = true;
-            this.shortcutsEnabledCheckbox.Location = new System.Drawing.Point(9, 29);
-            this.shortcutsEnabledCheckbox.Name = "shortcutsEnabledCheckbox";
-            this.shortcutsEnabledCheckbox.Size = new System.Drawing.Size(105, 17);
-            this.shortcutsEnabledCheckbox.TabIndex = 2;
-            this.shortcutsEnabledCheckbox.Text = "Enable shortcuts";
-            this.shortcutsEnabledCheckbox.UseVisualStyleBackColor = true;
-            this.shortcutsEnabledCheckbox.CheckedChanged += new System.EventHandler(this.shortcutsEnabledCheckbox_CheckedChanged);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -119,7 +120,9 @@
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
+            this.ShowInTaskbar = false;
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.groupBox1.ResumeLayout(false);

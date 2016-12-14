@@ -30,20 +30,11 @@ namespace Clipboarder
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.clipboardMonitor1 = new Cllipboarder.ClipboardMonitor();
             this.imagePage = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.imageDataGrid = new System.Windows.Forms.DataGridView();
@@ -56,6 +47,16 @@ namespace Clipboarder
             this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainTabControl = new System.Windows.Forms.TabControl();
+            this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.SaveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clipboardMonitor1 = new Cllipboarder.ClipboardMonitor();
             this.MainMenuStrip.SuspendLayout();
             this.MainStatusStrip.SuspendLayout();
             this.imagePage.SuspendLayout();
@@ -81,97 +82,6 @@ namespace Clipboarder
             this.MainMenuStrip.TabIndex = 6;
             this.MainMenuStrip.Text = "MainMenuStrip";
             // 
-            // ToolsToolStripMenuItem
-            // 
-            this.ToolsToolStripMenuItem.AutoSize = false;
-            this.ToolsToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ToolsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveContentToolStripMenuItem,
-            this.loadContentToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.SaveAllToolStripMenuItem});
-            this.ToolsToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Menu_Icon;
-            this.ToolsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
-            this.ToolsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(50, 50);
-            this.ToolsToolStripMenuItem.Text = "Tools";
-            this.ToolsToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // saveContentToolStripMenuItem
-            // 
-            this.saveContentToolStripMenuItem.Name = "saveContentToolStripMenuItem";
-            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.saveContentToolStripMenuItem.Text = "Save Content";
-            this.saveContentToolStripMenuItem.Click += new System.EventHandler(this.saveContentToolStripMenuItem_Click);
-            // 
-            // loadContentToolStripMenuItem
-            // 
-            this.loadContentToolStripMenuItem.Name = "loadContentToolStripMenuItem";
-            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.loadContentToolStripMenuItem.Text = "Load Content";
-            this.loadContentToolStripMenuItem.Click += new System.EventHandler(this.loadContentToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
-            // 
-            // SaveAllToolStripMenuItem
-            // 
-            this.SaveAllToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
-            this.SaveAllToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(146, 20);
-            this.SaveAllToolStripMenuItem.Text = "Exit";
-            this.SaveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.AutoSize = false;
-            this.toolStripMenuItem5.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripMenuItem5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.toolStripMenuItem5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripMenuItem5.Image = global::Clipboarder.Properties.Resources.Clipboarder_Gear_Icon;
-            this.toolStripMenuItem5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(50, 50);
-            this.toolStripMenuItem5.Text = "Settings";
-            this.toolStripMenuItem5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.AutoSize = false;
-            this.toolStripMenuItem2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.toolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4});
-            this.toolStripMenuItem2.Image = global::Clipboarder.Properties.Resources.Clipboarder_Clean_Icon;
-            this.toolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(50, 50);
-            this.toolStripMenuItem2.Text = "Edit";
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.AutoSize = false;
-            this.toolStripMenuItem3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(164, 22);
-            this.toolStripMenuItem3.Text = "Clear clipboarder";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(164, 22);
-            this.toolStripMenuItem4.Text = "Clear clipboard";
-            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
-            // 
             // MainStatusStrip
             // 
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -193,17 +103,6 @@ namespace Clipboarder
             // 
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(100, 16);
-            // 
-            // clipboardMonitor1
-            // 
-            this.clipboardMonitor1.BackColor = System.Drawing.Color.Red;
-            this.clipboardMonitor1.Location = new System.Drawing.Point(1352, 725);
-            this.clipboardMonitor1.Name = "clipboardMonitor1";
-            this.clipboardMonitor1.Size = new System.Drawing.Size(10, 10);
-            this.clipboardMonitor1.TabIndex = 10;
-            this.clipboardMonitor1.Text = "clipboardMonitor1";
-            this.clipboardMonitor1.Visible = false;
-            this.clipboardMonitor1.ClipboardChanged += new System.EventHandler<Cllipboarder.ClipboardChangedEventArgs>(this.clipboardMonitor1_ClipboardChanged);
             // 
             // imagePage
             // 
@@ -352,6 +251,115 @@ namespace Clipboarder
             this.MainTabControl.Size = new System.Drawing.Size(814, 321);
             this.MainTabControl.TabIndex = 11;
             // 
+            // ToolsToolStripMenuItem
+            // 
+            this.ToolsToolStripMenuItem.AutoSize = false;
+            this.ToolsToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ToolsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveContentToolStripMenuItem,
+            this.loadContentToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.SaveAllToolStripMenuItem});
+            this.ToolsToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Menu_Icon;
+            this.ToolsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
+            this.ToolsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(50, 50);
+            this.ToolsToolStripMenuItem.Text = "Tools";
+            this.ToolsToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // saveContentToolStripMenuItem
+            // 
+            this.saveContentToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Export_Icon;
+            this.saveContentToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveContentToolStripMenuItem.Name = "saveContentToolStripMenuItem";
+            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.saveContentToolStripMenuItem.Text = "Save Content";
+            this.saveContentToolStripMenuItem.Click += new System.EventHandler(this.saveContentToolStripMenuItem_Click);
+            // 
+            // loadContentToolStripMenuItem
+            // 
+            this.loadContentToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Import_Icon;
+            this.loadContentToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.loadContentToolStripMenuItem.Name = "loadContentToolStripMenuItem";
+            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.loadContentToolStripMenuItem.Text = "Load Content";
+            this.loadContentToolStripMenuItem.Click += new System.EventHandler(this.loadContentToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(147, 6);
+            // 
+            // SaveAllToolStripMenuItem
+            // 
+            this.SaveAllToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Close_Icon;
+            this.SaveAllToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
+            this.SaveAllToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(150, 24);
+            this.SaveAllToolStripMenuItem.Text = "Exit";
+            this.SaveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.AutoSize = false;
+            this.toolStripMenuItem5.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripMenuItem5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.toolStripMenuItem5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripMenuItem5.Image = global::Clipboarder.Properties.Resources.Clipboarder_Gear_Icon;
+            this.toolStripMenuItem5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(50, 50);
+            this.toolStripMenuItem5.Text = "Settings";
+            this.toolStripMenuItem5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.AutoSize = false;
+            this.toolStripMenuItem2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.toolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4});
+            this.toolStripMenuItem2.Image = global::Clipboarder.Properties.Resources.Clipboarder_Clean_Icon;
+            this.toolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(50, 50);
+            this.toolStripMenuItem2.Text = "Edit";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.AutoSize = false;
+            this.toolStripMenuItem3.Image = global::Clipboarder.Properties.Resources.Clipboarder_Clipboarder_clear_Icon;
+            this.toolStripMenuItem3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItem3.Text = "Clear clipboarder";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Image = global::Clipboarder.Properties.Resources.Clipboarder_Clipboard_Clear_Icon;
+            this.toolStripMenuItem4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(168, 26);
+            this.toolStripMenuItem4.Text = "Clear clipboard";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // clipboardMonitor1
+            // 
+            this.clipboardMonitor1.BackColor = System.Drawing.Color.Red;
+            this.clipboardMonitor1.Location = new System.Drawing.Point(1352, 725);
+            this.clipboardMonitor1.Name = "clipboardMonitor1";
+            this.clipboardMonitor1.Size = new System.Drawing.Size(10, 10);
+            this.clipboardMonitor1.TabIndex = 10;
+            this.clipboardMonitor1.Text = "clipboardMonitor1";
+            this.clipboardMonitor1.Visible = false;
+            this.clipboardMonitor1.ClipboardChanged += new System.EventHandler<Cllipboarder.ClipboardChangedEventArgs>(this.clipboardMonitor1_ClipboardChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -361,6 +369,7 @@ namespace Clipboarder
             this.Controls.Add(this.clipboardMonitor1);
             this.Controls.Add(this.MainStatusStrip);
             this.Controls.Add(this.MainMenuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Clipboarder";
             this.Load += new System.EventHandler(this.Form1_Load);
