@@ -28,27 +28,32 @@ namespace Clipboarder {
                 mainForm.password = passwordBox1.Text;
                 DialogResult = DialogResult.OK;
             } else {
-                MessageBox.Show("Password is incorrect!", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Incorrect password!", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 passwordBox1.Text = "";
             }
         }
 
         private void passwordBox_TextChanged(object sender, EventArgs e) {
-            if (passwordBox1.Text == "") {
-                okButton.Enabled = false;
-            }else {
-                okButton.Enabled = true;
-            }
-        }
 
-        private void passwordBox_KeyUp(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter && okButton.Enabled == true) {
-                okButton.PerformClick();
-            }
         }
 
         private void AskPasswordDecrypt_Load(object sender, EventArgs e) {
 
+        }
+
+        private void passwordBox1_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter && okButton.Enabled == true) {
+                okButton.PerformClick();
+            }
+
+        }
+
+        private void passwordBox1_TextChanged(object sender, EventArgs e) {
+            if (passwordBox1.Text == "") {
+                okButton.Enabled = false;
+            } else {
+                okButton.Enabled = true;
+            }
         }
     }
 }

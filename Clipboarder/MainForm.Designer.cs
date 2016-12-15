@@ -41,12 +41,11 @@ namespace Clipboarder
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.fillWithGarbageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.springStatusStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.imagePage = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.imageDataGrid = new System.Windows.Forms.DataGridView();
@@ -78,8 +77,7 @@ namespace Clipboarder
             this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolsToolStripMenuItem,
             this.toolStripMenuItem5,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem2});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
             this.MainMenuStrip.Size = new System.Drawing.Size(509, 45);
@@ -109,7 +107,8 @@ namespace Clipboarder
             this.saveContentToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Export_Icon;
             this.saveContentToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveContentToolStripMenuItem.Name = "saveContentToolStripMenuItem";
-            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.saveContentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.saveContentToolStripMenuItem.Text = "Save Content";
             this.saveContentToolStripMenuItem.Click += new System.EventHandler(this.saveContentToolStripMenuItem_Click);
             // 
@@ -118,14 +117,15 @@ namespace Clipboarder
             this.loadContentToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Import_Icon;
             this.loadContentToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.loadContentToolStripMenuItem.Name = "loadContentToolStripMenuItem";
-            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.loadContentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
             this.loadContentToolStripMenuItem.Text = "Load Content";
             this.loadContentToolStripMenuItem.Click += new System.EventHandler(this.loadContentToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
             // 
             // SaveAllToolStripMenuItem
             // 
@@ -133,7 +133,7 @@ namespace Clipboarder
             this.SaveAllToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SaveAllToolStripMenuItem.Name = "SaveAllToolStripMenuItem";
             this.SaveAllToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(156, 24);
+            this.SaveAllToolStripMenuItem.Size = new System.Drawing.Size(190, 24);
             this.SaveAllToolStripMenuItem.Text = "Exit";
             this.SaveAllToolStripMenuItem.Click += new System.EventHandler(this.SaveAllToolStripMenuItem_Click);
             // 
@@ -171,7 +171,9 @@ namespace Clipboarder
             this.toolStripMenuItem3.Image = global::Clipboarder.Properties.Resources.Clipboarder_Clipboarder_clear_Icon;
             this.toolStripMenuItem3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItem3.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Delete)));
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(251, 26);
             this.toolStripMenuItem3.Text = "Clear clipboarder";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -180,41 +182,18 @@ namespace Clipboarder
             this.toolStripMenuItem4.Image = global::Clipboarder.Properties.Resources.Clipboarder_Clipboard_Clear_Icon;
             this.toolStripMenuItem4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(168, 26);
+            this.toolStripMenuItem4.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(251, 26);
             this.toolStripMenuItem4.Text = "Clear clipboard";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.AutoSize = false;
-            this.toolStripMenuItem1.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripMenuItem1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.toolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fillWithGarbageToolStripMenuItem});
-            this.toolStripMenuItem1.Image = global::Clipboarder.Properties.Resources.Clipboarder_Debug_Icon;
-            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.F1)));
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(50, 50);
-            this.toolStripMenuItem1.Text = "Settings";
-            this.toolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // fillWithGarbageToolStripMenuItem
-            // 
-            this.fillWithGarbageToolStripMenuItem.Name = "fillWithGarbageToolStripMenuItem";
-            this.fillWithGarbageToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.fillWithGarbageToolStripMenuItem.Text = "Fill with garbage";
-            this.fillWithGarbageToolStripMenuItem.Click += new System.EventHandler(this.fillWithGarbageToolStripMenuItem_Click);
             // 
             // MainStatusStrip
             // 
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel,
             this.springStatusStripLabel,
-            this.progressBar});
+            this.progressBar,
+            this.toolStripStatusLabel1});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 321);
             this.MainStatusStrip.Name = "MainStatusStrip";
             this.MainStatusStrip.Size = new System.Drawing.Size(509, 22);
@@ -230,7 +209,7 @@ namespace Clipboarder
             // springStatusStripLabel
             // 
             this.springStatusStripLabel.Name = "springStatusStripLabel";
-            this.springStatusStripLabel.Size = new System.Drawing.Size(322, 17);
+            this.springStatusStripLabel.Size = new System.Drawing.Size(319, 17);
             this.springStatusStripLabel.Spring = true;
             // 
             // progressBar
@@ -238,14 +217,20 @@ namespace Clipboarder
             this.progressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(100, 16);
-            this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(34, 17);
+            this.toolStripStatusLabel1.Text = "BETA";
             // 
             // imagePage
             // 
             this.imagePage.Controls.Add(this.splitContainer1);
             this.imagePage.Location = new System.Drawing.Point(4, 25);
             this.imagePage.Name = "imagePage";
-            this.imagePage.Size = new System.Drawing.Size(358, 133);
+            this.imagePage.Size = new System.Drawing.Size(501, 247);
             this.imagePage.TabIndex = 1;
             this.imagePage.Text = "Image";
             this.imagePage.UseVisualStyleBackColor = true;
@@ -260,7 +245,7 @@ namespace Clipboarder
             // 
             this.splitContainer1.Panel1.Controls.Add(this.imageDataGrid);
             this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(358, 133);
+            this.splitContainer1.Size = new System.Drawing.Size(501, 247);
             this.splitContainer1.SplitterDistance = 333;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -285,7 +270,7 @@ namespace Clipboarder
             this.imageDataGrid.ReadOnly = true;
             this.imageDataGrid.RowHeadersVisible = false;
             this.imageDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.imageDataGrid.Size = new System.Drawing.Size(358, 133);
+            this.imageDataGrid.Size = new System.Drawing.Size(501, 247);
             this.imageDataGrid.TabIndex = 12;
             this.imageDataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.imageDataGrid_RowsRemoved);
             // 
@@ -412,6 +397,8 @@ namespace Clipboarder
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(382, 268);
             this.Name = "MainForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Clipboarder";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MainMenuStrip.ResumeLayout(false);
@@ -459,9 +446,8 @@ namespace Clipboarder
         private System.Windows.Forms.ToolStripMenuItem loadContentToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripProgressBar progressBar;
-        internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem fillWithGarbageToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel springStatusStripLabel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

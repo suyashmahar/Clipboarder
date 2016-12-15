@@ -222,7 +222,11 @@ namespace Clipboarder.Extension {
         }
 
         public void CloseConnection() {
-            databaseConnection.Close();
+            try {
+                databaseConnection.Close();
+            } catch (Exception) {
+                //
+            }
         }
 
     }

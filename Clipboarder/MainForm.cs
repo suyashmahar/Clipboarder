@@ -31,6 +31,8 @@ namespace Clipboarder {
             } else if (Clipboard.ContainsImage()) {
                 AddClipboardImageRow();
             }
+
+            progressBar.Visible = false;
         }
 
         // Calls for application key binding.
@@ -117,6 +119,7 @@ namespace Clipboarder {
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e) {
+            imageDataGrid.Rows.Clear();
             textDataGrid.Rows.Clear();
         }
 
@@ -168,7 +171,7 @@ namespace Clipboarder {
         /// </summary>
         private void ImportEntries() {
             if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, "contents.db"))) {
-                MessageBox.Show("No content to load. \n\n Use Menu > Save Content to save entries.", "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No content to load." + "\n\n" + "Use Menu > Save Content to save entries.", "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             } else {
                 // Uses DatabaseOperations class object to connect and write to database
@@ -178,6 +181,7 @@ namespace Clipboarder {
                     //Creates new Database
                     DatabaseOperations.CreatesNewDatabase(databaseName);
                     Properties.Settings.Default.doesDatabaseExists = true;
+                    statusLabel.Text = "Creating new database.";
                 }
                 
                 // Connects to database and opens connection
@@ -205,6 +209,7 @@ namespace Clipboarder {
                     return;
                 } else {
                     try {
+                        statusLabel.Text = "Reading text from database";
                         List<string[]> outputList = dbOperations.GetTextData();
 
                         //clears current grid
@@ -232,6 +237,8 @@ namespace Clipboarder {
 
 
                     try {
+                        statusLabel.Text = "Reading images from database.";
+
                         List<string[]> outputList = dbOperations.GetImageData();
 
                         //clears current grid
@@ -256,7 +263,7 @@ namespace Clipboarder {
                             try {
                                 newRow.Cells[1].Value = ImageConversion.Base64ToImage(outputString[1]);
                             } catch (Exception ex) {
-                                MessageBox.Show("Error Decrypting content.", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                MessageBox.Show("Error Decrypting content." + "\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                             }
                             newRow.Cells[2].Value = outputString[2];
 
@@ -269,7 +276,9 @@ namespace Clipboarder {
                     }
                 }
                 dbOperations.CloseConnection();
-                statusLabel.Text = "Export Completed";
+                statusLabel.Text = "Imported successfully";
+                progressBar.Value = 0;
+                progressBar.Visible = false;
             } // Else statement for check on file existence
             password = "";
         }   // Import Entries
@@ -310,7 +319,7 @@ namespace Clipboarder {
                         try {
                             dbOperations.RemoveRecordsForCurrentUsers();
                         } catch (Exception ex) {
-                            DialogResult messageResult = MessageBox.Show("Error adding current user record to database. \n\nDo you want to continue?.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                            DialogResult messageResult = MessageBox.Show("Error deleting existing records from database.\n" + ex.StackTrace + "\n\nDo you want to continue?." , "Clipboarder Error", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                             if (messageResult == DialogResult.No) return;
                         }
                     } else {
@@ -319,7 +328,7 @@ namespace Clipboarder {
                         try {
                             dbOperations.AddNewUser(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
                         } catch (Exception ex) {
-                            MessageBox.Show("Error adding current user record to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            MessageBox.Show("Error adding current user record to database." + ex.ToString() + "\n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                             return;
                         }
                     }
@@ -360,7 +369,7 @@ namespace Clipboarder {
                         progressBar.Value = 0;
 
                         for (int i = 0; i < imageDataGrid.RowCount; i++) {
-                            progressBar.Value = (progressBar.Maximum / textDataGrid.RowCount) * (i + 1);
+                            progressBar.Value = (progressBar.Maximum / imageDataGrid.RowCount) * (i + 1);
                             DataGridViewRow row = (DataGridViewRow)imageDataGrid.Rows[i].Clone();
                             for (int j = 0; j < 3; j++) {
                                 row.Cells[j].Value = imageDataGrid.Rows[i].Cells[j].Value;
@@ -382,10 +391,9 @@ namespace Clipboarder {
                         progressBar.Visible = false;
                     }
                     dbOperations.CloseConnection();
+                    statusLabel.Text = "Export Completed";
                 }
                 password = null;
-                statusLabel.Text = "Export Completed";
-                dbOperations.CloseConnection();
             }
         }
 
@@ -407,23 +415,19 @@ namespace Clipboarder {
             SettingsForm settings = new SettingsForm(this);
             settings.ShowDialog();
         }
-        
+
         public void reIndexDataGridContent() {
             // Reindexing textDataGridView
             for (int i = 0; i < textDataGrid.RowCount; i++) {
                 DataGridViewRow row = textDataGrid.Rows[i];
                 row.Cells[0].Value = i + 1;
             }
-            
+
             // Reindexing imageDataGridView
             for (int i = 0; i < imageDataGrid.RowCount; i++) {
                 DataGridViewRow row = imageDataGrid.Rows[i];
                 row.Cells[0].Value = i + 1;
             }
-        }
-
-        private void reindexRowsToolStripMenuItem_Click(object sender, EventArgs e) {
-            reIndexDataGridContent();
         }
 
         private void textDataGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) {
@@ -432,17 +436,6 @@ namespace Clipboarder {
 
         private void imageDataGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) {
             reIndexDataGridContent();
-        }
-
-        private void fillWithGarbageToolStripMenuItem_Click(object sender, EventArgs e) {
-            for (int i = 0; i < 100; i++) {
-                //Thread.Sleep(200);
-                Clipboard.SetText(String.Format("{0}{1}{2}{3}{4}{5}",i,i+8,i*i,Math.Log(i),Math.Log10(i), Math.Sin(i)));
-            }
-        }
-
-        private void progressBar_Click(object sender, EventArgs e) {
-
         }
     }
 }

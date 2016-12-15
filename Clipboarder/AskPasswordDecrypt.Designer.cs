@@ -26,8 +26,8 @@
             this.okButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.passwordBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.passwordBox1 = new PasswordTextBoxControl.PasswordTextBox();
             this.SuspendLayout();
             // 
             // okButton
@@ -37,7 +37,7 @@
             this.okButton.Location = new System.Drawing.Point(158, 95);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 18;
+            this.okButton.TabIndex = 1;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
@@ -48,7 +48,7 @@
             this.closeButton.Location = new System.Drawing.Point(239, 95);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 19;
+            this.closeButton.TabIndex = 2;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
@@ -64,18 +64,6 @@
             this.label3.TabIndex = 20;
             this.label3.Text = "Password for securing content";
             // 
-            // passwordBox1
-            // 
-            this.passwordBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.passwordBox1.Location = new System.Drawing.Point(109, 55);
-            this.passwordBox1.Name = "passwordBox1";
-            this.passwordBox1.PasswordChar = '•';
-            this.passwordBox1.Size = new System.Drawing.Size(205, 20);
-            this.passwordBox1.TabIndex = 15;
-            this.passwordBox1.TextChanged += new System.EventHandler(this.passwordBox_TextChanged);
-            this.passwordBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.passwordBox_KeyUp);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -85,16 +73,26 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Enter a password ";
             // 
+            // passwordBox1
+            // 
+            this.passwordBox1.Location = new System.Drawing.Point(106, 55);
+            this.passwordBox1.Name = "passwordBox1";
+            this.passwordBox1.PasswordCharDelay = 750;
+            this.passwordBox1.Size = new System.Drawing.Size(208, 20);
+            this.passwordBox1.TabIndex = 0;
+            this.passwordBox1.TextChanged += new System.EventHandler(this.passwordBox1_TextChanged);
+            this.passwordBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passwordBox1_KeyDown);
+            // 
             // AskPasswordDecrypt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(326, 130);
             this.ControlBox = false;
+            this.Controls.Add(this.passwordBox1);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.passwordBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AskPasswordDecrypt";
@@ -110,7 +108,7 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox passwordBox1;
         private System.Windows.Forms.Label label1;
+        private PasswordTextBoxControl.PasswordTextBox passwordBox1;
     }
 }
