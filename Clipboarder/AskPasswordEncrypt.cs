@@ -9,10 +9,10 @@ using System.Windows.Forms;
 
 namespace Clipboarder {
     public partial class AskPasswordEncrypt : Form {
-        MainForm mainForm;
+        OldMainForm mainForm;
         PasswordStrength passwordStrength = new PasswordStrength();
 
-        public AskPasswordEncrypt(MainForm mainForm) {
+        public AskPasswordEncrypt(OldMainForm mainForm) {
             this.mainForm = mainForm;
             InitializeComponent();
         }

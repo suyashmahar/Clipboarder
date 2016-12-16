@@ -10,10 +10,10 @@ using Clipboarder.Encryption;
 
 namespace Clipboarder {
     public partial class AskPasswordDecrypt : Form {
-        MainForm mainForm;
+        OldMainForm mainForm;
         string hashedPassword;
 
-        public AskPasswordDecrypt(MainForm mainForm, string hashedPassword) {
+        public AskPasswordDecrypt(OldMainForm mainForm, string hashedPassword) {
             InitializeComponent();
             this.mainForm = mainForm;
             this.hashedPassword = hashedPassword;

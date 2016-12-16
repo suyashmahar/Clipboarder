@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace Clipboarder {
     public partial class SettingsForm : Form {
-        MainForm mainForm;
+        //OldMainForm mainForm;
 
-        public SettingsForm(MainForm mainForm) {
+        public SettingsForm(/*OldMainForm mainForm*/) {
             InitializeComponent();
-            this.mainForm = mainForm;
+            //this.mainForm = mainForm;
         }
 
         private void SettingsForm_Load(object sender, EventArgs e) {
@@ -26,9 +26,9 @@ namespace Clipboarder {
 
         private void okButton_Click(object sender, EventArgs e) {
             if (shortcutsNumericUpDown.Enabled) {
-                if (Properties.Settings.Default.shortCuts != (int)shortcutsNumericUpDown.Value) {
-                    mainForm.UnregisterShortcuts(true);
-                }
+                //if (Properties.Settings.Default.shortCuts != (int)shortcutsNumericUpDown.Value) {
+                //    mainForm.UnregisterShortcuts(true);
+                //}
                 Properties.Settings.Default.shortCuts = (int)shortcutsNumericUpDown.Value;
                 Properties.Settings.Default.areShortcutsEnabled = true;
             } else {
