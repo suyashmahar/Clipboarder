@@ -84,9 +84,9 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PasswordTextBoxControl, Version=0.4.0.33110, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PasswordTextBoxControl-net40, Version=0.4.0.33110, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Desktop\PasswordTextBoxControl.dll</HintPath>
+      <HintPath>..\packages\PasswordTextBoxControl-net40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
