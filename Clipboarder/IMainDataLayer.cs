@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 
 namespace Clipboarder {
-    interface IMainDataLayer {
-        int TaskProgress { get; set; } // Progress of any task bieng processed
+    public interface IMainDataLayer {
+        int TaskProgress { get; set; } // Progress of any task being processed
         bool ProgressVisibility { get; set; }
+        int TextRowCount { get; }
+        int ImageRowCount { get; }
+        string status { get; set; }
 
         event EventHandler<EventArgs> LoadContent;
         event EventHandler<EventArgs> SaveContent;
@@ -17,5 +20,9 @@ namespace Clipboarder {
         void AddNewImageRow(ImageContent contentToAdd);
         List<ImageContent> GetAllImageContent();
         List<TextContent> GetAllTextContent();
+        ImageContent GetImageContentAt(int index);
+        TextContent GetTextContentAt(int index);
+
+        void ClearAll();
     }
 }

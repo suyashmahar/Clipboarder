@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.clipboardMonitor1 = new Cllipboarder.ClipboardMonitor();
+            this.clipboardMonitor1 = new ClipboardMonitor();
             this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -121,7 +121,7 @@
             this.textDataGrid.ReadOnly = true;
             this.textDataGrid.RowHeadersVisible = false;
             this.textDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.textDataGrid.Size = new System.Drawing.Size(411, 233);
+            this.textDataGrid.Size = new System.Drawing.Size(529, 235);
             this.textDataGrid.TabIndex = 10;
             this.textDataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.textDataGrid_RowsRemoved);
             // 
@@ -130,7 +130,7 @@
             this.textPage.Controls.Add(this.textDataGrid);
             this.textPage.Location = new System.Drawing.Point(4, 25);
             this.textPage.Name = "textPage";
-            this.textPage.Size = new System.Drawing.Size(411, 233);
+            this.textPage.Size = new System.Drawing.Size(529, 235);
             this.textPage.TabIndex = 0;
             this.textPage.Text = "Text";
             this.textPage.UseVisualStyleBackColor = true;
@@ -226,7 +226,7 @@
             // springStatusStripLabel
             // 
             this.springStatusStripLabel.Name = "springStatusStripLabel";
-            this.springStatusStripLabel.Size = new System.Drawing.Size(229, 17);
+            this.springStatusStripLabel.Size = new System.Drawing.Size(347, 17);
             this.springStatusStripLabel.Spring = true;
             // 
             // statusLabel
@@ -242,9 +242,9 @@
             this.springStatusStripLabel,
             this.progressBar,
             this.toolStripStatusLabel1});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 285);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 287);
             this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(419, 22);
+            this.MainStatusStrip.Size = new System.Drawing.Size(537, 22);
             this.MainStatusStrip.TabIndex = 13;
             this.MainStatusStrip.Text = "MainStatusStrip";
             // 
@@ -359,7 +359,7 @@
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.Padding = new System.Drawing.Point(0, 0);
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(419, 262);
+            this.MainTabControl.Size = new System.Drawing.Size(537, 264);
             this.MainTabControl.TabIndex = 15;
             // 
             // MainMenuStrip
@@ -371,7 +371,7 @@
             this.toolStripMenuItem2});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
-            this.MainMenuStrip.Size = new System.Drawing.Size(419, 45);
+            this.MainMenuStrip.Size = new System.Drawing.Size(537, 45);
             this.MainMenuStrip.TabIndex = 12;
             this.MainMenuStrip.Text = "MainMenuStrip";
             // 
@@ -379,7 +379,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 307);
+            this.ClientSize = new System.Drawing.Size(537, 309);
             this.Controls.Add(this.clipboardMonitor1);
             this.Controls.Add(this.MainStatusStrip);
             this.Controls.Add(this.MainTabControl);
@@ -408,7 +408,7 @@
 
         #endregion
 
-        private Cllipboarder.ClipboardMonitor clipboardMonitor1;
+        private Clipboarder.ClipboardMonitor clipboardMonitor1;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Content;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;

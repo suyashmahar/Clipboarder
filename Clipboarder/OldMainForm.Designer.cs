@@ -58,7 +58,7 @@ namespace Clipboarder
             this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainTabControl = new System.Windows.Forms.TabControl();
-            this.clipboardMonitor1 = new Cllipboarder.ClipboardMonitor();
+            this.clipboardMonitor1 = new Clipboarder.ClipboardMonitor();
             this.MainMenuStrip.SuspendLayout();
             this.MainStatusStrip.SuspendLayout();
             this.imagePage.SuspendLayout();
@@ -383,7 +383,7 @@ namespace Clipboarder
             this.clipboardMonitor1.TabIndex = 10;
             this.clipboardMonitor1.Text = "clipboardMonitor1";
             this.clipboardMonitor1.Visible = false;
-            this.clipboardMonitor1.ClipboardChanged += new System.EventHandler<Cllipboarder.ClipboardChangedEventArgs>(this.clipboardMonitor1_ClipboardChanged);
+            this.clipboardMonitor1.ClipboardChanged += new System.EventHandler<Clipboarder.ClipboardChangedEventArgs>(this.clipboardMonitor1_ClipboardChanged);
             // 
             // OldMainForm
             // 
@@ -428,7 +428,7 @@ namespace Clipboarder
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private Cllipboarder.ClipboardMonitor clipboardMonitor1;
+        private Clipboarder.ClipboardMonitor clipboardMonitor1;
         private System.Windows.Forms.ToolStripMenuItem saveContentToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.TabPage imagePage;

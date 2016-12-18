@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace Clipboarder {
     public partial class OldMainForm : Form {
-        string LastClipboardText = "sample";
+        Image LastClipboardImage = null;
         string databaseName = "contents.db";
         public string password = null;
         Image LastClipboardImage = null;
@@ -63,7 +63,7 @@ namespace Clipboarder {
                     // Modifies behaviour for abvoe key combination
                     newHotkey.Pressed += delegate { onHotkeyPress(newHotkey); };
                     try {
-                        newHotkey.Register();
+                        newHotkey.Register(this);
                     } catch (Exception ex) {
                         MessageBox.Show("Error registering hotkeys. \n\nOperation aborted.\n\nError:" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
@@ -399,7 +399,7 @@ namespace Clipboarder {
 
         #endregion
 
-        private void clipboardMonitor1_ClipboardChanged(object sender, Cllipboarder.ClipboardChangedEventArgs e) {
+        private void clipboardMonitor1_ClipboardChanged(object sender, Clipboarder.ClipboardChangedEventArgs e) {
             if (Clipboard.ContainsText()) {
                 if (!(Clipboard.GetText() == LastClipboardText)) {
                     AddClipboardTextRow();
@@ -412,7 +412,7 @@ namespace Clipboarder {
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e) {
-            SettingsForm settings = new SettingsForm(this);
+            SettingsForm settings = new SettingsForm();
             settings.ShowDialog();
         }
 

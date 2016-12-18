@@ -1,19 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
 namespace Clipboarder {
-    public struct TextContent {
+
+    public class Content {
         public int index;
-        public string text;
         public string time;
     }
 
-    public struct ImageContent {
-        public int index;
+    public class TextContent : Content{
+        public string text;
+        
+        public TextContent() {
+            
+        }
+
+        public TextContent(int index, string text, string time) {
+            this.index = index;
+            this.text = text;
+            this.time = time;
+        }
+    }
+
+    public class ImageContent : Content {
         public Image image;
-        public string time;
+
+        public ImageContent() {
+
+        }
+
+        public ImageContent(int index, Image image, string time) {
+            this.index = index;
+            this.image = image;
+            this.time = time;
+        }
     }
 }

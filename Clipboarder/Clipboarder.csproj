@@ -79,6 +79,10 @@
   <PropertyGroup>
     <ApplicationIcon>Clipboarder-Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PasswordTextBoxControl, Version=0.4.0.33110, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -122,12 +126,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainFormPresenter.cs" />
-    <Compile Include="OldMainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OldMainForm.Designer.cs">
-      <DependentUpon>OldMainForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="PasswordBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -150,9 +148,6 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OldMainForm.resx">
-      <DependentUpon>OldMainForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -166,6 +161,7 @@
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

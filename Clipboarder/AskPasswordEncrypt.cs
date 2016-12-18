@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace Clipboarder {
     public partial class AskPasswordEncrypt : Form {
-        OldMainForm mainForm;
+        MainFormPresenter mainFormPresenter;
         PasswordStrength passwordStrength = new PasswordStrength();
 
-        public AskPasswordEncrypt(OldMainForm mainForm) {
-            this.mainForm = mainForm;
+        public AskPasswordEncrypt(MainFormPresenter mainForm) {
+            this.mainFormPresenter = mainForm;
             InitializeComponent();
         }
 
@@ -22,7 +22,7 @@ namespace Clipboarder {
         }
 
         private void okButton_Click(object sender, EventArgs e) {
-            mainForm.password = passwordReEnterBox.Text;
+            mainFormPresenter.password = passwordReEnterBox.Text;
             this.DialogResult =  DialogResult.OK;
         }
 
