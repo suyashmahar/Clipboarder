@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace Cllipboarder {
+namespace Clipboarder {
 
     // Must inherit Control, not Component, in order to have Handle
     [DefaultEvent("ClipboardChanged")]

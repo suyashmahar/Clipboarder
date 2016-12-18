@@ -10,12 +10,12 @@ using Clipboarder.Encryption;
 
 namespace Clipboarder {
     public partial class AskPasswordDecrypt : Form {
-        MainForm mainForm;
+        MainFormPresenter mainFormPresenter;
         string hashedPassword;
 
-        public AskPasswordDecrypt(MainForm mainForm, string hashedPassword) {
+        public AskPasswordDecrypt(MainFormPresenter mainForm, string hashedPassword) {
             InitializeComponent();
-            this.mainForm = mainForm;
+            this.mainFormPresenter = mainForm;
             this.hashedPassword = hashedPassword;
         }
 
@@ -25,7 +25,7 @@ namespace Clipboarder {
 
         private void okButton_Click(object sender, EventArgs e) {
             if (BCrypt.CheckPassword(passwordBox1.Text, hashedPassword)){
-                mainForm.password = passwordBox1.Text;
+                mainFormPresenter.password = passwordBox1.Text;
                 DialogResult = DialogResult.OK;
             } else {
                 MessageBox.Show("Incorrect password!", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Information);

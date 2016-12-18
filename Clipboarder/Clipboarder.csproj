@@ -79,10 +79,14 @@
   <PropertyGroup>
     <ApplicationIcon>Clipboarder-Icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PasswordTextBoxControl, Version=0.4.0.33110, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PasswordTextBoxControl-net40, Version=0.4.0.33110, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Desktop\packages\PasswordTextBox-Control.0.4.0\lib\net40\PasswordTextBoxControl.dll</HintPath>
+      <HintPath>..\packages\PasswordTextBoxControl-net40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -112,13 +116,16 @@
     <Compile Include="ClipboardMonitor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Content.cs" />
     <Compile Include="HotKey.cs" />
+    <Compile Include="IMainDataLayer.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainFormPresenter.cs" />
     <Compile Include="PasswordBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -154,6 +161,7 @@
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
