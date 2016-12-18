@@ -111,6 +111,14 @@ namespace Clipboarder.Extension {
         }
 
         /// <summary>
+        /// Removes user name entry along with password from userNameTable
+        /// </summary>
+        public void RemoveUserEntry() {
+            string query = String.Format("DELETE FROM {0} WHERE id=\"{1}\"", userNameTable, GetCurrentUserID());
+            ExecuteNonQueryCommand(query);
+        }
+
+        /// <summary>
         /// Adds new record to userNameTable corresponding to user currently logged-in
         /// </summary>
         /// <param name="hashedPassword">Hash of password supplied by the user.</param>

@@ -107,15 +107,7 @@ namespace Clipboarder {
             } else {
                 // Uses DatabaseOperations class object to connect and write to database
                 DatabaseOperations dbOperations = new DatabaseOperations();
-
-                // TODO remove this on checking its importance
-                //if (!Properties.Settings.Default.doesDatabaseExists) {
-                //    //Creates new Database
-                //    DatabaseOperations.CreatesNewDatabase(databaseName);
-                //    Properties.Settings.Default.doesDatabaseExists = true;
-                //    view.status = "Creating new database.";
-                //}
-
+              
                 // Connects to database and opens connection
                 try {
                     dbOperations = new DatabaseOperations();
@@ -124,6 +116,7 @@ namespace Clipboarder {
                 } catch (Exception ex) {
                     MessageBox.Show("Error connecting database, database does not exists or is unreachable.  \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     view.status = "Error";
+                    dbOperations.CloseConnection();
                     return;
                 }
 
@@ -131,6 +124,7 @@ namespace Clipboarder {
                 DialogResult result = askPassword.ShowDialog();
 
                 if (result != DialogResult.OK) {
+                    dbOperations.CloseConnection();
                     return;
                 }
 
@@ -139,6 +133,7 @@ namespace Clipboarder {
                     if (!dbOperations.CurrentUserHasID()) {
                         MessageBox.Show("Content for current user doesn't exists.  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     }
+                    dbOperations.CloseConnection();
                     return;
                 } else {
                     view.ClearAll();
@@ -159,6 +154,7 @@ namespace Clipboarder {
                     } catch (Exception) {
                         MessageBox.Show("Error filling table with values. \n  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         view.status = "Error";
+                        dbOperations.CloseConnection();
                         return;
                     }
 
@@ -187,6 +183,7 @@ namespace Clipboarder {
                     } catch (Exception) {
                         MessageBox.Show("Error filling table with values. \n  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         view.status = "Error";
+                        dbOperations.CloseConnection();
                         return;
                     }
                 }
@@ -229,6 +226,7 @@ namespace Clipboarder {
                         dbOperations.OpenConnection();
                     } catch (Exception ex) {
                         MessageBox.Show("Error connecting database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        dbOperations.CloseConnection();
                         return;
                     }
 
@@ -236,17 +234,20 @@ namespace Clipboarder {
                     if (dbOperations.CurrentUserHasID()) {
                         try {
                             dbOperations.RemoveRecordsForCurrentUsers();
+                            dbOperations.RemoveUserEntry();
+                            dbOperations.AddNewUser(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
                         } catch (Exception ex) {
                             DialogResult messageResult = MessageBox.Show("Error deleting existing records from database.\n" + ex.StackTrace + "\n\nDo you want to continue?.", "Clipboarder Error", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                            dbOperations.CloseConnection();
                             if (messageResult == DialogResult.No) return;
                         }
                     } else {
-
                         // Hashes password using BCrypt Class and adds new record to userName table in database
                         try {
                             dbOperations.AddNewUser(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
                         } catch (Exception ex) {
                             MessageBox.Show("Error adding current user record to database." + ex.ToString() + "\n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            dbOperations.CloseConnection();
                             return;
                         }
                     }
@@ -271,6 +272,7 @@ namespace Clipboarder {
                                 dbOperations.EnterTextContentForCurrentUser(contentToExport.index, contentToExport.text, contentToExport.time);
                             } catch (Exception ex) {
                                 MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                dbOperations.CloseConnection();
                                 return;
                             }
                         }
@@ -296,6 +298,7 @@ namespace Clipboarder {
                                 dbOperations.EnterImageContentForCurrentUser(contentToAdd.index, contentToAdd.text, contentToAdd.time);
                             } catch (Exception ex) {
                                 MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                dbOperations.CloseConnection();
                                 return;
                             }
                         }
@@ -345,14 +348,12 @@ namespace Clipboarder {
             for (int i = 0; i < hotkeys.Count; i++) {
                 hotkeys[i].Unregister();
             }
-
-            MessageBox.Show(hotkeys[2].Registered + "");
+            
             hotkeys.Clear();
 
             if (reregisterKeys) RegisterShortcuts();
         }
-
-        //TODO -- test -- Update onHotkeyPress to accomodate view
+        
         private void onHotkeyPress(Hotkey key) {
             if (Array.IndexOf(numKeys, key.KeyCode) < view.TextRowCount) {
                 string temp = null;
