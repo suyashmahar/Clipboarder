@@ -15,6 +15,7 @@ namespace Clipboarder {
         event EventHandler<EventArgs> SaveContent;
         event EventHandler<EventArgs> OnExiting;
         event EventHandler<EventArgs> ViewLoaded;
+        event EventHandler<EventArgs> ShowSettings;
 
         void AddNewTextRow(TextContent contentToAdd);
         void AddNewImageRow(ImageContent contentToAdd);

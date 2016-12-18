@@ -8,7 +8,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using static System.Threading.Tasks.Task;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace Clipboarder {
     public class MainFormPresenter {
@@ -33,6 +35,7 @@ namespace Clipboarder {
             view.OnExiting += OnExit;
             view.LoadContent += LoadContent;
             view.SaveContent += SaveContent;
+            view.ShowSettings += ShowSettings;
 
             // Adds first content from clipboard
             if (Clipboard.ContainsText()) {
@@ -88,6 +91,12 @@ namespace Clipboarder {
 
         private void SaveContent(object sender, EventArgs e) {
             ExportEntries();
+        }
+
+        private void ShowSettings(object sender, EventArgs e) {
+            SettingsForm settingsForm = new SettingsForm();
+            settingsForm.ShowDialog();
+            UnregisterShortcuts(true);
         }
 
         #region  Import and Export
@@ -165,15 +174,14 @@ namespace Clipboarder {
                         for (int i = 0; i < outputList.Count; i++) {
                             view.TaskProgress = (100 / outputList.Count) * i;
                             string[] outputString = outputList[i];
-
-                            //Decrypts strings 
-                            outputString[1] = StringCipher.Decrypt(outputString[1], password);
-                            outputString[2] = StringCipher.Decrypt(outputString[2], password);
-
+                            
+                            // Decrypt content and add to contentToAdd
                             ImageContent contentToAdd = new ImageContent();
                             contentToAdd.index = Convert.ToInt32(outputString[0]);
                             contentToAdd.image = ImageConversion.Base64ToImage(StringCipher.Decrypt(outputString[1], password));
                             contentToAdd.time = StringCipher.Decrypt(outputString[2], password);
+
+                            view.AddNewImageRow(contentToAdd);
                         }
                         view.TaskProgress = 0;
                     } catch (Exception) {
@@ -310,6 +318,7 @@ namespace Clipboarder {
         private void RegisterShortcuts() {
             if (Properties.Settings.Default.areShortcutsEnabled) {
                 int keyboardShortcuts = Properties.Settings.Default.shortCuts;
+
                 for (int i = 0; i < keyboardShortcuts; i++) {
                     Hotkey newHotkey = new Hotkey();
 
@@ -320,6 +329,7 @@ namespace Clipboarder {
 
                     // Modifies behaviour for above key combination
                     newHotkey.Pressed += delegate { onHotkeyPress(newHotkey); };
+                    
                     try {
                         newHotkey.Register((MainForm)view);
                     } catch (Exception ex) {
@@ -336,15 +346,19 @@ namespace Clipboarder {
                 hotkeys[i].Unregister();
             }
 
-            if (reregisterKeys) {
-                RegisterShortcuts();
-            }
+            MessageBox.Show(hotkeys[2].Registered + "");
+            hotkeys.Clear();
+
+            if (reregisterKeys) RegisterShortcuts();
         }
+
         //TODO -- test -- Update onHotkeyPress to accomodate view
         private void onHotkeyPress(Hotkey key) {
             if (Array.IndexOf(numKeys, key.KeyCode) < view.TextRowCount) {
                 string temp = null;
-                if (Clipboard.ContainsText()) temp = Clipboard.GetText();
+
+                if (Clipboard.ContainsText())
+                    temp = Clipboard.GetText();
 
                 LastClipboardText = view.GetTextContentAt(view.TextRowCount - Array.IndexOf(numKeys, key.KeyCode) - 2).text;
                 Clipboard.SetText(LastClipboardText);

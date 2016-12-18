@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.clipboardMonitor1 = new ClipboardMonitor();
+            this.clipboardMonitor1 = new Clipboarder.ClipboardMonitor();
             this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -182,7 +182,7 @@
             this.imageDataGrid.ReadOnly = true;
             this.imageDataGrid.RowHeadersVisible = false;
             this.imageDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.imageDataGrid.Size = new System.Drawing.Size(411, 233);
+            this.imageDataGrid.Size = new System.Drawing.Size(529, 235);
             this.imageDataGrid.TabIndex = 12;
             this.imageDataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.imageDataGrid_RowsRemoved);
             // 
@@ -196,7 +196,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.imageDataGrid);
             this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(411, 233);
+            this.splitContainer1.Size = new System.Drawing.Size(529, 235);
             this.splitContainer1.SplitterDistance = 333;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -205,7 +205,7 @@
             this.imagePage.Controls.Add(this.splitContainer1);
             this.imagePage.Location = new System.Drawing.Point(4, 25);
             this.imagePage.Name = "imagePage";
-            this.imagePage.Size = new System.Drawing.Size(411, 233);
+            this.imagePage.Size = new System.Drawing.Size(529, 235);
             this.imagePage.TabIndex = 1;
             this.imagePage.Text = "Image";
             this.imagePage.UseVisualStyleBackColor = true;
@@ -267,6 +267,7 @@
             | System.Windows.Forms.Keys.Delete)));
             this.ClearClipboarderMenuItem.Size = new System.Drawing.Size(251, 26);
             this.ClearClipboarderMenuItem.Text = "Clear clipboarder";
+            this.ClearClipboarderMenuItem.Click += new System.EventHandler(this.ClearClipboarderMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -387,7 +388,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(382, 268);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Clipboarder";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).EndInit();
             this.textPage.ResumeLayout(false);

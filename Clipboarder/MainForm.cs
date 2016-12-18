@@ -62,6 +62,7 @@ namespace Clipboarder {
         public event EventHandler<EventArgs> SaveContent;
         public event EventHandler<EventArgs> OnExiting;
         public event EventHandler<EventArgs> ViewLoaded;
+        public event EventHandler<EventArgs> ShowSettings;
 
         public void AddNewImageRow(ImageContent contentToAdd) {
             DataGridViewRow NewRow = new DataGridViewRow();
@@ -109,7 +110,7 @@ namespace Clipboarder {
                 TextContent contentToAdd = new TextContent();
                 contentToAdd.index = (int)textDataGrid.Rows[i].Cells[0].Value;
                 contentToAdd.text = (string)textDataGrid.Rows[i].Cells[1].Value;
-                contentToAdd.time = (string)textDataGrid.Rows[i].Cells[3].Value;
+                contentToAdd.time = (string)textDataGrid.Rows[i].Cells[2].Value;
 
                 returnValues.Add(contentToAdd);
             }
@@ -175,9 +176,13 @@ namespace Clipboarder {
         }
 
         private void settingsMenuItem_Click(object sender, EventArgs e) {
-            SettingsForm settingsForm = new SettingsForm();
-            settingsForm.ShowDialog();
+            ShowSettings(sender, e);
         }
         #endregion
+
+        private void ClearClipboarderMenuItem_Click(object sender, EventArgs e) {
+            textDataGrid.Rows.Clear();
+            imageDataGrid.Rows.Clear();
+        }
     }
 }
