@@ -1,4 +1,6 @@
-﻿namespace Clipboarder {
+﻿using Clipboarder;
+
+namespace Clipboarder {
     partial class MainForm {
         /// <summary>
         /// Required designer variable.

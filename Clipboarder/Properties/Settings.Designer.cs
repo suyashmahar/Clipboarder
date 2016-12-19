@@ -38,24 +38,72 @@ namespace Clipboarder.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4")]
-        public int shortCuts {
+        public int textShortcuts {
             get {
-                return ((int)(this["shortCuts"]));
+                return ((int)(this["textShortcuts"]));
             }
             set {
-                this["shortCuts"] = value;
+                this["textShortcuts"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool areShortcutsEnabled {
+        public bool areTextShortcutsEnabled {
             get {
-                return ((bool)(this["areShortcutsEnabled"]));
+                return ((bool)(this["areTextShortcutsEnabled"]));
             }
             set {
-                this["areShortcutsEnabled"] = value;
+                this["areTextShortcutsEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int imageShortcuts {
+            get {
+                return ((int)(this["imageShortcuts"]));
+            }
+            set {
+                this["imageShortcuts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool areImageShortcutsEnabled {
+            get {
+                return ((bool)(this["areImageShortcutsEnabled"]));
+            }
+            set {
+                this["areImageShortcutsEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+NumKeys")]
+        public string textContentKeys {
+            get {
+                return ((string)(this["textContentKeys"]));
+            }
+            set {
+                this["textContentKeys"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Alt+NumKeys")]
+        public string imageContentKeys {
+            get {
+                return ((string)(this["imageContentKeys"]));
+            }
+            set {
+                this["imageContentKeys"] = value;
             }
         }
     }

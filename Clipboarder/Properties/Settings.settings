@@ -5,11 +5,23 @@
     <Setting Name="doesDatabaseExists" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="shortCuts" Type="System.Int32" Scope="User">
+    <Setting Name="textShortcuts" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4</Value>
     </Setting>
-    <Setting Name="areShortcutsEnabled" Type="System.Boolean" Scope="User">
+    <Setting Name="areTextShortcutsEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="imageShortcuts" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="areImageShortcutsEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="textContentKeys" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+NumKeys</Value>
+    </Setting>
+    <Setting Name="imageContentKeys" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ctrl+Alt+NumKeys</Value>
     </Setting>
   </Settings>
 </SettingsFile>

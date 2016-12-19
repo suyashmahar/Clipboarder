@@ -319,15 +319,32 @@ namespace Clipboarder {
         /// Registers hotkeys using HotKey class
         /// </summary>
         private void RegisterShortcuts() {
-            if (Properties.Settings.Default.areShortcutsEnabled) {
-                int keyboardShortcuts = Properties.Settings.Default.shortCuts;
+            if (Properties.Settings.Default.areTextShortcutsEnabled) {
+                int keyboardShortcuts = Properties.Settings.Default.textShortcuts;
 
                 for (int i = 0; i < keyboardShortcuts; i++) {
                     Hotkey newHotkey = new Hotkey();
 
+                    // Gets keys from settings
+                    string[] splitted = Properties.Settings.Default.textContentKeys.Split('+');
+                    //MessageBox.Show(splitted[0] + splitted[1] + splitted[2]);
+
+                    // Chooses Ctrl, Shift and Alt keys according to user preference
+                    foreach (string value in splitted){
+                        //Ctrl+Alt+NumKeys
+                        switch (value) {
+                            case "Ctrl":
+                                newHotkey.Control = true;
+                                break;
+                            case "Alt":
+                                newHotkey.Alt = true;
+                                break;
+                            case "Shift":
+                                newHotkey.Shift = true;
+                                break;
+                        }
+                    }
                     // Ctrl + Shift + NumberAtIndex_i
-                    newHotkey.Control = true;
-                    newHotkey.Shift = true;
                     newHotkey.KeyCode = numKeys[i];
 
                     // Modifies behaviour for above key combination
@@ -340,6 +357,7 @@ namespace Clipboarder {
                         return;
                     }
                     hotkeys.Add(newHotkey);
+                    
                 }
             }
         }
