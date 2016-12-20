@@ -10,7 +10,6 @@ using System.Windows.Forms;
 namespace Clipboarder {
     public partial class SettingsForm : Form {
         string defaultTextKeys = "Ctrl+Shift+(none)+NumKeys";
-        string defaultImageKeys = "Ctrl+Alt+NumKeys";
 
         List<Keys> modifierKeys = new List<Keys>() {
             Keys.None,
@@ -29,7 +28,6 @@ namespace Clipboarder {
 
         public SettingsForm() {
             InitializeComponent();
-
         }
 
         private void SettingsForm_Load(object sender, EventArgs e) {
@@ -57,13 +55,6 @@ namespace Clipboarder {
                     textShortcutsNumericUpDown.Enabled = false;
                     ChangeTextComboBoxesEnabledState(false);
                 }
-
-            // Loading values for image content
-            imageShortcutsNumericUpDown.Value = Properties.Settings.Default.imageShortcuts;
-            imageContentCheckBox.Checked = Properties.Settings.Default.areImageShortcutsEnabled;
-            if (!Properties.Settings.Default.areImageShortcutsEnabled) {
-                imageShortcutsNumericUpDown.Enabled = false;
-            }
         }
 
         private void okButton_Click(object sender, EventArgs e) {

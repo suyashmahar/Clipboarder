@@ -97,7 +97,7 @@ namespace Clipboarder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Alt+NumKeys")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ctrl+Shift+NumKeys")]
         public string imageContentKeys {
             get {
                 return ((string)(this["imageContentKeys"]));

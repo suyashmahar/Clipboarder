@@ -21,7 +21,7 @@
       <Value Profile="(Default)">Ctrl+NumKeys</Value>
     </Setting>
     <Setting Name="imageContentKeys" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Ctrl+Alt+NumKeys</Value>
+      <Value Profile="(Default)">Ctrl+Shift+NumKeys</Value>
     </Setting>
   </Settings>
 </SettingsFile>
