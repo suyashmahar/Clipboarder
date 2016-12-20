@@ -1,4 +1,6 @@
-﻿namespace Clipboarder {
+﻿using Clipboarder;
+
+namespace Clipboarder {
     partial class MainForm {
         /// <summary>
         /// Required designer variable.
@@ -24,7 +26,6 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.clipboardMonitor1 = new Clipboarder.ClipboardMonitor();
             this.TimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Content = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +53,7 @@
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.clipboardMonitor1 = new Clipboarder.ClipboardMonitor();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.textPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).BeginInit();
@@ -63,16 +65,6 @@
             this.MainTabControl.SuspendLayout();
             this.MainMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // clipboardMonitor1
-            // 
-            this.clipboardMonitor1.BackColor = System.Drawing.Color.Red;
-            this.clipboardMonitor1.Location = new System.Drawing.Point(835, 497);
-            this.clipboardMonitor1.Name = "clipboardMonitor1";
-            this.clipboardMonitor1.Size = new System.Drawing.Size(10, 10);
-            this.clipboardMonitor1.TabIndex = 14;
-            this.clipboardMonitor1.Text = "clipboardMonitor1";
-            this.clipboardMonitor1.Visible = false;
             // 
             // TimeColumn
             // 
@@ -256,6 +248,7 @@
             this.clearClipboardMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.clearClipboardMenuItem.Size = new System.Drawing.Size(251, 26);
             this.clearClipboardMenuItem.Text = "Clear clipboard";
+            this.clearClipboardMenuItem.Click += new System.EventHandler(this.clearClipboardMenuItem_Click);
             // 
             // ClearClipboarderMenuItem
             // 
@@ -375,6 +368,16 @@
             this.MainMenuStrip.Size = new System.Drawing.Size(537, 45);
             this.MainMenuStrip.TabIndex = 12;
             this.MainMenuStrip.Text = "MainMenuStrip";
+            // 
+            // clipboardMonitor1
+            // 
+            this.clipboardMonitor1.BackColor = System.Drawing.Color.Red;
+            this.clipboardMonitor1.Location = new System.Drawing.Point(835, 497);
+            this.clipboardMonitor1.Name = "clipboardMonitor1";
+            this.clipboardMonitor1.Size = new System.Drawing.Size(10, 10);
+            this.clipboardMonitor1.TabIndex = 14;
+            this.clipboardMonitor1.Text = "clipboardMonitor1";
+            this.clipboardMonitor1.Visible = false;
             // 
             // MainForm
             // 

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Clipboarder")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany(" ")]
+[assembly: AssemblyCompany("Company")]
 [assembly: AssemblyProduct("Clipboarder")]
 [assembly: AssemblyCopyright(" ")]
 [assembly: AssemblyTrademark("")]

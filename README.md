@@ -4,11 +4,15 @@
 ## Features:
 1. Clipboard management for text and image based content.
 2. Ability to save contents of Clipboarder to database using password.
+<<<<<<< HEAD
 3. Ability to access content in hierarchical order using keyboard shortcut (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>NumberKeys</kbd>).
+=======
+3. Ability to access content in hierarchical order using customizable keyboard shortcut (`Ctrl + Shift + NumberKeys`).
+>>>>>>> keyboard-shortcuts
 
 ## TODOs:
 1. Improve performance on exporting content.
-2. Customizable shortcut and option to export save data without a password.
+2. More user control over opertations like exporting content.
 3. Identification of URL in content to open link in a browser window.
 4. Better image support and stability.
 
