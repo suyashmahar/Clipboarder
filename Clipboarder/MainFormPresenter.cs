@@ -11,17 +11,23 @@ using System.Text;
 using static System.Threading.Tasks.Task;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Diagnostics;
 
 namespace Clipboarder {
+
     public class MainFormPresenter {
+
         private IMainDataLayer view;
         private string databaseName = "contents.db";
         public string password = null;
-        Image LastClipboardImage = null;
+        Image LastClipboardImage = ImageConversion.Base64ToImage("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY3growIAAycBLhVrvukAAAAASUVORK5CYII=");
+        int lastImageHashCode = 1;
         string LastClipboardText = null;
         ClipboardMonitor clipboardMonitor;
 
-        List<Hotkey> hotkeys = new List<Hotkey>();
+        List<Hotkey> textHotkeys = new List<Hotkey>();
+        List<Hotkey> imageHotkeys = new List<Hotkey>();
         Keys[] numKeys = { Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9 }; //Number keys
 
         public MainFormPresenter(IMainDataLayer view) {
@@ -39,9 +45,11 @@ namespace Clipboarder {
 
             // Adds first content from clipboard
             if (Clipboard.ContainsText()) {
+                LastClipboardText = Clipboard.GetText();
                 view.AddNewTextRow(getTextContentFromClipboard());
             } else if (Clipboard.ContainsImage()) {
                 view.AddNewImageRow(getImageContentFromClipboard());
+                Clipboard.GetText();
             }
 
             view.ProgressVisibility = false;
@@ -54,12 +62,12 @@ namespace Clipboarder {
         /// Monitors clipboard content change and notifies views accordingly
         /// </summary>
         private void ClipboardMonitor_ClipboardChanged(object sender, ClipboardChangedEventArgs e) {
+            //MessageBox.Show("Triggered!");
             if (Clipboard.ContainsText()) {
                 if (Clipboard.GetText() != LastClipboardText)
                     view.AddNewTextRow(getTextContentFromClipboard());                
             } else if (Clipboard.ContainsImage()) {
-                if (Clipboard.GetImage() != LastClipboardImage)
-                    view.AddNewImageRow(getImageContentFromClipboard());
+                view.AddNewImageRow(getImageContentFromClipboard());
             }
         }
 
@@ -319,49 +327,64 @@ namespace Clipboarder {
         /// Registers hotkeys using HotKey class
         /// </summary>
         private void RegisterShortcuts() {
-            if (Properties.Settings.Default.areShortcutsEnabled) {
-                int keyboardShortcuts = Properties.Settings.Default.shortCuts;
+            //Registers keyboard shortcuts for text content
+            if (Properties.Settings.Default.areTextShortcutsEnabled) {
+                int keyboardTextShortcuts = Properties.Settings.Default.textShortcuts;
 
-                for (int i = 0; i < keyboardShortcuts; i++) {
+                for (int i = 0; i < keyboardTextShortcuts; i++) {
                     Hotkey newHotkey = new Hotkey();
 
-                    // Ctrl + Shift + NumberAtIndex_i
-                    newHotkey.Control = true;
-                    newHotkey.Shift = true;
+                    // Gets keys from settings
+                    string[] splitted = Properties.Settings.Default.textContentKeys.Split('+');
+
+                    // Chooses Ctrl, Shift and Alt keys according to user preference
+                    foreach (string value in splitted) {
+                        switch (value) {
+                            case "Ctrl":
+                                newHotkey.Control = true;
+                                break;
+                            case "Alt":
+                                newHotkey.Alt = true;
+                                break;
+                            case "Shift":
+                                newHotkey.Shift = true;
+                                break;
+                        }
+                    }
+
                     newHotkey.KeyCode = numKeys[i];
 
                     // Modifies behaviour for above key combination
-                    newHotkey.Pressed += delegate { onHotkeyPress(newHotkey); };
-                    
+                    newHotkey.Pressed += delegate { onTextHotkeyPress(newHotkey); };
+
                     try {
                         newHotkey.Register((MainForm)view);
                     } catch (Exception ex) {
                         MessageBox.Show("Error registering hotkeys. \n\nOperation aborted.\n\nError:" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
-                    hotkeys.Add(newHotkey);
+                    textHotkeys.Add(newHotkey);
+
                 }
             }
         }
 
         public void UnregisterShortcuts(bool reregisterKeys) {
-            for (int i = 0; i < hotkeys.Count; i++) {
-                hotkeys[i].Unregister();
+            for (int i = 0; i < textHotkeys.Count; i++) {
+                textHotkeys[i].Unregister();
             }
-            
-            hotkeys.Clear();
-
+            textHotkeys.Clear();
             if (reregisterKeys) RegisterShortcuts();
         }
-        
-        private void onHotkeyPress(Hotkey key) {
+
+        private void onTextHotkeyPress(Hotkey key) {
             if (Array.IndexOf(numKeys, key.KeyCode) < view.TextRowCount) {
                 string temp = null;
 
                 if (Clipboard.ContainsText())
                     temp = Clipboard.GetText();
 
-                LastClipboardText = view.GetTextContentAt(view.TextRowCount - Array.IndexOf(numKeys, key.KeyCode) - 2).text;
+                LastClipboardText = view.GetTextContentAt(view.TextRowCount - Array.IndexOf(numKeys, key.KeyCode) - 1).text;
                 Clipboard.SetText(LastClipboardText);
                 SendKeys.SendWait("^v");
 

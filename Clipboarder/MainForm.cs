@@ -1,12 +1,17 @@
-﻿using System; 
+﻿using Clipboarder.Extension;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
+
+//TODO Reimplement IMainDataLayer
 namespace Clipboarder {
     public partial class MainForm : Form, IMainDataLayer {
         private MainFormPresenter presenter;
@@ -72,7 +77,7 @@ namespace Clipboarder {
             NewRow.Cells[1].Value = contentToAdd.image;
             NewRow.Cells[2].Value = contentToAdd.time;
 
-            //Adjusts width of a row
+            //Adjusts height of a row
                 NewRow.Height = Clipboard.GetImage().Height;
             
             imageDataGrid.Rows.Insert(imageDataGrid.RowCount, NewRow);
@@ -117,11 +122,16 @@ namespace Clipboarder {
 
             return returnValues;
         }
+
         public ImageContent GetImageContentAt(int index) {
             //0 indexed
             DataGridViewRow row = imageDataGrid.Rows[index];
+            //MemoryStream ms = new MemoryStream((byte[])row.Cells[1].Value);
+            //Image image = Image.FromStream(ms);
+            //Image imgToRtr = Image.FromFile(row.Cells[1].Value.ToString());
             return new ImageContent((int)row.Cells[0].Value, (Image)row.Cells[1].Value, (string)row.Cells[2].Value);
         }
+
         public TextContent GetTextContentAt(int index) {
             //0 indexed
             DataGridViewRow row = textDataGrid.Rows[index];
@@ -183,6 +193,10 @@ namespace Clipboarder {
         private void ClearClipboarderMenuItem_Click(object sender, EventArgs e) {
             textDataGrid.Rows.Clear();
             imageDataGrid.Rows.Clear();
+        }
+
+        private void clearClipboardMenuItem_Click(object sender, EventArgs e) {
+            Clipboard.Clear();
         }
     }
 }
