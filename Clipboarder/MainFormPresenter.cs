@@ -114,11 +114,11 @@ namespace Clipboarder {
                 return;
             } else {
                 // Uses DatabaseOperations class object to connect and write to database
-                DatabaseOperations dbOperations = new DatabaseOperations();
+                Clipboarder.Extension.DatabaseOperations dbOperations = new Clipboarder.Extension.DatabaseOperations();
               
                 // Connects to database and opens connection
                 try {
-                    dbOperations = new DatabaseOperations();
+                    dbOperations = new Clipboarder.Extension.DatabaseOperations();
                     dbOperations.ConnectDatabase(databaseName);
                     dbOperations.OpenConnection();
                 } catch (Exception ex) {
@@ -217,19 +217,19 @@ namespace Clipboarder {
                 AskPasswordEncrypt askPassword = new AskPasswordEncrypt(this);
                 DialogResult result = askPassword.ShowDialog();
 
-                // Uses DatabaseOperations class object to connect and write to database
-                DatabaseOperations dbOperations = new DatabaseOperations();
+                // Uses DatabaseOperations class object to connect and write to database Clipboarder.Extension
+                Clipboarder.Extension.DatabaseOperations dbOperations = new Clipboarder.Extension.DatabaseOperations();
 
                 if (result == DialogResult.OK) {
                     if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, databaseName))) {
                         //Creates new Database
-                        DatabaseOperations.CreatesNewDatabase(databaseName);
+                        Clipboarder.Extension.DatabaseOperations.CreatesNewDatabase(databaseName);
                         Properties.Settings.Default.doesDatabaseExists = true;
                     }
 
                     // Connects to database and opens connection
                     try {
-                        dbOperations = new DatabaseOperations();
+                        dbOperations = new Clipboarder.Extension.DatabaseOperations();
                         dbOperations.ConnectDatabase(databaseName);
                         dbOperations.OpenConnection();
                     } catch (Exception ex) {

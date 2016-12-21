@@ -15,9 +15,9 @@ namespace Clipboarder.Extension {
         SQLiteCommand databaseCommand = new SQLiteCommand();
         SQLiteDataReader databaseDataReader;
 
-        static string userNameTable = "users";  // Table name corresponding to table containing records of Users
-        static string textEntriesTable = "clipboarderTextEntries";   // Table name corresponding to table containing text entries of Clipboard
-        static string imageEntriesTable = "clipboarderImageEntries";   // Table name corresponding to table containing image entries of Clipboard
+        public static string userNameTable = "users";  // Table name corresponding to table containing records of Users
+        public static string textEntriesTable = "clipboarderTextEntries";   // Table name corresponding to table containing text entries of Clipboard
+        public static string imageEntriesTable = "clipboarderImageEntries";   // Table name corresponding to table containing image entries of Clipboard
         /// <summary>
         /// Creates new database along with all tables and releationships among tables.
         /// </summary>
