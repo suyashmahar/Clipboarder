@@ -25,7 +25,6 @@ namespace Clipboarder {
         int lastImageHashCode = 1;
         string LastClipboardText = null;
         ClipboardMonitor clipboardMonitor;
-
         List<Hotkey> textHotkeys = new List<Hotkey>();
         List<Hotkey> imageHotkeys = new List<Hotkey>();
         Keys[] numKeys = { Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9 }; //Number keys
@@ -114,11 +113,11 @@ namespace Clipboarder {
                 return;
             } else {
                 // Uses DatabaseOperations class object to connect and write to database
-                Clipboarder.Extension.DatabaseOperations dbOperations = new Clipboarder.Extension.DatabaseOperations();
-              
+                DatabaseOperations dbOperations = new DatabaseOperations();
+                
                 // Connects to database and opens connection
                 try {
-                    dbOperations = new Clipboarder.Extension.DatabaseOperations();
+                    dbOperations = new DatabaseOperations();
                     dbOperations.ConnectDatabase(databaseName);
                     dbOperations.OpenConnection();
                 } catch (Exception ex) {
@@ -128,7 +127,10 @@ namespace Clipboarder {
                     return;
                 }
 
-                AskPasswordDecrypt askPassword = new AskPasswordDecrypt(this, dbOperations.GetUserPassword());
+                User user = new User(dbOperations);
+                user.GetCurrentUserID();
+
+                AskPasswordDecrypt askPassword = new AskPasswordDecrypt(this, user.GetUserPassword());
                 DialogResult result = askPassword.ShowDialog();
 
                 if (result != DialogResult.OK) {
@@ -137,17 +139,16 @@ namespace Clipboarder {
                 }
 
                 // Checks equality of password provided and stored
-                if (!dbOperations.CurrentUserHasID()) {
-                    if (!dbOperations.CurrentUserHasID()) {
-                        MessageBox.Show("Content for current user doesn't exists.  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    }
+                if (!user.CurrentUserHasID()) {
+                    MessageBox.Show("Content for current user doesn't exists.  \n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     dbOperations.CloseConnection();
                     return;
                 } else {
                     view.ClearAll();
+                    DatabaseContent dbContent = new DatabaseContent(dbOperations, user);
                     try {
                         view.status = "Reading text from database";
-                        List<string[]> outputList = dbOperations.GetTextData();
+                        List<string[]> outputList = dbContent.GetTextData();
                         
                         for (int i = 0; i < outputList.Count; i++) {
                             string[] outputString = outputList[i];
@@ -169,7 +170,7 @@ namespace Clipboarder {
                     try {
                         view.status = "Reading images from database.";
 
-                        List<string[]> outputList = dbOperations.GetImageData();
+                        List<string[]> outputList = dbContent.GetImageData();
                         
                         //progress bar values
                         view.TaskProgress = 0;
@@ -195,10 +196,10 @@ namespace Clipboarder {
                         return;
                     }
                 }
-                dbOperations.CloseConnection();
                 view.status = "Imported successfully";
                 view.TaskProgress = 0;
                 view.ProgressVisibility = false;
+                dbOperations.CloseConnection();
             } // Else statement for check on file existence
             password = "";
         }
@@ -218,7 +219,7 @@ namespace Clipboarder {
                 DialogResult result = askPassword.ShowDialog();
 
                 // Uses DatabaseOperations class object to connect and write to database Clipboarder.Extension
-                Clipboarder.Extension.DatabaseOperations dbOperations = new Clipboarder.Extension.DatabaseOperations();
+                DatabaseOperations dbOperations = new DatabaseOperations();
 
                 if (result == DialogResult.OK) {
                     if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, databaseName))) {
@@ -229,7 +230,7 @@ namespace Clipboarder {
 
                     // Connects to database and opens connection
                     try {
-                        dbOperations = new Clipboarder.Extension.DatabaseOperations();
+                        dbOperations = new DatabaseOperations();
                         dbOperations.ConnectDatabase(databaseName);
                         dbOperations.OpenConnection();
                     } catch (Exception ex) {
@@ -237,22 +238,31 @@ namespace Clipboarder {
                         dbOperations.CloseConnection();
                         return;
                     }
-
+                    
+                    User user = new User(dbOperations);
+                    if (user.CurrentUserHasID())
+                        user.GetCurrentUserID();
+                    DatabaseContent dbContents = new DatabaseContent(dbOperations, user);
                     // Deletes existing content for current user if corresponding record exists in userTable
-                    if (dbOperations.CurrentUserHasID()) {
+
+                    if (user.CurrentUserHasID()) {
                         try {
-                            dbOperations.RemoveRecordsForCurrentUsers();
-                            dbOperations.RemoveUserEntry();
-                            dbOperations.AddNewUser(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
+                            //dbContents.clearAllContent();
+                            dbContents.RemoveRecordsForCurrentUsers();
+                            user.DeleteEntry();
+                            user.CreateEntry(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
+                            user.GetCurrentUserID();
                         } catch (Exception ex) {
-                            DialogResult messageResult = MessageBox.Show("Error deleting existing records from database.\n" + ex.StackTrace + "\n\nDo you want to continue?.", "Clipboarder Error", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                           DialogResult messageResult = MessageBox.Show("Error deleting existing records from database.\n" + ex.ToString() + "\n\nDo you want to continue?.", "Clipboarder Error", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                             dbOperations.CloseConnection();
                             if (messageResult == DialogResult.No) return;
                         }
                     } else {
                         // Hashes password using BCrypt Class and adds new record to userName table in database
                         try {
-                            dbOperations.AddNewUser(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
+                            
+                            user.CreateEntry(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
+                            user.GetCurrentUserID();
                         } catch (Exception ex) {
                             MessageBox.Show("Error adding current user record to database." + ex.ToString() + "\n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                             dbOperations.CloseConnection();
@@ -261,7 +271,7 @@ namespace Clipboarder {
                     }
 
                     //  Adds Content to databased as it is encrypted using password provided by the user
-
+                    
                     // Exports text Entries
                     if (textContents.Count != 0) {
                         view.ProgressVisibility = true;
@@ -277,7 +287,7 @@ namespace Clipboarder {
                             
                             // Writing data to database
                             try {
-                                dbOperations.EnterTextContentForCurrentUser(contentToExport.index, contentToExport.text, contentToExport.time);
+                                dbContents.EnterTextContent(contentToExport.index, contentToExport.text, contentToExport.time);
                             } catch (Exception ex) {
                                 MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                                 dbOperations.CloseConnection();
@@ -303,7 +313,7 @@ namespace Clipboarder {
                             contentToAdd.time = StringCipher.Encrypt(imageContents[i].time, password);
                             // Writing data to database
                             try {
-                                dbOperations.EnterImageContentForCurrentUser(contentToAdd.index, contentToAdd.text, contentToAdd.time);
+                                dbContents.EnterImageContent(contentToAdd.index, contentToAdd.text, contentToAdd.time);
                             } catch (Exception ex) {
                                 MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                                 dbOperations.CloseConnection();
@@ -313,9 +323,9 @@ namespace Clipboarder {
                         view.TaskProgress = 0;
                         view.ProgressVisibility = false;
                     }
-                    dbOperations.CloseConnection();
                     view.status = "Export Completed";
                 }
+                dbOperations.CloseConnection();
                 password = null;
             }
         }

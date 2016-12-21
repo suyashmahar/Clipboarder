@@ -90,6 +90,5 @@ namespace Clipboarder {
             databaseCommand = new SQLiteCommand(query,databaseConnection);
             return databaseCommand.ExecuteReader();
         }
-
     }
 }

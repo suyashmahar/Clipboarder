@@ -34,7 +34,7 @@ namespace Clipboarder {
         /// <param name="index">Index of content.</param>
         /// <param name="content">Content to be written to the database, if security is a concern content should be encrypted.</param>
         /// <param name="time">Time of entry in clipboarder.</param>
-        public void EnterImageContentForCurrentUser(int index, string content, string time) {
+        public void EnterImageContent(int index, string content, string time) {
             string command = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", DatabaseOperations.imageEntriesTable, index, content, time, user.id);
             dbOperations.ExecuteNonQueryCommand(command);
         }

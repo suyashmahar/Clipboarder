@@ -12,6 +12,7 @@ namespace Clipboarder {
 
         public User(DatabaseOperations dbOperations) {
             this.dbOperations = dbOperations;
+            //GetCurrentUserID();
         }
 
         public Boolean CurrentUserHasID() {
@@ -21,7 +22,6 @@ namespace Clipboarder {
             
             return reader.Read();
         }
-
 
         /// <summary>
         /// Returns id in table 'userNameTable' corresponding to user logged-in.
@@ -52,7 +52,6 @@ namespace Clipboarder {
                 dbOperations.ExecuteNonQueryCommand(command);
             }
         }
-
 
         public string GetUserPassword() {
             string query = String.Format("SELECT * FROM {0} where id='{1}';", DatabaseOperations.userNameTable, GetCurrentUserID());
