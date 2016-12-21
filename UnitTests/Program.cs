@@ -121,16 +121,16 @@ Parameter           Usages
             Console.WriteLine();
             Console.WriteLine("Creating database...");
             if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, "debug.db"))) {
-                DatabaseOperations.CreatesNewDatabase("debug.db"); //Comment this line if database exists
+                Clipboarder.Extension.DatabaseOperations.CreatesNewDatabase("debug.db"); //Comment this line if database exists
             }
 
             Console.WriteLine("Starting Database Tests...");
 
             Console.WriteLine("Initializing database..");
-            DatabaseOperations newDatabaseOperations = null;
+            Clipboarder.Extension.DatabaseOperations newDatabaseOperations = null;
 
             try {
-                newDatabaseOperations = new DatabaseOperations();
+                newDatabaseOperations = new Clipboarder.Extension.DatabaseOperations();
                 newDatabaseOperations.ConnectDatabase("debug.db");
                 newDatabaseOperations.OpenConnection();
             } catch (Exception ex) {
