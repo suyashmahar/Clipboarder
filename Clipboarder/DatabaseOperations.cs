@@ -32,8 +32,10 @@ namespace Clipboarder {
 
                 SQLiteCommand newCommand = new SQLiteCommand(createUsersTableQuery, newConnection);
                 newCommand.ExecuteNonQuery();
+
                 newCommand = new SQLiteCommand(createTextEntriesTableQuery, newConnection); // Creates table for text content
                 newCommand.ExecuteNonQuery();
+
                 newCommand = new SQLiteCommand(createImageEntriesTableQuery, newConnection);// Creates table for storing image in Base64 format
                 newCommand.ExecuteNonQuery();
 

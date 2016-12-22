@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 
 namespace Clipboarder {
-    class DatabaseContent {
+    class DatabaseReadWrite {
         DatabaseOperations dbOperations;
         User user;
 
-        public DatabaseContent(DatabaseOperations dbOperations,User user) {
+        public DatabaseReadWrite(DatabaseOperations dbOperations,User user) {
             this.dbOperations = dbOperations;
             this.user = user;
         }
@@ -22,7 +22,7 @@ namespace Clipboarder {
         /// <param name="index">Index of content.</param>
         /// <param name="content">Content to be written to the database, if security is a concern content should be encrypted.</param>
         /// <param name="time">Time of entry in clipboarder.</param>
-        public void EnterTextContent(int index, string content, string time) {
+        public void SetTextContent(int index, string content, string time) {
             string command = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", DatabaseOperations.textEntriesTable, index, content, time, user.id);
             dbOperations.ExecuteNonQueryCommand(command);
         }
@@ -34,7 +34,7 @@ namespace Clipboarder {
         /// <param name="index">Index of content.</param>
         /// <param name="content">Content to be written to the database, if security is a concern content should be encrypted.</param>
         /// <param name="time">Time of entry in clipboarder.</param>
-        public void EnterImageContent(int index, string content, string time) {
+        public void SetImageContent(int index, string content, string time) {
             string command = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", DatabaseOperations.imageEntriesTable, index, content, time, user.id);
             dbOperations.ExecuteNonQueryCommand(command);
         }
@@ -87,7 +87,7 @@ namespace Clipboarder {
         /// <summary>
         /// Deletes all records in tables 'userNameTable' and 'entriesTable'
         /// </summary>
-        public void clearAllContent() {
+        public void ClearDatabase() {
             string deleteUsersTablequery = String.Format("DELETE FROM {0};", DatabaseOperations.userNameTable);
             string deleteTextEntriesTablequery = String.Format("DELETE FROM {0};", DatabaseOperations.textEntriesTable);
             string deleteImageEntriesTablequery = String.Format("DELETE FROM {0};", DatabaseOperations.imageEntriesTable);
@@ -100,7 +100,7 @@ namespace Clipboarder {
         /// <summary>
         /// Deletes all records corresponding to current user in clipboarderEntries table
         /// </summary>
-        public void RemoveRecordsForCurrentUsers() {
+        public void DeleteAllRecordsForCurrentUsers() {
             string removeTextContentQuery = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";", DatabaseOperations.textEntriesTable, user.id);
             string removeImageContentQuery = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";", DatabaseOperations.imageEntriesTable, user.id);
             dbOperations.ExecuteNonQueryCommand(removeTextContentQuery);

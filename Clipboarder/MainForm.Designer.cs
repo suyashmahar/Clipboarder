@@ -53,7 +53,6 @@ namespace Clipboarder {
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.clipboardMonitor1 = new Clipboarder.ClipboardMonitor();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.textPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).BeginInit();
@@ -247,8 +246,7 @@ namespace Clipboarder {
             this.clearClipboardMenuItem.Name = "clearClipboardMenuItem";
             this.clearClipboardMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.clearClipboardMenuItem.Size = new System.Drawing.Size(251, 26);
-            this.clearClipboardMenuItem.Text = "Clear clipboard";
-            this.clearClipboardMenuItem.Click += new System.EventHandler(this.clearClipboardMenuItem_Click);
+            this.clearClipboardMenuItem.Text = "Clear Clipboard";
             // 
             // ClearClipboarderMenuItem
             // 
@@ -296,22 +294,22 @@ namespace Clipboarder {
             this.exitMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exitMenuItem.Name = "exitMenuItem";
             this.exitMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.exitMenuItem.Size = new System.Drawing.Size(190, 24);
+            this.exitMenuItem.Size = new System.Drawing.Size(193, 24);
             this.exitMenuItem.Text = "Exit";
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(190, 6);
             // 
             // loadContentToolStripMenuItem
             // 
             this.loadContentToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Import_Icon;
             this.loadContentToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.loadContentToolStripMenuItem.Name = "loadContentToolStripMenuItem";
-            this.loadContentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
+            this.loadContentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.loadContentToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.loadContentToolStripMenuItem.Text = "Load Content";
             this.loadContentToolStripMenuItem.Click += new System.EventHandler(this.loadContentToolStripMenuItem_Click);
             // 
@@ -321,7 +319,7 @@ namespace Clipboarder {
             this.saveContentToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.saveContentToolStripMenuItem.Name = "saveContentToolStripMenuItem";
             this.saveContentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(190, 26);
+            this.saveContentToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
             this.saveContentToolStripMenuItem.Text = "Save Content";
             this.saveContentToolStripMenuItem.Click += new System.EventHandler(this.saveContentToolStripMenuItem_Click);
             // 
@@ -369,29 +367,20 @@ namespace Clipboarder {
             this.MainMenuStrip.TabIndex = 12;
             this.MainMenuStrip.Text = "MainMenuStrip";
             // 
-            // clipboardMonitor1
-            // 
-            this.clipboardMonitor1.BackColor = System.Drawing.Color.Red;
-            this.clipboardMonitor1.Location = new System.Drawing.Point(835, 497);
-            this.clipboardMonitor1.Name = "clipboardMonitor1";
-            this.clipboardMonitor1.Size = new System.Drawing.Size(10, 10);
-            this.clipboardMonitor1.TabIndex = 14;
-            this.clipboardMonitor1.Text = "clipboardMonitor1";
-            this.clipboardMonitor1.Visible = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(537, 309);
-            this.Controls.Add(this.clipboardMonitor1);
             this.Controls.Add(this.MainStatusStrip);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.MainMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.MinimumSize = new System.Drawing.Size(382, 268);
             this.Name = "MainForm";
             this.Text = "Clipboarder";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).EndInit();
             this.textPage.ResumeLayout(false);
