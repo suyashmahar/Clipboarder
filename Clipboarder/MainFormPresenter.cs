@@ -262,7 +262,7 @@ namespace Clipboarder {
                 if (result == DialogResult.OK) {
                     if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, databaseName))) {
                         //Creates new Database
-                        Clipboarder.Extension.DatabaseOperations.CreatesNewDatabase(databaseName);
+                        DatabaseOperations.CreatesNewDatabase(databaseName);
                         Properties.Settings.Default.doesDatabaseExists = true;
                     }
 

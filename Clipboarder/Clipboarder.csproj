@@ -128,6 +128,7 @@
     <Compile Include="DatabaseReadWrite.cs" />
     <Compile Include="DatabaseOperations.cs" />
     <Compile Include="HotKey.cs" />
+    <Compile Include="ImageConversion.cs" />
     <Compile Include="IMainDataLayer.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -201,10 +202,6 @@
     <ProjectReference Include="..\Clipboarder.Encryption\Clipboarder.Encryption.csproj">
       <Project>{42493ae7-77f0-4f3f-ad94-e4d140cd07b5}</Project>
       <Name>Clipboarder.Encryption</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Clipboarder.Extension\Clipboarder.Extension.csproj">
-      <Project>{a64a1e47-93bc-41cd-8ed2-d85d3fc21a3b}</Project>
-      <Name>Clipboarder.Extension</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
