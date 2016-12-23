@@ -39,14 +39,14 @@
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
             this.textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox.Size = new System.Drawing.Size(495, 102);
+            this.textBox.Size = new System.Drawing.Size(514, 102);
             this.textBox.TabIndex = 0;
             this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(326, 113);
+            this.okButton.Location = new System.Drawing.Point(345, 113);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 3;
@@ -58,7 +58,7 @@
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(407, 113);
+            this.closeButton.Location = new System.Drawing.Point(426, 113);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 5;
@@ -71,11 +71,11 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Enabled = false;
-            this.label1.Location = new System.Drawing.Point(69, 118);
+            this.label1.Location = new System.Drawing.Point(24, 118);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(251, 13);
+            this.label1.Size = new System.Drawing.Size(315, 13);
             this.label1.TabIndex = 6;
-            this.label1.Text = "regex should be standard regex for C# with @ string";
+            this.label1.Text = "Clipboarder accepts C# compatible regex stored in verbatim string";
             // 
             // TextForm
             // 
@@ -83,13 +83,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
-            this.ClientSize = new System.Drawing.Size(495, 147);
+            this.ClientSize = new System.Drawing.Size(514, 147);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.textBox);
-            this.MinimumSize = new System.Drawing.Size(471, 147);
+            this.MinimumSize = new System.Drawing.Size(530, 186);
             this.Name = "TextForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
