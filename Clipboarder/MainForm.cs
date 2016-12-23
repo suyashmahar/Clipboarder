@@ -52,6 +52,14 @@ namespace Clipboarder {
                 statusLabel.Text = value;
             }
         }
+        public string SelectedRowText {
+            get {
+                if (textDataGrid.SelectedRows.Count == 1) {
+                    return (string)textDataGrid.SelectedRows[0].Cells[1].Value;    
+                }
+                return null;
+            }
+        }
         #endregion
 
         public MainForm() {
@@ -67,6 +75,7 @@ namespace Clipboarder {
         public event EventHandler<EventArgs> OnExiting;
         public event EventHandler<EventArgs> ViewLoaded;
         public event EventHandler<EventArgs> ShowSettings;
+        public event EventHandler<EventArgs> URLCalled;
 
         public void AddNewImageRow(ImageContent contentToAdd) {
             DataGridViewRow NewRow = new DataGridViewRow();
@@ -197,6 +206,22 @@ namespace Clipboarder {
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             OnExiting(sender, e);
+        }
+
+        private void mainGridContextMenu_Opened(object sender, EventArgs e) {
+            if (textDataGrid.SelectedRows.Count  == 1 && ContentIdentifier.containsURL((string)textDataGrid.SelectedRows[0].Cells[1].Value)) {
+                goToURLToolStripMenuItem.Enabled = true;
+            } else {
+                goToURLToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void goToURLToolStripMenuItem_Click(object sender, EventArgs e) {
+            URLCalled(sender, e);
+        }
+
+        private void textDataGrid_MouseClick(object sender, MouseEventArgs e) {
+            
         }
     }
 }

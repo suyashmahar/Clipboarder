@@ -124,6 +124,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Content.cs" />
+    <Compile Include="ContentIdentifier.cs" />
     <Compile Include="DatabaseContent.cs" />
     <Compile Include="DatabaseOperations.cs" />
     <Compile Include="HotKey.cs" />
@@ -148,6 +149,12 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UrlListDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UrlListDisplay.Designer.cs">
+      <DependentUpon>UrlListDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <EmbeddedResource Include="AskPasswordDecrypt.resx">
       <DependentUpon>AskPasswordDecrypt.cs</DependentUpon>
@@ -170,6 +177,9 @@
     </Compile>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UrlListDisplay.resx">
+      <DependentUpon>UrlListDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">

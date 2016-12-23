@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace Clipboarder {
 
@@ -48,6 +49,7 @@ namespace Clipboarder {
             view.LoadContent += LoadContent;
             view.SaveContent += SaveContent;
             view.ShowSettings += ShowSettings;
+            view.URLCalled += URLCalled;
 
             // Adds first content from clipboard
             if (Clipboard.ContainsText()) {
@@ -63,6 +65,13 @@ namespace Clipboarder {
             // Adds handler for clipboardContentChanged Event
             clipboardMonitor = new ClipboardMonitor();
             clipboardMonitor.ClipboardChanged += ClipboardMonitor_ClipboardChanged;
+        }
+
+        private void URLCalled(object sender, EventArgs e) {
+            if (view.SelectedRowText != null) {
+                UrlListDisplay urlListDisplay = new UrlListDisplay(this, ContentIdentifier.GetURLs(view.SelectedRowText));
+                urlListDisplay.ShowDialog();
+            }
         }
 
         private void OnExiting(object sender, EventArgs e) {
