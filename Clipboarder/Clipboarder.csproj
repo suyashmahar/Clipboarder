@@ -90,6 +90,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.103.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
@@ -120,6 +124,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Content.cs" />
+    <Compile Include="ContentIdentifier.cs" />
+    <Compile Include="DatabaseReadWrite.cs" />
+    <Compile Include="DatabaseOperations.cs" />
     <Compile Include="HotKey.cs" />
     <Compile Include="IMainDataLayer.cs" />
     <Compile Include="MainForm.cs">
@@ -142,6 +149,13 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UrlListDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UrlListDisplay.Designer.cs">
+      <DependentUpon>UrlListDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs" />
     <EmbeddedResource Include="AskPasswordDecrypt.resx">
       <DependentUpon>AskPasswordDecrypt.cs</DependentUpon>
     </EmbeddedResource>
@@ -163,6 +177,9 @@
     </Compile>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UrlListDisplay.resx">
+      <DependentUpon>UrlListDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">

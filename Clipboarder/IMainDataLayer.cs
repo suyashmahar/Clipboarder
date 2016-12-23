@@ -10,12 +10,14 @@ namespace Clipboarder {
         int TextRowCount { get; }
         int ImageRowCount { get; }
         string status { get; set; }
+        string SelectedRowText { get; }
 
         event EventHandler<EventArgs> LoadContent;
         event EventHandler<EventArgs> SaveContent;
         event EventHandler<EventArgs> OnExiting;
         event EventHandler<EventArgs> ViewLoaded;
         event EventHandler<EventArgs> ShowSettings;
+        event EventHandler<EventArgs> URLCalled;
 
         void AddNewTextRow(TextContent contentToAdd);
         void AddNewImageRow(ImageContent contentToAdd);

@@ -11,7 +11,6 @@ using System.Text;
 using System.Windows.Forms;
 
 
-//TODO Reimplement IMainDataLayer
 namespace Clipboarder {
     public partial class MainForm : Form, IMainDataLayer {
         private MainFormPresenter presenter;
@@ -53,6 +52,14 @@ namespace Clipboarder {
                 statusLabel.Text = value;
             }
         }
+        public string SelectedRowText {
+            get {
+                if (textDataGrid.SelectedRows.Count == 1) {
+                    return (string)textDataGrid.SelectedRows[0].Cells[1].Value;    
+                }
+                return null;
+            }
+        }
         #endregion
 
         public MainForm() {
@@ -68,6 +75,7 @@ namespace Clipboarder {
         public event EventHandler<EventArgs> OnExiting;
         public event EventHandler<EventArgs> ViewLoaded;
         public event EventHandler<EventArgs> ShowSettings;
+        public event EventHandler<EventArgs> URLCalled;
 
         public void AddNewImageRow(ImageContent contentToAdd) {
             DataGridViewRow NewRow = new DataGridViewRow();
@@ -78,7 +86,7 @@ namespace Clipboarder {
             NewRow.Cells[2].Value = contentToAdd.time;
 
             //Adjusts height of a row
-                NewRow.Height = Clipboard.GetImage().Height;
+            NewRow.Height = Clipboard.GetImage().Height;
             
             imageDataGrid.Rows.Insert(imageDataGrid.RowCount, NewRow);
             MainTabControl.SelectedIndex = 1;
@@ -126,9 +134,6 @@ namespace Clipboarder {
         public ImageContent GetImageContentAt(int index) {
             //0 indexed
             DataGridViewRow row = imageDataGrid.Rows[index];
-            //MemoryStream ms = new MemoryStream((byte[])row.Cells[1].Value);
-            //Image image = Image.FromStream(ms);
-            //Image imgToRtr = Image.FromFile(row.Cells[1].Value.ToString());
             return new ImageContent((int)row.Cells[0].Value, (Image)row.Cells[1].Value, (string)row.Cells[2].Value);
         }
 
@@ -188,7 +193,6 @@ namespace Clipboarder {
         private void settingsMenuItem_Click(object sender, EventArgs e) {
             ShowSettings(sender, e);
         }
-        #endregion
 
         private void ClearClipboarderMenuItem_Click(object sender, EventArgs e) {
             textDataGrid.Rows.Clear();
@@ -197,6 +201,27 @@ namespace Clipboarder {
 
         private void clearClipboardMenuItem_Click(object sender, EventArgs e) {
             Clipboard.Clear();
+        }
+        #endregion
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            OnExiting(sender, e);
+        }
+
+        private void mainGridContextMenu_Opened(object sender, EventArgs e) {
+            if (textDataGrid.SelectedRows.Count  == 1 && ContentIdentifier.containsURL((string)textDataGrid.SelectedRows[0].Cells[1].Value)) {
+                goToURLToolStripMenuItem.Enabled = true;
+            } else {
+                goToURLToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void goToURLToolStripMenuItem_Click(object sender, EventArgs e) {
+            URLCalled(sender, e);
+        }
+
+        private void textDataGrid_MouseClick(object sender, MouseEventArgs e) {
+            
         }
     }
 }
