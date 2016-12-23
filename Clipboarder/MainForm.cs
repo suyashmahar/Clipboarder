@@ -60,6 +60,12 @@ namespace Clipboarder {
                 return null;
             }
         }
+
+        public bool ShowURLStatus {
+            set {
+                goToURLToolStripMenuItem.Enabled = value;
+            }
+        }
         #endregion
 
         public MainForm() {
@@ -76,6 +82,7 @@ namespace Clipboarder {
         public event EventHandler<EventArgs> ViewLoaded;
         public event EventHandler<EventArgs> ShowSettings;
         public event EventHandler<EventArgs> URLCalled;
+        public event EventHandler<TextEventArgs> textGridCheckURLAndSetStatus;
 
         public void AddNewImageRow(ImageContent contentToAdd) {
             DataGridViewRow NewRow = new DataGridViewRow();
@@ -209,8 +216,10 @@ namespace Clipboarder {
         }
 
         private void mainGridContextMenu_Opened(object sender, EventArgs e) {
-            if (textDataGrid.SelectedRows.Count  == 1 && ContentIdentifier.containsURL((string)textDataGrid.SelectedRows[0].Cells[1].Value)) {
-                goToURLToolStripMenuItem.Enabled = true;
+            if (textDataGrid.SelectedRows.Count == 1) {
+                TextEventArgs textEventArgs = new TextEventArgs();    // Declares new TextEventArg
+                textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);   // Adds row text content as string to TextEventArgs
+                textGridCheckURLAndSetStatus(sender, textEventArgs);
             } else {
                 goToURLToolStripMenuItem.Enabled = false;
             }

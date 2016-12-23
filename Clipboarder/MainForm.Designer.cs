@@ -132,6 +132,7 @@ namespace Clipboarder {
             // 
             // goToURLToolStripMenuItem
             // 
+            this.goToURLToolStripMenuItem.Enabled = false;
             this.goToURLToolStripMenuItem.Name = "goToURLToolStripMenuItem";
             this.goToURLToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.goToURLToolStripMenuItem.Text = "Go to URL";
@@ -400,6 +401,7 @@ namespace Clipboarder {
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.MinimumSize = new System.Drawing.Size(382, 268);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clipboarder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);

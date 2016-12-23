@@ -1,16 +1,16 @@
 # Clipboarder
-**Clipboarder** is a clipboard management tool for Windows written in C#.
+**Clipboarder** is a clipboard management tool for Windows written in C#. This projec is still under construction.
 
 ## Features:
 1. Clipboard management for text and image based content.
 2. Ability to save contents of Clipboarder to database using password.
-3. Ability to access content in hierarchical order using customizable  keyboard shortcut (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>NumberKeys</kbd>).
+3. Ability to access content in hierarchical order using customizable  keyboard shortcut, default: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>NumberKeys</kbd>.
+4. Identification of multiple URLs in text content (turned off by default).
 
 ## TODOs:
 1. Improve performance on exporting content.
 2. More user control over opertations like exporting content.
-3. Identification of URL in content to open link in a browser window.
-4. Better image support and stability.
+3. Better image support and stability.
 
 ## Instruction for Building Solution
 1. Open project is in Visual Studio 2015.

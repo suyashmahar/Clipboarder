@@ -150,6 +150,13 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextEventArgs.cs" />
+    <Compile Include="TextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextForm.Designer.cs">
+      <DependentUpon>TextForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UrlListDisplay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +185,9 @@
     </Compile>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextForm.resx">
+      <DependentUpon>TextForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UrlListDisplay.resx">
       <DependentUpon>UrlListDisplay.cs</DependentUpon>

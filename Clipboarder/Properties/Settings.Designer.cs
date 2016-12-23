@@ -106,5 +106,43 @@ namespace Clipboarder.Properties {
                 this["imageContentKeys"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("((([A - Za - z]{ 3, 9 }:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;" +
+            ":&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\" +
+            "w]*))?)")]
+        public string regex {
+            get {
+                return ((string)(this["regex"]));
+            }
+            set {
+                this["regex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isURLIdentificationEnabled {
+            get {
+                return ((bool)(this["isURLIdentificationEnabled"]));
+            }
+            set {
+                this["isURLIdentificationEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isCutomRegexEnabled {
+            get {
+                return ((bool)(this["isCutomRegexEnabled"]));
+            }
+            set {
+                this["isCutomRegexEnabled"] = value;
+            }
+        }
     }
 }

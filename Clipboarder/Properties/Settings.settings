@@ -23,5 +23,14 @@
     <Setting Name="imageContentKeys" Type="System.String" Scope="User">
       <Value Profile="(Default)">Ctrl+Shift+NumKeys</Value>
     </Setting>
+    <Setting Name="regex" Type="System.String" Scope="User">
+      <Value Profile="(Default)">((([A - Za - z]{ 3, 9 }:(?:\/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&amp;=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[\w]*))?)</Value>
+    </Setting>
+    <Setting Name="isURLIdentificationEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="isCutomRegexEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

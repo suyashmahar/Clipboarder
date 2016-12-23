@@ -6,16 +6,17 @@ using System.Text.RegularExpressions;
 
 namespace Clipboarder {
     class ContentIdentifier {
-        static string URLregex = @"((([A - Za - z]{ 3, 9 }:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)";
+        public const string DefaultURLregex = @"((([A - Za - z]{ 3, 9 }:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)";
 
-        public static bool containsURL(string inputString) {
+
+        public static bool containsURL(string inputString, string URLregex = DefaultURLregex) {
             Regex regex = new Regex(URLregex);
             MatchCollection match = regex.Matches(inputString);
             if (match.Count > 0) return true;
             return false;
         }
 
-        public static List<string> GetURLs(string inputString) {
+        public static List<string> GetURLs(string inputString, string URLregex = DefaultURLregex) {
             Regex regex = new Regex(URLregex);
             MatchCollection match = regex.Matches(inputString);
 

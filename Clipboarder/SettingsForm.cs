@@ -51,10 +51,14 @@ namespace Clipboarder {
                 }
             }
 
-                if (!Properties.Settings.Default.areTextShortcutsEnabled) {
-                    textShortcutsNumericUpDown.Enabled = false;
-                    ChangeTextComboBoxesEnabledState(false);
-                }
+            if (!Properties.Settings.Default.areTextShortcutsEnabled) {
+                textShortcutsNumericUpDown.Enabled = false;
+                ChangeTextComboBoxesEnabledState(false);
+            }
+
+            CustomRegexCheckBox.Checked = Properties.Settings.Default.isCutomRegexEnabled;
+            URLCheckBox.Checked = Properties.Settings.Default.isURLIdentificationEnabled;
+
         }
 
         private void okButton_Click(object sender, EventArgs e) {
@@ -66,6 +70,9 @@ namespace Clipboarder {
             } else {
                 Properties.Settings.Default.areTextShortcutsEnabled = false;
             }
+
+            Properties.Settings.Default.isURLIdentificationEnabled = URLCheckBox.Checked;
+            Properties.Settings.Default.isCutomRegexEnabled = CustomRegexCheckBox.Checked;
 
             Properties.Settings.Default.Save();
             Close();
@@ -116,6 +123,19 @@ namespace Clipboarder {
             textControlKeycheckBox.Enabled = value;
             textShiftKeycheckBox.Enabled = value;
             textAltKeycheckBox.Enabled = value;
+        }
+
+        private void URLCheckBox_CheckedChanged(object sender, EventArgs e) {
+            CustomRegexCheckBox.Enabled = URLCheckBox.Checked;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            TextForm textForm = new TextForm();
+            textForm.ShowDialog();
+        }
+
+        private void CustomRegexCheckBox_CheckedChanged(object sender, EventArgs e) {
+            RegexLinkLabel.Enabled = CustomRegexCheckBox.Checked;
         }
     }
 }
