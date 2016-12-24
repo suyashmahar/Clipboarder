@@ -24,7 +24,6 @@ namespace Clipboarder {
         private string databaseName = "contents.db";
         public string password = null;          // Field for temporarily storing password
         
-        Image LastClipboardImage = null;        // Hold last text from clipboard
         string LastClipboardText = null;        // Hold last image from clipboard
 
         // Stores hotkeys registered

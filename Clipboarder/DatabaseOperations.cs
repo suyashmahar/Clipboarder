@@ -9,7 +9,6 @@ namespace Clipboarder {
 
         SQLiteConnection databaseConnection;
         SQLiteCommand databaseCommand = new SQLiteCommand();
-        SQLiteDataReader databaseDataReader;
 
         public static string userNameTable = "users";  // Table name corresponding to table containing records of Users
         public static string textEntriesTable = "clipboarderTextEntries";   // Table name corresponding to table containing text entries of Clipboard

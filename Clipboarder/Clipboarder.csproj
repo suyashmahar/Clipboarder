@@ -224,10 +224,12 @@
     <None Include="Resources\Clipboarder-Clean-Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Clipboarder-Expand-Arrow.png" />
     <None Include="Resources\Clipboarder-Close-Icon.png" />
     <None Include="Resources\Clipboarder-Clipboard_Clear-Icon.png" />
     <None Include="Resources\Clipboarder-Clipboarder_clear-Icon.png" />
     <Content Include="Clipboarder-Icon.ico" />
+    <None Include="Resources\Clipboarder-Collapse-Arrow.png" />
     <Content Include="Resources\Clipboarder-Debug-Icon.png" />
     <None Include="Resources\Clipboarder-Import-Icon.png" />
     <None Include="Resources\Clipboarder-Export-Icon.png" />

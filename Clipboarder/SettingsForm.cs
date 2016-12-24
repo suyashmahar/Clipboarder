@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 namespace Clipboarder {
     public partial class SettingsForm : Form {
-        string defaultTextKeys = "Ctrl+Shift+(none)+NumKeys";
 
         List<Keys> modifierKeys = new List<Keys>() {
             Keys.None,

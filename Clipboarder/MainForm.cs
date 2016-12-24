@@ -79,7 +79,6 @@ namespace Clipboarder {
         public event EventHandler<EventArgs> LoadContent;
         public event EventHandler<EventArgs> SaveContent;
         public event EventHandler<EventArgs> OnExiting;
-        public event EventHandler<EventArgs> ViewLoaded;
         public event EventHandler<EventArgs> ShowSettings;
         public event EventHandler<EventArgs> URLCalled;
         public event EventHandler<TextEventArgs> textGridCheckURLAndSetStatus;
@@ -231,6 +230,33 @@ namespace Clipboarder {
 
         private void textDataGrid_MouseClick(object sender, MouseEventArgs e) {
             
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e) {
+            if (splitContainer2.Panel2Collapsed) {
+                collapseExpandButton.Image = Properties.Resources.Clipboarder_Expand_Arrow;
+                splitContainer2.Panel2Collapsed = false;
+            } else {
+                collapseExpandButton.Image = Properties.Resources.Clipboarder_Collapse_Arrow;
+                splitContainer2.Panel2Collapsed = true;
+            }
+        }
+
+        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e) {
+            if (MainTabControl.SelectedIndex == 1) {
+                collapseExpandButton.Visible = true;
+            } else {
+                collapseExpandButton.Visible = false;
+            }
+        }
+
+        private void imageDataGrid_RowEnter_1(object sender, DataGridViewCellEventArgs e) {
+            // Sets preview image to previewPictureBox
+            if (imageDataGrid.SelectedRows.Count == 1) {
+                picturePreviewBox.Image = (Image)imageDataGrid.Rows[imageDataGrid.SelectedRows[0].Index].Cells[1].Value;
+            }
+
+            imagePreviewLabel.Visible = false;  // Hides 'Image Preview' label
         }
     }
 }

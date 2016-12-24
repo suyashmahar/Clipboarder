@@ -103,9 +103,29 @@ namespace Clipboarder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Clipboarder_Collapse_Arrow {
+            get {
+                object obj = ResourceManager.GetObject("Clipboarder-Collapse-Arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Clipboarder_Debug_Icon {
             get {
                 object obj = ResourceManager.GetObject("Clipboarder-Debug-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Clipboarder_Expand_Arrow {
+            get {
+                object obj = ResourceManager.GetObject("Clipboarder-Expand-Arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

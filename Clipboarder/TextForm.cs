@@ -21,7 +21,7 @@ namespace Clipboarder {
         private void okButton_Click(object sender, EventArgs e) {
             try {
                 Regex regex = new Regex(textBox.Text);
-            } catch (ArgumentException ex) {
+            } catch (ArgumentException) {
                 MessageBox.Show("Error compiling regex.", "Clipboarder Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;

@@ -16,7 +16,6 @@ namespace Clipboarder {
         event EventHandler<EventArgs> LoadContent;
         event EventHandler<EventArgs> SaveContent;
         event EventHandler<EventArgs> OnExiting;
-        event EventHandler<EventArgs> ViewLoaded;
         event EventHandler<EventArgs> ShowSettings;
         event EventHandler<EventArgs> URLCalled;
         event EventHandler<TextEventArgs> textGridCheckURLAndSetStatus;

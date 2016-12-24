@@ -34,19 +34,10 @@ namespace Clipboarder {
             this.mainGridContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.goToURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textPage = new System.Windows.Forms.TabPage();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imageDataGrid = new System.Windows.Forms.DataGridView();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.imagePage = new System.Windows.Forms.TabPage();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.springStatusStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.collapseExpandButton = new System.Windows.Forms.PictureBox();
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,17 +47,32 @@ namespace Clipboarder {
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearClipboarderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearClipboardMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.imageDataGrid = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.picturePreviewBox = new System.Windows.Forms.PictureBox();
+            this.imagePreviewLabel = new System.Windows.Forms.Label();
+            this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.springStatusStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.mainGridContextMenu.SuspendLayout();
             this.textPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.imagePage.SuspendLayout();
-            this.MainStatusStrip.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.MainMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.collapseExpandButton)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picturePreviewBox)).BeginInit();
+            this.MainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // TimeColumn
@@ -117,7 +123,7 @@ namespace Clipboarder {
             this.textDataGrid.ReadOnly = true;
             this.textDataGrid.RowHeadersVisible = false;
             this.textDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.textDataGrid.Size = new System.Drawing.Size(610, 293);
+            this.textDataGrid.Size = new System.Drawing.Size(668, 297);
             this.textDataGrid.TabIndex = 10;
             this.textDataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.textDataGrid_RowsRemoved);
             this.textDataGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textDataGrid_MouseClick);
@@ -143,123 +149,20 @@ namespace Clipboarder {
             this.textPage.Controls.Add(this.textDataGrid);
             this.textPage.Location = new System.Drawing.Point(4, 25);
             this.textPage.Name = "textPage";
-            this.textPage.Size = new System.Drawing.Size(610, 293);
+            this.textPage.Size = new System.Drawing.Size(668, 297);
             this.textPage.TabIndex = 0;
             this.textPage.Text = "Text";
             this.textPage.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Time";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.FillWeight = 226.3333F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Image";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Index";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.Width = 66;
-            // 
-            // imageDataGrid
-            // 
-            this.imageDataGrid.AllowUserToAddRows = false;
-            this.imageDataGrid.AllowUserToOrderColumns = true;
-            this.imageDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.imageDataGrid.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.imageDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.imageDataGrid.ColumnHeadersHeight = 27;
-            this.imageDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
-            this.imageDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.imageDataGrid.GridColor = System.Drawing.SystemColors.AppWorkspace;
-            this.imageDataGrid.Location = new System.Drawing.Point(0, 0);
-            this.imageDataGrid.Margin = new System.Windows.Forms.Padding(0);
-            this.imageDataGrid.Name = "imageDataGrid";
-            this.imageDataGrid.ReadOnly = true;
-            this.imageDataGrid.RowHeadersVisible = false;
-            this.imageDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.imageDataGrid.Size = new System.Drawing.Size(610, 293);
-            this.imageDataGrid.TabIndex = 12;
-            this.imageDataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.imageDataGrid_RowsRemoved);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.imageDataGrid);
-            this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(610, 293);
-            this.splitContainer1.SplitterDistance = 333;
-            this.splitContainer1.TabIndex = 0;
-            // 
             // imagePage
             // 
-            this.imagePage.Controls.Add(this.splitContainer1);
+            this.imagePage.Controls.Add(this.splitContainer2);
             this.imagePage.Location = new System.Drawing.Point(4, 25);
             this.imagePage.Name = "imagePage";
-            this.imagePage.Size = new System.Drawing.Size(610, 293);
+            this.imagePage.Size = new System.Drawing.Size(668, 297);
             this.imagePage.TabIndex = 1;
             this.imagePage.Text = "Image";
             this.imagePage.UseVisualStyleBackColor = true;
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(34, 17);
-            this.toolStripStatusLabel1.Text = "BETA";
-            // 
-            // progressBar
-            // 
-            this.progressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(100, 16);
-            // 
-            // springStatusStripLabel
-            // 
-            this.springStatusStripLabel.Name = "springStatusStripLabel";
-            this.springStatusStripLabel.Size = new System.Drawing.Size(428, 17);
-            this.springStatusStripLabel.Spring = true;
-            // 
-            // statusLabel
-            // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(39, 17);
-            this.statusLabel.Text = "Ready";
-            // 
-            // MainStatusStrip
-            // 
-            this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel,
-            this.springStatusStripLabel,
-            this.progressBar,
-            this.toolStripStatusLabel1});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 345);
-            this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(618, 22);
-            this.MainStatusStrip.TabIndex = 13;
-            this.MainStatusStrip.Text = "MainStatusStrip";
             // 
             // MainTabControl
             // 
@@ -271,8 +174,9 @@ namespace Clipboarder {
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.Padding = new System.Drawing.Point(0, 0);
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(618, 322);
+            this.MainTabControl.Size = new System.Drawing.Size(676, 326);
             this.MainTabControl.TabIndex = 15;
+            this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
             // MainMenuStrip
             // 
@@ -283,9 +187,23 @@ namespace Clipboarder {
             this.toolStripMenuItem2});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
-            this.MainMenuStrip.Size = new System.Drawing.Size(618, 45);
+            this.MainMenuStrip.Size = new System.Drawing.Size(676, 45);
             this.MainMenuStrip.TabIndex = 12;
             this.MainMenuStrip.Text = "MainMenuStrip";
+            // 
+            // collapseExpandButton
+            // 
+            this.collapseExpandButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.collapseExpandButton.BackColor = System.Drawing.Color.Transparent;
+            this.collapseExpandButton.Image = global::Clipboarder.Properties.Resources.Clipboarder_Expand_Arrow;
+            this.collapseExpandButton.Location = new System.Drawing.Point(654, 48);
+            this.collapseExpandButton.Name = "collapseExpandButton";
+            this.collapseExpandButton.Size = new System.Drawing.Size(20, 20);
+            this.collapseExpandButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.collapseExpandButton.TabIndex = 1;
+            this.collapseExpandButton.TabStop = false;
+            this.collapseExpandButton.Visible = false;
+            this.collapseExpandButton.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // ToolsToolStripMenuItem
             // 
@@ -389,17 +307,147 @@ namespace Clipboarder {
             this.clearClipboardMenuItem.Size = new System.Drawing.Size(251, 26);
             this.clearClipboardMenuItem.Text = "Clear Clipboard";
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.imageDataGrid);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.imagePreviewLabel);
+            this.splitContainer2.Panel2.Controls.Add(this.picturePreviewBox);
+            this.splitContainer2.Size = new System.Drawing.Size(668, 297);
+            this.splitContainer2.SplitterDistance = 497;
+            this.splitContainer2.TabIndex = 14;
+            // 
+            // imageDataGrid
+            // 
+            this.imageDataGrid.AllowUserToAddRows = false;
+            this.imageDataGrid.AllowUserToOrderColumns = true;
+            this.imageDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.imageDataGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.imageDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.imageDataGrid.ColumnHeadersHeight = 27;
+            this.imageDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3});
+            this.imageDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.imageDataGrid.GridColor = System.Drawing.SystemColors.AppWorkspace;
+            this.imageDataGrid.Location = new System.Drawing.Point(0, 0);
+            this.imageDataGrid.Margin = new System.Windows.Forms.Padding(0);
+            this.imageDataGrid.Name = "imageDataGrid";
+            this.imageDataGrid.ReadOnly = true;
+            this.imageDataGrid.RowHeadersVisible = false;
+            this.imageDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.imageDataGrid.Size = new System.Drawing.Size(497, 297);
+            this.imageDataGrid.TabIndex = 12;
+            this.imageDataGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.imageDataGrid_RowEnter_1);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Index";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.Width = 66;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.FillWeight = 226.3333F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Image";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Time";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // picturePreviewBox
+            // 
+            this.picturePreviewBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picturePreviewBox.Location = new System.Drawing.Point(0, 0);
+            this.picturePreviewBox.Name = "picturePreviewBox";
+            this.picturePreviewBox.Size = new System.Drawing.Size(167, 297);
+            this.picturePreviewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picturePreviewBox.TabIndex = 0;
+            this.picturePreviewBox.TabStop = false;
+            // 
+            // imagePreviewLabel
+            // 
+            this.imagePreviewLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.imagePreviewLabel.AutoSize = true;
+            this.imagePreviewLabel.Enabled = false;
+            this.imagePreviewLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.85F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imagePreviewLabel.Location = new System.Drawing.Point(34, 130);
+            this.imagePreviewLabel.Name = "imagePreviewLabel";
+            this.imagePreviewLabel.Size = new System.Drawing.Size(88, 15);
+            this.imagePreviewLabel.TabIndex = 1;
+            this.imagePreviewLabel.Text = "Image Preview";
+            // 
+            // MainStatusStrip
+            // 
+            this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel,
+            this.springStatusStripLabel,
+            this.progressBar,
+            this.toolStripStatusLabel1});
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 349);
+            this.MainStatusStrip.Name = "MainStatusStrip";
+            this.MainStatusStrip.Size = new System.Drawing.Size(676, 22);
+            this.MainStatusStrip.TabIndex = 16;
+            this.MainStatusStrip.Text = "MainStatusStrip";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(39, 17);
+            this.statusLabel.Text = "Ready";
+            // 
+            // springStatusStripLabel
+            // 
+            this.springStatusStripLabel.Name = "springStatusStripLabel";
+            this.springStatusStripLabel.Size = new System.Drawing.Size(486, 17);
+            this.springStatusStripLabel.Spring = true;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(34, 17);
+            this.toolStripStatusLabel1.Text = "BETA";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 367);
+            this.ClientSize = new System.Drawing.Size(676, 371);
             this.Controls.Add(this.MainStatusStrip);
+            this.Controls.Add(this.collapseExpandButton);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.MainMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.MinimumSize = new System.Drawing.Size(382, 268);
+            this.MinimumSize = new System.Drawing.Size(549, 381);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clipboarder";
@@ -408,40 +456,32 @@ namespace Clipboarder {
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).EndInit();
             this.mainGridContextMenu.ResumeLayout(false);
             this.textPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.imagePage.ResumeLayout(false);
-            this.MainStatusStrip.ResumeLayout(false);
-            this.MainStatusStrip.PerformLayout();
             this.MainTabControl.ResumeLayout(false);
             this.MainMenuStrip.ResumeLayout(false);
             this.MainMenuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.collapseExpandButton)).EndInit();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imageDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picturePreviewBox)).EndInit();
+            this.MainStatusStrip.ResumeLayout(false);
+            this.MainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Clipboarder.ClipboardMonitor clipboardMonitor1;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Content;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         internal System.Windows.Forms.DataGridView textDataGrid;
         private System.Windows.Forms.TabPage textPage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewImageColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        internal System.Windows.Forms.DataGridView imageDataGrid;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabPage imagePage;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripProgressBar progressBar;
-        private System.Windows.Forms.ToolStripStatusLabel springStatusStripLabel;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-        internal System.Windows.Forms.StatusStrip MainStatusStrip;
         internal System.Windows.Forms.ToolStripMenuItem clearClipboardMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem ClearClipboarderMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
@@ -455,5 +495,18 @@ namespace Clipboarder {
         internal System.Windows.Forms.MenuStrip MainMenuStrip;
         private System.Windows.Forms.ContextMenuStrip mainGridContextMenu;
         private System.Windows.Forms.ToolStripMenuItem goToURLToolStripMenuItem;
+        private System.Windows.Forms.PictureBox collapseExpandButton;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        internal System.Windows.Forms.DataGridView imageDataGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.PictureBox picturePreviewBox;
+        private System.Windows.Forms.Label imagePreviewLabel;
+        internal System.Windows.Forms.StatusStrip MainStatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel springStatusStripLabel;
+        private System.Windows.Forms.ToolStripProgressBar progressBar;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
