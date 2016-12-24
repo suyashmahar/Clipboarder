@@ -127,7 +127,7 @@
     <value>True</value>
   </metadata>
   <metadata name="mainGridContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>552, 20</value>
+    <value>295, 18</value>
   </metadata>
   <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -139,12 +139,32 @@
     <value>True</value>
   </metadata>
   <metadata name="MainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>416, 20</value>
+    <value>159, 18</value>
   </metadata>
   <metadata name="MainStatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>727, 20</value>
   </metadata>
+  <metadata name="mainNotifyIcon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>28, 17</value>
+  </metadata>
+  <metadata name="NotificationMenuContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>470, 20</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="mainNotifyIcon.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAMDAAAAEAIAAeAgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAwAAAAMAgGAAAAVwL5hwAAAAFz
+        UkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABs0lEQVRoQ+2ZLUsE
+        URSGd4YNRoPBIhgMGzcIGrUZbdr8ARoEg8UgGAyLmBaMmkwGQbEIGg3+A4OCZcHgggZBmfE9M68fg7sz
+        486dORvOA5f3fNw59565M0yYmmEMGUEQ7IR9QG6X04YXbPKO+/0Dco+QOqcOH9jgbLzV/mDOAqc7wae6
+        YomaxgrVCR41E9y5KciG53knGJfwp+G3ouQPTeRGafcEh/AGuYm9b/Z83z9DroGxCb8N/zZOOQBFJ7Hh
+        F6g8AheM1WHfS6wIrBs1DbvF2DukKTEnfBX+RYPxdfoDgxr7UgvmCOynOBrFjyWeRd53IHE3UH9VFI/L
+        IexuFBwAXPsBadNeRL0xsck4NZVc7wDuxhWKz9GVxbrwJzBekVuGRifyX1Cng2f9QOwea1wjN0+3GFIc
+        BRMgtsZ0YVBOXt4EsibTqQx0AgLWeEDsiG4hUGsGtRLfB8TKPYGyyXsCrj9klWMNaGMNaGMNaGMNaGMN
+        aGMNaGMNaGMNaGMNaGMNaGMNaGMNaGMNaJO3gQ61SuRXVCZ5GzinVskp1Q1hGG4H/E9WJljjGWOLyxpG
+        udRqn3RPpm2E2gWQAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAMDAAAAEAIACoJQAAZgAAACAgAAABACAAqBAAAA4mAAAQEAAAAQAgAGgEAAC2NgAAgIAAAAEA

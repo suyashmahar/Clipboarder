@@ -1,4 +1,5 @@
-﻿using Clipboarder.Extension;
+﻿// Blue Color : #FF076FFF
+using Clipboarder.Extension;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,12 +9,14 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 
 namespace Clipboarder {
     public partial class MainForm : Form, IMainDataLayer {
         private MainFormPresenter presenter;
+        bool isFormVisible = true;
 
         #region Properties
         public int TaskProgress {
@@ -60,7 +63,6 @@ namespace Clipboarder {
                 return null;
             }
         }
-
         public bool ShowURLStatus {
             set {
                 goToURLToolStripMenuItem.Enabled = value;
@@ -73,6 +75,7 @@ namespace Clipboarder {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
+            splitContainer2.Panel2Collapsed = Properties.Settings.Default.imagePreviewCollapsed;
             presenter = new MainFormPresenter(this);
         }      
 
@@ -136,13 +139,11 @@ namespace Clipboarder {
 
             return returnValues;
         }
-
         public ImageContent GetImageContentAt(int index) {
             //0 indexed
             DataGridViewRow row = imageDataGrid.Rows[index];
             return new ImageContent((int)row.Cells[0].Value, (Image)row.Cells[1].Value, (string)row.Cells[2].Value);
         }
-
         public TextContent GetTextContentAt(int index) {
             //0 indexed
             DataGridViewRow row = textDataGrid.Rows[index];
@@ -185,7 +186,7 @@ namespace Clipboarder {
 
         #region MenuStripItems
         private void exitMenuItem_Click(object sender, EventArgs e) {
-            Close();
+            Application.Exit();
         }
 
         private void saveContentToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -211,7 +212,14 @@ namespace Clipboarder {
         #endregion
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-            OnExiting(sender, e);
+            if (e.CloseReason != CloseReason.WindowsShutDown && 
+                    e.CloseReason != CloseReason.ApplicationExitCall) { // To identify close method request
+                Hide();
+                isFormVisible = false;
+                e.Cancel = true;
+            } else {
+                OnExiting(sender, e);
+            }
         }
 
         private void mainGridContextMenu_Opened(object sender, EventArgs e) {
@@ -236,10 +244,13 @@ namespace Clipboarder {
             if (splitContainer2.Panel2Collapsed) {
                 collapseExpandButton.Image = Properties.Resources.Clipboarder_Expand_Arrow;
                 splitContainer2.Panel2Collapsed = false;
+                Properties.Settings.Default.imagePreviewCollapsed = false;
             } else {
                 collapseExpandButton.Image = Properties.Resources.Clipboarder_Collapse_Arrow;
                 splitContainer2.Panel2Collapsed = true;
+                Properties.Settings.Default.imagePreviewCollapsed = true;
             }
+            Properties.Settings.Default.Save();
         }
 
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e) {
@@ -258,5 +269,43 @@ namespace Clipboarder {
 
             imagePreviewLabel.Visible = false;  // Hides 'Image Preview' label
         }
+
+        #region Notification context menu options
+
+        private void NotificationMenuContextMenuStrip_Opened(object sender, EventArgs e) {
+            if (isFormVisible) {
+                showToolStripMenuItem.Text = "Hide";
+            } else {
+                showToolStripMenuItem.Text = "Show";
+            }
+        }
+
+        private void showToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (isFormVisible) {
+                isFormVisible = !isFormVisible;
+                Hide();
+            } else {
+                isFormVisible = !isFormVisible;
+                Show();
+            }
+        }
+
+        private void clearClipboarderToolStripMenuItem_Click(object sender, EventArgs e) {
+            ClearAll();
+        }
+
+        private void clearClipboardToolStripMenuItem_Click(object sender, EventArgs e) {
+            Clipboard.Clear();
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();           
+        }
+
+        private void NotificationMenuContextMenuStrip_MouseDoubleClick(object sender, MouseEventArgs e) {
+            isFormVisible = true;
+            Show();
+        }
+        #endregion
     }
 }

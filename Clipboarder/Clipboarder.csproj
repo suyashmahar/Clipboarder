@@ -224,6 +224,7 @@
     <None Include="Resources\Clipboarder-Clean-Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Clipboarder-Show.png" />
     <None Include="Resources\Clipboarder-Expand-Arrow.png" />
     <None Include="Resources\Clipboarder-Close-Icon.png" />
     <None Include="Resources\Clipboarder-Clipboard_Clear-Icon.png" />

@@ -144,5 +144,17 @@ namespace Clipboarder.Properties {
                 this["isCutomRegexEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool imagePreviewCollapsed {
+            get {
+                return ((bool)(this["imagePreviewCollapsed"]));
+            }
+            set {
+                this["imagePreviewCollapsed"] = value;
+            }
+        }
     }
 }
