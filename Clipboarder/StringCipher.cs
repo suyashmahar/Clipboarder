@@ -3,6 +3,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 using System.Linq;
+
 namespace Clipboarder.Encryption {
     public static class StringCipher {
         private const int Keysize = 256;
@@ -12,6 +13,7 @@ namespace Clipboarder.Encryption {
             var saltStringBytes = GenerateEntropy(32);
             var ivStringBytes = GenerateEntropy(32);
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+
             using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations)) {
                 var keyBytes = password.GetBytes(Keysize / 8);
                 using (var symmetricKey = new RijndaelManaged()) {

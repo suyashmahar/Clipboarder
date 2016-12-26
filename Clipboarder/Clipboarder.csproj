@@ -120,6 +120,7 @@
     <Compile Include="AskPasswordEncrypt.Designer.cs">
       <DependentUpon>AskPasswordEncrypt.cs</DependentUpon>
     </Compile>
+    <Compile Include="BCrypt.cs" />
     <Compile Include="ClipboardMonitor.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -156,6 +157,7 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StringCipher.cs" />
     <Compile Include="TextEventArgs.cs" />
     <Compile Include="TextForm.cs">
       <SubType>Form</SubType>
@@ -216,12 +218,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Clipboarder.Encryption\Clipboarder.Encryption.csproj">
-      <Project>{42493ae7-77f0-4f3f-ad94-e4d140cd07b5}</Project>
-      <Name>Clipboarder.Encryption</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Clipboarder-Menu-Icon.png" />

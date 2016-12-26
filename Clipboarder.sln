@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clipboarder", "Clipboarder\Clipboarder.csproj", "{410914C2-A194-4538-AFD8-12E21F92A96E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clipboarder.Encryption", "Clipboarder.Encryption\Clipboarder.Encryption.csproj", "{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly Files", "Assembly Files", "{17DB9436-7954-46E0-B597-7E7E838813EA}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Desktop\PasswordTextBoxControl-net40.dll = ..\..\..\Desktop\PasswordTextBoxControl-net40.dll
@@ -35,18 +33,6 @@ Global
 		{410914C2-A194-4538-AFD8-12E21F92A96E}.Release|x64.Build.0 = Release|x64
 		{410914C2-A194-4538-AFD8-12E21F92A96E}.Release|x86.ActiveCfg = Release|Any CPU
 		{410914C2-A194-4538-AFD8-12E21F92A96E}.Release|x86.Build.0 = Release|Any CPU
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Debug|x64.ActiveCfg = Debug|x64
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Debug|x64.Build.0 = Debug|x64
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Debug|x86.ActiveCfg = Debug|x86
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Debug|x86.Build.0 = Debug|x86
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Release|x64.ActiveCfg = Release|x64
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Release|x64.Build.0 = Release|x64
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Release|x86.ActiveCfg = Release|Any CPU
-		{42493AE7-77F0-4F3F-AD94-E4D140CD07B5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
