@@ -127,6 +127,12 @@
     <Compile Include="ContentIdentifier.cs" />
     <Compile Include="DatabaseReadWrite.cs" />
     <Compile Include="DatabaseOperations.cs" />
+    <Compile Include="EditText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditText.Designer.cs">
+      <DependentUpon>EditText.cs</DependentUpon>
+    </Compile>
     <Compile Include="HotKey.cs" />
     <Compile Include="ImageConversion.cs" />
     <Compile Include="IMainDataLayer.cs" />
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AskPasswordEncrypt.resx">
       <DependentUpon>AskPasswordEncrypt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditText.resx">
+      <DependentUpon>EditText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -50,7 +50,7 @@ namespace Clipboarder {
             view.ShowSettings += ShowSettings;
             view.URLCalled += URLCalled;
             view.textGridCheckURLAndSetStatus += textGridCheckURLAndSetStatus;
-
+            view.EditTextContent += EditTextContent;
             // Adds first content from clipboard
             if (Clipboard.ContainsText()) {
                 LastClipboardText = Clipboard.GetText();
@@ -67,6 +67,11 @@ namespace Clipboarder {
             clipboardMonitor.ClipboardChanged += ClipboardMonitor_ClipboardChanged;
         }
 
+        private void EditTextContent(Object sender, EventArgs e) {
+            EditText text = new EditText(this.view);
+            DialogResult result = text.ShowDialog();
+        }
+
         private void textGridCheckURLAndSetStatus(object sender, TextEventArgs e) {
             if (Properties.Settings.Default.isURLIdentificationEnabled) {
 
@@ -76,16 +81,15 @@ namespace Clipboarder {
                 } else {
                     view.ShowURLStatus = ContentIdentifier.containsURL(e.GetAll[0]);
                 }
-
             } else {
                 view.ShowURLStatus = false;
             }
         }
 
         private void URLCalled(object sender, EventArgs e) {
-            if (view.SelectedRowText != null) {
+            if (view.SelectedRowTextContent != null) {
                 UrlListDisplay urlListDisplay = new UrlListDisplay(this, 
-                    ContentIdentifier.GetURLs(view.SelectedRowText));
+                    ContentIdentifier.GetURLs(view.SelectedRowTextContent.text));
                 urlListDisplay.ShowDialog();
             }
         }

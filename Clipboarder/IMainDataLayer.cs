@@ -10,7 +10,7 @@ namespace Clipboarder {
         int TextRowCount { get; }
         int ImageRowCount { get; }
         string status { get; set; }
-        string SelectedRowText { get; }
+        TextContent SelectedRowTextContent { get; }
         bool ShowURLStatus { set; }
 
         event EventHandler<EventArgs> LoadContent;
@@ -18,10 +18,13 @@ namespace Clipboarder {
         event EventHandler<EventArgs> OnExiting;
         event EventHandler<EventArgs> ShowSettings;
         event EventHandler<EventArgs> URLCalled;
+        event EventHandler<EventArgs> EditTextContent;
         event EventHandler<TextEventArgs> textGridCheckURLAndSetStatus;
 
         void AddNewTextRow(TextContent contentToAdd);
         void AddNewImageRow(ImageContent contentToAdd);
+        void SetTextContentAt(TextContent contentToAdd);
+        void SetImageContentAt(ImageContent contentToAdd);
         List<ImageContent> GetAllImageContent();
         List<TextContent> GetAllTextContent();
         ImageContent GetImageContentAt(int index);

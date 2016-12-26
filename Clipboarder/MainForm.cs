@@ -55,10 +55,14 @@ namespace Clipboarder {
                 statusLabel.Text = value;
             }
         }
-        public string SelectedRowText {
+        public TextContent SelectedRowTextContent {
             get {
                 if (textDataGrid.SelectedRows.Count == 1) {
-                    return (string)textDataGrid.SelectedRows[0].Cells[1].Value;    
+                    int index = textDataGrid.SelectedRows[0].Index;
+                    return new TextContent(
+                        (int)textDataGrid.Rows[index].Cells[0].Value,
+                        (string)textDataGrid.Rows[index].Cells[1].Value,
+                        (string)textDataGrid.Rows[index].Cells[2].Value);    
                 }
                 return null;
             }
@@ -85,6 +89,7 @@ namespace Clipboarder {
         public event EventHandler<EventArgs> ShowSettings;
         public event EventHandler<EventArgs> URLCalled;
         public event EventHandler<TextEventArgs> textGridCheckURLAndSetStatus;
+        public event EventHandler<EventArgs> EditTextContent;
 
         public void AddNewImageRow(ImageContent contentToAdd) {
             DataGridViewRow NewRow = new DataGridViewRow();
@@ -110,6 +115,30 @@ namespace Clipboarder {
 
             textDataGrid.Rows.Insert(textDataGrid.RowCount, NewRow);
             MainTabControl.SelectedIndex = 0;
+        }
+        public void SetTextContentAt(TextContent contentToAdd) {
+            try {
+                DataGridViewRow row = textDataGrid.Rows[contentToAdd.index - 1];
+
+                row.Cells[0].Value = contentToAdd.index;
+                row.Cells[1].Value = contentToAdd.text;
+                row.Cells[2].Value = contentToAdd.time;
+            } catch (ArgumentOutOfRangeException) {
+                MessageBox.Show("Error, unable to update content.",
+                    "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+        public void SetImageContentAt(ImageContent contentToAdd) {
+            try {
+                DataGridViewRow row = imageDataGrid.Rows[contentToAdd.index - 1];
+
+                row.Cells[0].Value = contentToAdd.index;
+                row.Cells[1].Value = contentToAdd.image;
+                row.Cells[2].Value = contentToAdd.time;
+            } catch (ArgumentOutOfRangeException) {
+                MessageBox.Show("Error, unable to update content.",
+                    "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
         }
         public List<ImageContent> GetAllImageContent() {
             List<ImageContent> returnValues = new List<ImageContent>();
@@ -222,7 +251,9 @@ namespace Clipboarder {
             }
         }
 
+        #region Text Data Grid Context Menu
         private void mainGridContextMenu_Opened(object sender, EventArgs e) {
+            // Checks and Enable/Disables Go to URL menu item
             if (textDataGrid.SelectedRows.Count == 1) {
                 TextEventArgs textEventArgs = new TextEventArgs();    // Declares new TextEventArg
                 textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);   // Adds row text content as string to TextEventArgs
@@ -230,8 +261,17 @@ namespace Clipboarder {
             } else {
                 goToURLToolStripMenuItem.Enabled = false;
             }
+
+            // Checks and Enable/Disable Edit Context menu item5
+            if (textDataGrid.SelectedRows.Count != 1) {
+                goToURLToolStripMenuItem.Enabled = false;
+            } 
         }
 
+        private void editToolStripMenuItem_Click(Object sender, EventArgs e) {
+            EditTextContent(sender, e);
+        }
+        #endregion
         private void goToURLToolStripMenuItem_Click(object sender, EventArgs e) {
             URLCalled(sender, e);
         }
