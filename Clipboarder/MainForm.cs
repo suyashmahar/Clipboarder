@@ -243,6 +243,10 @@ namespace Clipboarder {
         private void clearClipboardMenuItem_Click(object sender, EventArgs e) {
             Clipboard.Clear();
         }
+
+        private void clearClipboardMenuItem_Click_1(Object sender, EventArgs e) {
+            Clipboard.Clear();
+        }
         #endregion
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {

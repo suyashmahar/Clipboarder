@@ -5,12 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clipboarder", "Clipboarder\Clipboarder.csproj", "{410914C2-A194-4538-AFD8-12E21F92A96E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly Files", "Assembly Files", "{17DB9436-7954-46E0-B597-7E7E838813EA}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\PasswordTextBoxControl-net40.dll = ..\..\..\Desktop\PasswordTextBoxControl-net40.dll
-		..\..\..\Desktop\System.Data.SQLite.dll = ..\..\..\Desktop\System.Data.SQLite.dll
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -177,7 +177,7 @@ namespace Clipboarder {
             this.imagePage.Controls.Add(this.splitContainer2);
             this.imagePage.Location = new System.Drawing.Point(4, 25);
             this.imagePage.Name = "imagePage";
-            this.imagePage.Size = new System.Drawing.Size(614, 269);
+            this.imagePage.Size = new System.Drawing.Size(614, 272);
             this.imagePage.TabIndex = 1;
             this.imagePage.Text = "Image";
             this.imagePage.UseVisualStyleBackColor = true;
@@ -196,7 +196,7 @@ namespace Clipboarder {
             // 
             this.splitContainer2.Panel2.Controls.Add(this.imagePreviewLabel);
             this.splitContainer2.Panel2.Controls.Add(this.picturePreviewBox);
-            this.splitContainer2.Size = new System.Drawing.Size(614, 269);
+            this.splitContainer2.Size = new System.Drawing.Size(614, 272);
             this.splitContainer2.SplitterDistance = 456;
             this.splitContainer2.TabIndex = 14;
             // 
@@ -221,7 +221,7 @@ namespace Clipboarder {
             this.imageDataGrid.ReadOnly = true;
             this.imageDataGrid.RowHeadersVisible = false;
             this.imageDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.imageDataGrid.Size = new System.Drawing.Size(456, 269);
+            this.imageDataGrid.Size = new System.Drawing.Size(456, 272);
             this.imageDataGrid.TabIndex = 12;
             this.imageDataGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.imageDataGrid_RowEnter_1);
             // 
@@ -257,7 +257,7 @@ namespace Clipboarder {
             this.imagePreviewLabel.AutoSize = true;
             this.imagePreviewLabel.Enabled = false;
             this.imagePreviewLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.85F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.imagePreviewLabel.Location = new System.Drawing.Point(28, 116);
+            this.imagePreviewLabel.Location = new System.Drawing.Point(28, 118);
             this.imagePreviewLabel.Name = "imagePreviewLabel";
             this.imagePreviewLabel.Size = new System.Drawing.Size(88, 15);
             this.imagePreviewLabel.TabIndex = 1;
@@ -268,7 +268,7 @@ namespace Clipboarder {
             this.picturePreviewBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picturePreviewBox.Location = new System.Drawing.Point(0, 0);
             this.picturePreviewBox.Name = "picturePreviewBox";
-            this.picturePreviewBox.Size = new System.Drawing.Size(154, 269);
+            this.picturePreviewBox.Size = new System.Drawing.Size(154, 272);
             this.picturePreviewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picturePreviewBox.TabIndex = 0;
             this.picturePreviewBox.TabStop = false;
@@ -403,6 +403,7 @@ namespace Clipboarder {
             this.clearClipboardMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.clearClipboardMenuItem.Size = new System.Drawing.Size(251, 26);
             this.clearClipboardMenuItem.Text = "Clear Clipboard";
+            this.clearClipboardMenuItem.Click += new System.EventHandler(this.clearClipboardMenuItem_Click_1);
             // 
             // MainStatusStrip
             // 
