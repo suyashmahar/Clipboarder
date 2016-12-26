@@ -125,6 +125,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Content.cs" />
+    <Compile Include="ContentEncryption.cs" />
     <Compile Include="ContentIdentifier.cs" />
     <Compile Include="DatabaseReadWrite.cs" />
     <Compile Include="DatabaseOperations.cs" />

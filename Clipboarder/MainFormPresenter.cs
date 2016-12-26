@@ -51,6 +51,7 @@ namespace Clipboarder {
             view.URLCalled += URLCalled;
             view.textGridCheckURLAndSetStatus += textGridCheckURLAndSetStatus;
             view.EditTextContent += EditTextContent;
+
             // Adds first content from clipboard
             if (Clipboard.ContainsText()) {
                 LastClipboardText = Clipboard.GetText();
@@ -195,7 +196,7 @@ namespace Clipboarder {
 
                 // Checks equality of password provided and stored
                 if (!user.CurrentUserHasID()) {
-                    MessageBox.Show("Content for current user doesn't exists.  \n\nOperation aborted.\n",
+                    MessageBox.Show("Content for current user doesn't exists.\n\nOperation aborted.\n",
                         "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     dbOperations.CloseConnection();
                     return;
@@ -204,20 +205,24 @@ namespace Clipboarder {
                     DatabaseReadWrite dbContent = new DatabaseReadWrite(dbOperations, user);
                     try {
                         view.status = "Reading text from database";
-                        List<string[]> outputList = dbContent.GetTextData();
+                        List<EncryptedTextContent> encryptedList = dbContent.GetTextData();
+                        List<TextContent> outputList = new List<TextContent>();
                         
-                        for (int i = 0; i < outputList.Count; i++) {
-                            string[] outputString = outputList[i];
-                            
-                            TextContent contentToAdd = new TextContent();
-                            contentToAdd.index = Convert.ToInt32(outputString[0]);
-                            contentToAdd.text = StringCipher.Decrypt(outputString[1], password);
-                            contentToAdd.time = StringCipher.Decrypt(outputString[2], password);
+                        // Resets progress
+                        view.ProgressVisibility = true;
+                        view.TaskProgress = 0;
 
+                        // Decrypts and adds text content to textDataGrid
+                        encryptedList.ForEach((encryptedContent) => {
+                            view.TaskProgress = (100 / encryptedList.Count) * encryptedContent.index;
+                            TextContent contentToAdd =
+                                ContentEncryption.DecryptTextContent(encryptedContent, password);
                             view.AddNewTextRow(contentToAdd);
-                        }
-                    } catch (Exception) {
-                        MessageBox.Show("Error filling table with values. \n  \n\nOperation aborted.\n",
+                        });
+                        view.TaskProgress = 0;
+
+                    } catch (Exception ex) {
+                        MessageBox.Show("Error filling table with values.\n\n\nOperation aborted.\n" + ex.StackTrace,
                             "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         view.status = "Error";
                         dbOperations.CloseConnection();
@@ -227,27 +232,23 @@ namespace Clipboarder {
                     try {
                         view.status = "Reading images from database.";
 
-                        List<string[]> outputList = dbContent.GetImageData();
-                        
+                        List<EncryptedImageContent> encryptedList = dbContent.GetImageData();
+                        List<ImageContent> outputList = new List<ImageContent>();
+
                         //progress bar values
                         view.TaskProgress = 0;
                         view.ProgressVisibility = true;
 
-                        for (int i = 0; i < outputList.Count; i++) {
-                            view.TaskProgress = (100 / outputList.Count) * i;
-                            string[] outputString = outputList[i];
-                            
-                            // Decrypt content and add to contentToAdd
-                            ImageContent contentToAdd = new ImageContent();
-                            contentToAdd.index = Convert.ToInt32(outputString[0]);
-                            contentToAdd.image = ImageConversion.Base64ToImage(StringCipher.Decrypt(outputString[1], password));
-                            contentToAdd.time = StringCipher.Decrypt(outputString[2], password);
-
+                        // Decrypts image content
+                        encryptedList.ForEach(encryptedContent => {
+                            view.TaskProgress = (100 / encryptedList.Count) * encryptedContent.index;
+                            ImageContent contentToAdd = 
+                                ContentEncryption.DecryptImageContent(encryptedContent, password);
                             view.AddNewImageRow(contentToAdd);
-                        }
+                        });
                         view.TaskProgress = 0;
                     } catch (Exception) {
-                        MessageBox.Show("Error filling table with values. \n  \n\nOperation aborted.\n",
+                        MessageBox.Show("Error filling table with values.\n\n\nOperation aborted.\n",
                             "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         view.status = "Error";
                         dbOperations.CloseConnection();
@@ -255,7 +256,6 @@ namespace Clipboarder {
                     }
                 }
                 view.status = "Imported successfully";
-                view.TaskProgress = 0;
                 view.ProgressVisibility = false;
                 dbOperations.CloseConnection();
             } // Else statement for check on file existence
@@ -332,69 +332,54 @@ namespace Clipboarder {
                         }
                     }
 
-                    //  Adds Content to databased as it is encrypted using password provided by the user
-                    
+                    // Resets progress status in view
+                    view.ProgressVisibility = true;
+                    view.TaskProgress = 0;
+
                     // Exports text Entries
-                    if (textContents.Count != 0) {
-                        view.ProgressVisibility = true;
-                        view.TaskProgress = 0;
+                    textContents.ForEach(content => {
+                        // Sets task progress
+                        view.TaskProgress = (100 / textContents.Count) * (content.index);
+                        EncryptedTextContent encryptedContent = ContentEncryption.EncryptTextContent(content, password);
 
-                        for (int i = 0; i < textContents.Count; i++) {
-                            view.TaskProgress = (100 / textContents.Count) * (i + 1);
-                            TextContent contentToExport = new TextContent();
-
-                            contentToExport.index = textContents[i].index;
-                            contentToExport.text = StringCipher.Encrypt(textContents[i].text, password);
-                            contentToExport.time = StringCipher.Encrypt(textContents[i].time, password);
-                            
-                            // Writing data to database
-                            try {
-                                dbContents.SetTextContent(contentToExport.index, contentToExport.text, contentToExport.time);
-                            } catch (Exception ex) {
-                                MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" 
-                                    + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                                dbOperations.CloseConnection();
-                                return;
-                            }
+                        // Inserts content to database
+                        try {
+                            dbContents.SetTextContent(encryptedContent);
+                        } catch (Exception ex) {
+                            MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n"
+                                + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            dbOperations.CloseConnection();
+                            return;
                         }
-                        view.TaskProgress = 0;
-                        view.ProgressVisibility = false;
-                    }
+                    });
 
+                    view.TaskProgress = 0;
+                    
                     // Exports image Entries
-                    if (imageContents.Count != 0) {
-                        view.ProgressVisibility = true;
-                        view.TaskProgress = 0;
+                    imageContents.ForEach(content => {
+                        // Sets task progress
+                        view.TaskProgress = (100 / imageContents.Count) * (content.index);
+                        EncryptedImageContent encryptedContent = ContentEncryption.EncryptImageContent(content, password);
 
-                        for (int i = 0; i < imageContents.Count; i++) {
-                            view.TaskProgress = (100 / imageContents.Count) * (i + 1);
-
-                            //Using TextContent since image will be converted Base64 String
-                            TextContent contentToAdd = new TextContent();
-                            contentToAdd.index = imageContents[i].index;
-                            contentToAdd.text = StringCipher.Encrypt(ImageConversion.ImageToBase64(imageContents[i].image, ImageFormat.Png), password);
-                            contentToAdd.time = StringCipher.Encrypt(imageContents[i].time, password);
-                            
-                            // Writing data to database
-                            try {
-                                dbContents.SetImageContent(contentToAdd.index, contentToAdd.text, contentToAdd.time);
-                            } catch (Exception ex) {
-                                MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n" 
-                                    + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                                dbOperations.CloseConnection();
-                                return;
-                            }
+                        // Inserts content to database
+                        try {
+                            dbContents.SetImageContent(encryptedContent);
+                        } catch (Exception ex) {
+                            MessageBox.Show("Error adding content to database. \n\nOperation aborted.\n"
+                                + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            dbOperations.CloseConnection();
+                            return;
                         }
+                    });
                         view.TaskProgress = 0;
                         view.ProgressVisibility = false;
-                    }
                     view.status = "Export Completed";
-                }
-                dbOperations.CloseConnection();
+                    dbOperations.CloseConnection();
+                    }
                 password = null;
             }
         }
-
+        
         #endregion
 
         #region HotKey Bindings

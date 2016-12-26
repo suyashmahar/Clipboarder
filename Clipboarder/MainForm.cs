@@ -27,7 +27,7 @@ namespace Clipboarder {
             set {
                 progressBar.Value = value;
             }
-        }
+        }    // TAG -- 0
         public bool ProgressVisibility {
             get {
                 return progressBar.Visible;
@@ -36,7 +36,7 @@ namespace Clipboarder {
             set {
                 progressBar.Visible = value;
             }
-        }
+        } // TAG -- 0
         public int TextRowCount {
             get {
                 return textDataGrid.RowCount;
@@ -80,6 +80,11 @@ namespace Clipboarder {
 
         private void MainForm_Load(object sender, EventArgs e) {
             splitContainer2.Panel2Collapsed = Properties.Settings.Default.imagePreviewCollapsed;
+            if (Properties.Settings.Default.imagePreviewCollapsed) {
+                collapseExpandButton.Image = Properties.Resources.Clipboarder_Collapse_Arrow;
+            } else {
+                collapseExpandButton.Image = Properties.Resources.Clipboarder_Expand_Arrow;
+            }
             presenter = new MainFormPresenter(this);
         }      
 
@@ -100,7 +105,7 @@ namespace Clipboarder {
             NewRow.Cells[2].Value = contentToAdd.time;
 
             //Adjusts height of a row
-            NewRow.Height = Clipboard.GetImage().Height;
+            NewRow.Height = contentToAdd.image.Height;
             
             imageDataGrid.Rows.Insert(imageDataGrid.RowCount, NewRow);
             MainTabControl.SelectedIndex = 1;

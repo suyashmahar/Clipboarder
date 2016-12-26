@@ -32,6 +32,7 @@ namespace Clipboarder {
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textDataGrid = new System.Windows.Forms.DataGridView();
             this.mainGridContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goToURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textPage = new System.Windows.Forms.TabPage();
             this.imagePage = new System.Windows.Forms.TabPage();
@@ -67,7 +68,6 @@ namespace Clipboarder {
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collapseExpandButton = new System.Windows.Forms.PictureBox();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.mainGridContextMenu.SuspendLayout();
             this.textPage.SuspendLayout();
@@ -133,7 +133,7 @@ namespace Clipboarder {
             this.textDataGrid.ReadOnly = true;
             this.textDataGrid.RowHeadersVisible = false;
             this.textDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.textDataGrid.Size = new System.Drawing.Size(614, 269);
+            this.textDataGrid.Size = new System.Drawing.Size(614, 272);
             this.textDataGrid.TabIndex = 10;
             this.textDataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.textDataGrid_RowsRemoved);
             this.textDataGrid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textDataGrid_MouseClick);
@@ -144,14 +144,21 @@ namespace Clipboarder {
             this.editToolStripMenuItem,
             this.goToURLToolStripMenuItem});
             this.mainGridContextMenu.Name = "mainGridContextMenu";
-            this.mainGridContextMenu.Size = new System.Drawing.Size(153, 70);
+            this.mainGridContextMenu.Size = new System.Drawing.Size(128, 48);
             this.mainGridContextMenu.Opened += new System.EventHandler(this.mainGridContextMenu_Opened);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // goToURLToolStripMenuItem
             // 
             this.goToURLToolStripMenuItem.Enabled = false;
             this.goToURLToolStripMenuItem.Name = "goToURLToolStripMenuItem";
-            this.goToURLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.goToURLToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.goToURLToolStripMenuItem.Text = "Go to URL";
             this.goToURLToolStripMenuItem.Click += new System.EventHandler(this.goToURLToolStripMenuItem_Click);
             // 
@@ -160,7 +167,7 @@ namespace Clipboarder {
             this.textPage.Controls.Add(this.textDataGrid);
             this.textPage.Location = new System.Drawing.Point(4, 25);
             this.textPage.Name = "textPage";
-            this.textPage.Size = new System.Drawing.Size(614, 269);
+            this.textPage.Size = new System.Drawing.Size(614, 272);
             this.textPage.TabIndex = 0;
             this.textPage.Text = "Text";
             this.textPage.UseVisualStyleBackColor = true;
@@ -278,7 +285,7 @@ namespace Clipboarder {
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.Padding = new System.Drawing.Point(0, 0);
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(622, 298);
+            this.MainTabControl.Size = new System.Drawing.Size(622, 301);
             this.MainTabControl.TabIndex = 15;
             this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
@@ -515,13 +522,6 @@ namespace Clipboarder {
             this.collapseExpandButton.TabStop = false;
             this.collapseExpandButton.Visible = false;
             this.collapseExpandButton.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // MainForm
             // 

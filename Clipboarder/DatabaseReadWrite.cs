@@ -9,7 +9,7 @@ namespace Clipboarder {
         DatabaseOperations dbOperations;
         User user;
 
-        public DatabaseReadWrite(DatabaseOperations dbOperations,User user) {
+        public DatabaseReadWrite(DatabaseOperations dbOperations, User user) {
             this.dbOperations = dbOperations;
             this.user = user;
         }
@@ -20,10 +20,15 @@ namespace Clipboarder {
         /// Note - content column should be encrypted 
         /// </summary>
         /// <param name="index">Index of content.</param>
-        /// <param name="content">Content to be written to the database, if security is a concern content should be encrypted.</param>
+        /// <param name="content">Content to be written to the database,
+        /// if security is a concern content should be encrypted.</param>
         /// <param name="time">Time of entry in clipboarder.</param>
-        public void SetTextContent(int index, string content, string time) {
-            string command = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", DatabaseOperations.textEntriesTable, index, content, time, user.id);
+        public void SetTextContent(EncryptedTextContent contentToAdd) {
+            string command = String.Format(
+                "INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');",
+                DatabaseOperations.textEntriesTable,
+                contentToAdd.index, contentToAdd.encryptedText, contentToAdd.time,
+                user.id);
             dbOperations.ExecuteNonQueryCommand(command);
         }
         
@@ -32,53 +37,62 @@ namespace Clipboarder {
         /// Note - content column should be encrypted 
         /// </summary>
         /// <param name="index">Index of content.</param>
-        /// <param name="content">Content to be written to the database, if security is a concern content should be encrypted.</param>
+        /// <param name="content">Content to be written to the database, 
+        /// if security is a concern content should be encrypted.</param>
         /// <param name="time">Time of entry in clipboarder.</param>
-        public void SetImageContent(int index, string content, string time) {
-            string command = String.Format("INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');", DatabaseOperations.imageEntriesTable, index, content, time, user.id);
+        public void SetImageContent(EncryptedImageContent contentToAdd) {
+
+            string command = String.Format(
+                "INSERT INTO {0}('indexNumber', 'content', 'time', 'byUser') VALUES({1},\'{2}\',\'{3}\',\'{4}\');",
+                DatabaseOperations.imageEntriesTable,
+                contentToAdd.index, contentToAdd.encryptedImage, contentToAdd.time,
+                user.id);
+
             dbOperations.ExecuteNonQueryCommand(command);
         }
 
         /// <summary>
-        /// Pulls entries for current user from database and returns list of string array with encrypted  content.
+        /// Pulls entries for current user from database and returns list
+        /// of string array with encrypted  content.
         /// </summary>
         /// <returns>List of string[3] where string[0], [1] & [2] corresponds to Index, content and Time respectively</returns>
-        public List<string[]> GetTextData() {
+        public List<EncryptedTextContent> GetTextData() {
             string query = String.Format("SELECT * FROM {0} where byUser='{1}';", DatabaseOperations.textEntriesTable, user.id);
             SQLiteDataReader databaseDataReader = dbOperations.GetDataReader(query);
 
-            List<string[]> outputList = new List<string[]>();
+            List<EncryptedTextContent> outputList = new List<EncryptedTextContent>();
             while (databaseDataReader.Read()) {
-                string[] stringToAdd = new String[3];
+                EncryptedTextContent contentToAdd = new EncryptedTextContent();
 
                 //ignored value at [0] since id of record is of no use in this context.
-                stringToAdd[0] = "" + databaseDataReader.GetInt32(1); //Index of record acording to clipboarder entry
-                stringToAdd[1] = databaseDataReader.GetString(2);   //content
-                stringToAdd[2] = databaseDataReader.GetString(3);   //time of entry in clipboarder
+                contentToAdd.index = databaseDataReader.GetInt32(1); //Index of record acording to clipboarder entry
+                contentToAdd.encryptedText = databaseDataReader.GetString(2);   //content
+                contentToAdd.time = databaseDataReader.GetString(3);   //time of entry in clipboarder
 
-                outputList.Add(stringToAdd);
+                outputList.Add(contentToAdd);
             }
             return outputList;
         }
 
         /// <summary>
-        /// Pulls entries from image table for current user from database and returns list of string array with encrypted  content.
+        /// Pulls entries from image table for current user from 
+        /// database and returns list of string array with encrypted  content.
         /// </summary>
         /// <returns>List of string[3] where string[0], [1] & [2] corresponds to Index, content and Time respectively</returns>
-        public List<string[]> GetImageData() {
+        public List<EncryptedImageContent> GetImageData() {
             string query = String.Format("SELECT * FROM {0} where byUser='{1}';", DatabaseOperations.imageEntriesTable, user.id);
             SQLiteDataReader databaseDataReader = dbOperations.GetDataReader(query);
 
-            List<string[]> outputList = new List<string[]>();
+            List<EncryptedImageContent> outputList = new List<EncryptedImageContent>();
             while (databaseDataReader.Read()) {
-                string[] stringToAdd = new String[3];
+                EncryptedImageContent contentToAdd = new EncryptedImageContent();
 
                 //ignored value at [0] since id of record is of no use in this context.
-                stringToAdd[0] = "" + databaseDataReader.GetInt32(1); //Index of record acording to clipboarder entry
-                stringToAdd[1] = databaseDataReader.GetString(2);   //content
-                stringToAdd[2] = databaseDataReader.GetString(3);   //time of entry in clipboarder
+                contentToAdd.index = databaseDataReader.GetInt32(1); //Index of record acording to clipboarder entry
+                contentToAdd.encryptedImage = databaseDataReader.GetString(2);   //content
+                contentToAdd.time = databaseDataReader.GetString(3);   //time of entry in clipboarder
 
-                outputList.Add(stringToAdd);
+                outputList.Add(contentToAdd);
             }
             return outputList;
         }
@@ -101,8 +115,11 @@ namespace Clipboarder {
         /// Deletes all records corresponding to current user in clipboarderEntries table
         /// </summary>
         public void DeleteAllRecordsForCurrentUsers() {
-            string removeTextContentQuery = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";", DatabaseOperations.textEntriesTable, user.id);
-            string removeImageContentQuery = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";", DatabaseOperations.imageEntriesTable, user.id);
+            string removeTextContentQuery = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";",
+                DatabaseOperations.textEntriesTable, user.id);
+            string removeImageContentQuery = String.Format("DELETE FROM {0} WHERE byUser = \"{1}\";",
+                DatabaseOperations.imageEntriesTable, user.id);
+
             dbOperations.ExecuteNonQueryCommand(removeTextContentQuery);
             dbOperations.ExecuteNonQueryCommand(removeImageContentQuery);
         }

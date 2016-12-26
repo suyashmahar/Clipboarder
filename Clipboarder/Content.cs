@@ -21,9 +21,23 @@ namespace Clipboarder {
         }
     }
 
+    public class EncryptedTextContent : Content {
+        public string encryptedText;
+
+        public EncryptedTextContent() {
+
+        }
+
+        public EncryptedTextContent(int index, string encryptedText, string time) {
+            this.index = index;
+            this.encryptedText = encryptedText;
+            this.time = time;
+        }
+    }
+
     public class ImageContent : Content {
         public Image image;
-
+        
         public ImageContent() {
 
         }
@@ -31,6 +45,20 @@ namespace Clipboarder {
         public ImageContent(int index, Image image, string time) {
             this.index = index;
             this.image = image;
+            this.time = time;
+        }
+    }
+
+    public class EncryptedImageContent : Content {
+        public string encryptedImage;
+
+        public EncryptedImageContent() {
+
+        }
+
+        public EncryptedImageContent(int index, string encryptedImage, string time) {
+            this.index = index;
+            this.encryptedImage = encryptedImage;
             this.time = time;
         }
     }
