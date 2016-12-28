@@ -158,7 +158,16 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SHRTb Testing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SHRTb Testing.Designer.cs">
+      <DependentUpon>SHRTb Testing.cs</DependentUpon>
+    </Compile>
     <Compile Include="StringCipher.cs" />
+    <Compile Include="SyntaxHighlightingTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TextEventArgs.cs" />
     <Compile Include="TextForm.cs">
       <SubType>Form</SubType>
@@ -197,6 +206,9 @@
     </Compile>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SHRTb Testing.resx">
+      <DependentUpon>SHRTb Testing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TextForm.resx">
       <DependentUpon>TextForm.cs</DependentUpon>

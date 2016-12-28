@@ -356,5 +356,10 @@ namespace Clipboarder {
             Show();
         }
         #endregion
+
+        private void testingToolStripMenuItem_Click(Object sender, EventArgs e) {
+            SHRTb_Testing sh = new SHRTb_Testing();
+            sh.Show();
+        }
     }
 }
