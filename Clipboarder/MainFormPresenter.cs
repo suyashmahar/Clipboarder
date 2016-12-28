@@ -222,7 +222,7 @@ namespace Clipboarder {
                         view.TaskProgress = 0;
 
                     } catch (Exception ex) {
-                        MessageBox.Show("Error filling table with values.\n\n\nOperation aborted.\n" + ex.StackTrace,
+                        MessageBox.Show("Error filling table with values.\n\n\nOperation aborted.\n",
                             "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         view.status = "Error";
                         dbOperations.CloseConnection();
@@ -270,7 +270,8 @@ namespace Clipboarder {
             List<ImageContent> imageContents = view.GetAllImageContent();
 
             if (textContents.Count == 0 && imageContents.Count == 0) {
-                MessageBox.Show("No entries to save.", "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No entries to save.", "Clipboarder",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             } else {
                 AskPasswordEncrypt askPassword = new AskPasswordEncrypt(this);
@@ -336,7 +337,9 @@ namespace Clipboarder {
                     view.ProgressVisibility = true;
                     view.TaskProgress = 0;
 
+                    //-------------------------------------------------------------
                     // Exports text Entries
+
                     textContents.ForEach(content => {
                         // Sets task progress
                         view.TaskProgress = (100 / textContents.Count) * (content.index);
@@ -354,8 +357,10 @@ namespace Clipboarder {
                     });
 
                     view.TaskProgress = 0;
-                    
+
+                    //-------------------------------------------------------------
                     // Exports image Entries
+
                     imageContents.ForEach(content => {
                         // Sets task progress
                         view.TaskProgress = (100 / imageContents.Count) * (content.index);
