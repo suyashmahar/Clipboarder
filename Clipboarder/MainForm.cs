@@ -27,7 +27,7 @@ namespace Clipboarder {
             set {
                 progressBar.Value = value;
             }
-        }
+        }    // TAG -- 0
         public bool ProgressVisibility {
             get {
                 return progressBar.Visible;
@@ -36,7 +36,7 @@ namespace Clipboarder {
             set {
                 progressBar.Visible = value;
             }
-        }
+        } // TAG -- 0
         public int TextRowCount {
             get {
                 return textDataGrid.RowCount;
@@ -80,6 +80,11 @@ namespace Clipboarder {
 
         private void MainForm_Load(object sender, EventArgs e) {
             splitContainer2.Panel2Collapsed = Properties.Settings.Default.imagePreviewCollapsed;
+            if (Properties.Settings.Default.imagePreviewCollapsed) {
+                collapseExpandButton.Image = Properties.Resources.Clipboarder_Collapse_Arrow;
+            } else {
+                collapseExpandButton.Image = Properties.Resources.Clipboarder_Expand_Arrow;
+            }
             presenter = new MainFormPresenter(this);
         }      
 
@@ -100,7 +105,7 @@ namespace Clipboarder {
             NewRow.Cells[2].Value = contentToAdd.time;
 
             //Adjusts height of a row
-            NewRow.Height = Clipboard.GetImage().Height;
+            NewRow.Height = contentToAdd.image.Height;
             
             imageDataGrid.Rows.Insert(imageDataGrid.RowCount, NewRow);
             MainTabControl.SelectedIndex = 1;
@@ -238,6 +243,10 @@ namespace Clipboarder {
         private void clearClipboardMenuItem_Click(object sender, EventArgs e) {
             Clipboard.Clear();
         }
+
+        private void clearClipboardMenuItem_Click_1(Object sender, EventArgs e) {
+            Clipboard.Clear();
+        }
         #endregion
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -258,8 +267,12 @@ namespace Clipboarder {
                 TextEventArgs textEventArgs = new TextEventArgs();    // Declares new TextEventArg
                 textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);   // Adds row text content as string to TextEventArgs
                 textGridCheckURLAndSetStatus(sender, textEventArgs);
+
+                //goToURLToolStripMenuItem.Enabled = true;
+                //viewInSyntaxHighlightingToolStripMenuItem.Enabled = true;
             } else {
                 goToURLToolStripMenuItem.Enabled = false;
+                viewInSyntaxHighlightingToolStripMenuItem.Enabled = false;
             }
 
             // Checks and Enable/Disable Edit Context menu item5
@@ -270,6 +283,11 @@ namespace Clipboarder {
 
         private void editToolStripMenuItem_Click(Object sender, EventArgs e) {
             EditTextContent(sender, e);
+        }
+
+        private void viewInSyntaxHighlightingToolStripMenuItem_Click(Object sender, EventArgs e) {
+            TextPreview textPreview = new TextPreview((string)textDataGrid.SelectedRows[0].Cells[1].Value);
+            textPreview.Show();
         }
         #endregion
         private void goToURLToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -347,5 +365,9 @@ namespace Clipboarder {
             Show();
         }
         #endregion
+
+        private void mainGridContextMenu_Opening(Object sender, CancelEventArgs e) {
+
+        }
     }
 }

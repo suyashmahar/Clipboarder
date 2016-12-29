@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Clipboarder {
     public partial class SettingsForm : Form {
-
+        Font syntaxHiglightingFont;
         List<Keys> modifierKeys = new List<Keys>() {
             Keys.None,
             Keys.Alt,
@@ -58,6 +58,9 @@ namespace Clipboarder {
             CustomRegexCheckBox.Checked = Properties.Settings.Default.isCutomRegexEnabled;
             URLCheckBox.Checked = Properties.Settings.Default.isURLIdentificationEnabled;
 
+            //Fills font for syntaxhighlighting
+            syntaxHiglightingFont = Properties.Settings.Default.syntaxHighlightingFont;
+            UpdateFontDescription();
         }
 
         private void okButton_Click(object sender, EventArgs e) {
@@ -135,6 +138,27 @@ namespace Clipboarder {
 
         private void CustomRegexCheckBox_CheckedChanged(object sender, EventArgs e) {
             RegexLinkLabel.Enabled = CustomRegexCheckBox.Checked;
+        }
+
+        private void button1_Click(Object sender, EventArgs e) {
+            FontDialog fontDialog = new FontDialog();
+            fontDialog.ShowEffects = false;
+            fontDialog.ShowApply = false;
+            fontDialog.ShowColor = false;
+            fontDialog.Font = syntaxHiglightingFont;
+
+            DialogResult result = fontDialog.ShowDialog();
+            if (result == DialogResult.OK) {
+                syntaxHiglightingFont = fontDialog.Font;
+                UpdateFontDescription();
+            }
+            
+        }
+        private void UpdateFontDescription() {
+            fontDescriptionLabel.Text =
+                "Font: " + syntaxHiglightingFont.Name + "\n" +
+                "Size:" + syntaxHiglightingFont.Size + "\n" +
+                "Style: " + syntaxHiglightingFont.Style;
         }
     }
 }

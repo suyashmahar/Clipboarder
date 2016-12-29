@@ -45,6 +45,10 @@
             this.RegexLinkLabel = new System.Windows.Forms.LinkLabel();
             this.CustomRegexCheckBox = new System.Windows.Forms.CheckBox();
             this.URLCheckBox = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.fontDescriptionLabel = new System.Windows.Forms.Label();
+            this.syntaxHiglightingSettings = new System.Windows.Forms.Button();
             this.textSettingsPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -52,12 +56,13 @@
             this.tabControl1.SuspendLayout();
             this.generalSettingsPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(125, 223);
+            this.okButton.Location = new System.Drawing.Point(137, 266);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 1;
@@ -69,7 +74,7 @@
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(206, 223);
+            this.closeButton.Location = new System.Drawing.Point(218, 266);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 2;
@@ -84,7 +89,7 @@
             this.textSettingsPage.Location = new System.Drawing.Point(4, 22);
             this.textSettingsPage.Name = "textSettingsPage";
             this.textSettingsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.textSettingsPage.Size = new System.Drawing.Size(280, 188);
+            this.textSettingsPage.Size = new System.Drawing.Size(318, 231);
             this.textSettingsPage.TabIndex = 0;
             this.textSettingsPage.Text = "Text";
             this.textSettingsPage.UseVisualStyleBackColor = true;
@@ -102,7 +107,7 @@
             this.groupBox2.Controls.Add(this.plusLabel3);
             this.groupBox2.Location = new System.Drawing.Point(6, 101);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(268, 83);
+            this.groupBox2.Size = new System.Drawing.Size(306, 83);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Custom Keys";
@@ -185,7 +190,7 @@
             this.groupBox1.Controls.Add(this.textShortcutsNumericUpDown);
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(268, 89);
+            this.groupBox1.Size = new System.Drawing.Size(306, 89);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Short-Cuts";
@@ -242,15 +247,16 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(288, 214);
+            this.tabControl1.Size = new System.Drawing.Size(300, 257);
             this.tabControl1.TabIndex = 0;
             // 
             // generalSettingsPage
             // 
+            this.generalSettingsPage.Controls.Add(this.groupBox4);
             this.generalSettingsPage.Controls.Add(this.groupBox3);
             this.generalSettingsPage.Location = new System.Drawing.Point(4, 22);
             this.generalSettingsPage.Name = "generalSettingsPage";
-            this.generalSettingsPage.Size = new System.Drawing.Size(280, 188);
+            this.generalSettingsPage.Size = new System.Drawing.Size(292, 231);
             this.generalSettingsPage.TabIndex = 1;
             this.generalSettingsPage.Text = "General";
             this.generalSettingsPage.UseVisualStyleBackColor = true;
@@ -264,7 +270,7 @@
             this.groupBox3.Controls.Add(this.URLCheckBox);
             this.groupBox3.Location = new System.Drawing.Point(6, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(271, 69);
+            this.groupBox3.Size = new System.Drawing.Size(283, 69);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "URL Identification";
@@ -305,17 +311,55 @@
             this.URLCheckBox.UseVisualStyleBackColor = true;
             this.URLCheckBox.CheckedChanged += new System.EventHandler(this.URLCheckBox_CheckedChanged);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.syntaxHiglightingSettings);
+            this.groupBox4.Controls.Add(this.fontDescriptionLabel);
+            this.groupBox4.Location = new System.Drawing.Point(6, 79);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(283, 149);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Syntax Highlighting";
+            // 
+            // fontDialog1
+            // 
+            this.fontDialog1.ShowEffects = false;
+            // 
+            // fontDescriptionLabel
+            // 
+            this.fontDescriptionLabel.AutoSize = true;
+            this.fontDescriptionLabel.Location = new System.Drawing.Point(6, 45);
+            this.fontDescriptionLabel.Name = "fontDescriptionLabel";
+            this.fontDescriptionLabel.Size = new System.Drawing.Size(117, 13);
+            this.fontDescriptionLabel.TabIndex = 0;
+            this.fontDescriptionLabel.Text = "Current Font : lakndflna";
+            // 
+            // syntaxHiglightingSettings
+            // 
+            this.syntaxHiglightingSettings.Location = new System.Drawing.Point(6, 19);
+            this.syntaxHiglightingSettings.Name = "syntaxHiglightingSettings";
+            this.syntaxHiglightingSettings.Size = new System.Drawing.Size(75, 23);
+            this.syntaxHiglightingSettings.TabIndex = 1;
+            this.syntaxHiglightingSettings.Text = "Edit";
+            this.syntaxHiglightingSettings.UseVisualStyleBackColor = true;
+            this.syntaxHiglightingSettings.Click += new System.EventHandler(this.button1_Click);
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
-            this.ClientSize = new System.Drawing.Size(292, 258);
+            this.ClientSize = new System.Drawing.Size(304, 301);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.closeButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(320, 340);
             this.Name = "SettingsForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -331,6 +375,8 @@
             this.generalSettingsPage.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -357,5 +403,9 @@
         private System.Windows.Forms.CheckBox URLCheckBox;
         private System.Windows.Forms.CheckBox CustomRegexCheckBox;
         private System.Windows.Forms.LinkLabel RegexLinkLabel;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button syntaxHiglightingSettings;
+        private System.Windows.Forms.Label fontDescriptionLabel;
     }
 }

@@ -1,0 +1,32 @@
+﻿$Blue {
+ 	public\b
+    static\b
+    void\b
+    int\b
+    import\b
+    if\b
+    return\b
+    for\b
+    switch\b
+    default\b
+    class\b
+    short\b
+    byte\b
+    long\b
+    case:\b
+    [\s\(\[][A-Z]\w+
+    Integer\.?
+    extends\b
+    implements\b
+    super
+    \bthis\s
+    new\n
+}
+$Green {
+    //.+
+    /\*.+\*/
+}
+$Red {
+    ".+"
+}
+

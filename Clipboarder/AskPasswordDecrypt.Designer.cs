@@ -99,6 +99,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AskPasswordDecrypt";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clipboarder";
             this.Load += new System.EventHandler(this.AskPasswordDecrypt_Load);
             this.ResumeLayout(false);

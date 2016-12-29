@@ -125,6 +125,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Content.cs" />
+    <Compile Include="ContentEncryption.cs" />
     <Compile Include="ContentIdentifier.cs" />
     <Compile Include="DatabaseReadWrite.cs" />
     <Compile Include="DatabaseOperations.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="HotKey.cs" />
     <Compile Include="ImageConversion.cs" />
     <Compile Include="IMainDataLayer.cs" />
+    <Compile Include="Languages.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,12 +160,21 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="StringCipher.cs" />
+    <Compile Include="SyntaxHighlightingTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TextEventArgs.cs" />
     <Compile Include="TextForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TextForm.Designer.cs">
       <DependentUpon>TextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextPreview.Designer.cs">
+      <DependentUpon>TextPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="UrlListDisplay.cs">
       <SubType>Form</SubType>
@@ -200,6 +211,9 @@
     <EmbeddedResource Include="TextForm.resx">
       <DependentUpon>TextForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TextPreview.resx">
+      <DependentUpon>TextPreview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UrlListDisplay.resx">
       <DependentUpon>UrlListDisplay.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,6 +227,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SHLs\Java.shl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
