@@ -267,8 +267,12 @@ namespace Clipboarder {
                 TextEventArgs textEventArgs = new TextEventArgs();    // Declares new TextEventArg
                 textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);   // Adds row text content as string to TextEventArgs
                 textGridCheckURLAndSetStatus(sender, textEventArgs);
+
+                goToURLToolStripMenuItem.Enabled = true;
+                viewInSyntaxHighlightingToolStripMenuItem.Enabled = true;
             } else {
                 goToURLToolStripMenuItem.Enabled = false;
+                viewInSyntaxHighlightingToolStripMenuItem.Enabled = false;
             }
 
             // Checks and Enable/Disable Edit Context menu item5
@@ -279,6 +283,11 @@ namespace Clipboarder {
 
         private void editToolStripMenuItem_Click(Object sender, EventArgs e) {
             EditTextContent(sender, e);
+        }
+
+        private void viewInSyntaxHighlightingToolStripMenuItem_Click(Object sender, EventArgs e) {
+            TextPreview textPreview = new TextPreview((string)textDataGrid.SelectedRows[0].Cells[1].Value);
+            textPreview.Show();
         }
         #endregion
         private void goToURLToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -356,10 +365,5 @@ namespace Clipboarder {
             Show();
         }
         #endregion
-
-        private void testingToolStripMenuItem_Click(Object sender, EventArgs e) {
-            SHRTb_Testing sh = new SHRTb_Testing();
-            sh.Show();
-        }
     }
 }

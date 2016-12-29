@@ -124,7 +124,6 @@
     <Compile Include="ClipboardMonitor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ColoredKeyword.cs" />
     <Compile Include="Content.cs" />
     <Compile Include="ContentEncryption.cs" />
     <Compile Include="ContentIdentifier.cs" />
@@ -139,6 +138,7 @@
     <Compile Include="HotKey.cs" />
     <Compile Include="ImageConversion.cs" />
     <Compile Include="IMainDataLayer.cs" />
+    <Compile Include="Languages.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,12 +159,6 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SHRTb Testing.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SHRTb Testing.Designer.cs">
-      <DependentUpon>SHRTb Testing.cs</DependentUpon>
-    </Compile>
     <Compile Include="StringCipher.cs" />
     <Compile Include="SyntaxHighlightingTextBox.cs">
       <SubType>Component</SubType>
@@ -175,6 +169,12 @@
     </Compile>
     <Compile Include="TextForm.Designer.cs">
       <DependentUpon>TextForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextPreview.Designer.cs">
+      <DependentUpon>TextPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="UrlListDisplay.cs">
       <SubType>Form</SubType>
@@ -208,11 +208,11 @@
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SHRTb Testing.resx">
-      <DependentUpon>SHRTb Testing.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TextForm.resx">
       <DependentUpon>TextForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextPreview.resx">
+      <DependentUpon>TextPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UrlListDisplay.resx">
       <DependentUpon>UrlListDisplay.cs</DependentUpon>

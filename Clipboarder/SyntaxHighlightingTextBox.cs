@@ -8,7 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Clipboarder {
+
+namespace Clipboarder.SyntaxHighlighting {
     class SyntaxHighlightingTextBox : RichTextBox{
         List<ColoredKeyword> syntaxList = new List<ColoredKeyword>();
         private bool isSyntaxHighlightingEnabled;

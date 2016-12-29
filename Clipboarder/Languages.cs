@@ -1,51 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
 
-namespace Clipboarder {
-    public partial class SHRTb_Testing : Form {
-        public SHRTb_Testing() {
-            InitializeComponent();
-        }
-
-        private void SHRTb_Testing_Load(Object sender, EventArgs e) {
-
-            List<ColoredKeyword> list= CompileFromFile("JAVA");
-            list.ForEach(s => syntaxHighlightingTextBox1.AddKeyword(s.keyword, s.color));
-            syntaxHighlightingTextBox1.EnableSyntaxHiglighting = true;
-        }
-         
-        private void button2_Click(Object sender, EventArgs e) {
-            syntaxHighlightingTextBox1.compile();
-        }
-
-        public List<ColoredKeyword> CompileFromFile(string language) {
+namespace Clipboarder.SyntaxHighlighting {
+    public class Languages {
+        public static List<ColoredKeyword> CompileFromFile(string language) {
             if (!doesLanguageExists(language))
                 throw new ArgumentException("Language file for the specified language does not exist at default path");
 
             List<ColoredKeyword> coloredKeywords = new List<ColoredKeyword>();
-            List<string> splitted =  SplitIntoColors(language);
+            List<string> splitted = SplitIntoColors(language);
 
             splitted.ForEach(s => {
                 coloredKeywords.AddRange(GetKeywords(s));
             });
 
             coloredKeywords.ForEach(coloredKeyword => {
-                 new Regex(coloredKeyword.keyword);
+                new Regex(coloredKeyword.keyword);
             });
 
             return coloredKeywords;
         }
-
-        public List<string> SplitIntoColors(string language) {
+        public static List<string> SplitIntoColors(string language) {
             List<string> splitted = new List<string>();
 
             Regex regex = new Regex(@"\$.+ {");
@@ -59,9 +41,7 @@ namespace Clipboarder {
             splitted.Add(languageFileContent.Substring(matches[matches.Count - 1].Index));
             return splitted;
         }
-
-        //--OK
-        public List<string> GetLanguages() {
+        public static List<string> GetLanguages() {
             string filePath = System.IO.Path.Combine(Application.StartupPath, "SHLs");
             string[] languages = Directory.GetFiles(filePath, "*.shl");
 
@@ -77,8 +57,7 @@ namespace Clipboarder {
 
             return languagesToReturn;
         }
-
-        public bool doesLanguageExists(string language) {
+        public static bool doesLanguageExists(string language) {
             List<string> languages = GetLanguages();
 
             bool result = false;
@@ -89,8 +68,7 @@ namespace Clipboarder {
 
             return result;
         }
-
-        public List<string> LanguageFileLines(string language) {
+        public static List<string> LanguageFileLines(string language) {
             string filePath = System.IO.Path.Combine(
                 Application.StartupPath,
                 "SHLs",
@@ -103,26 +81,24 @@ namespace Clipboarder {
             }
             return linesToReturn;
         }
-
-        public string LanguageFileAsString(string language) {
-            if (!doesLanguageExists(language)) 
+        public static string LanguageFileAsString(string language) {
+            if (!doesLanguageExists(language))
                 throw new ArgumentException("Language file for the specified language does not exist at default path");
             return File.ReadAllText(getLanguagePath(language));
         }
-        public string getLanguagePath(String language) {
+        public static string getLanguagePath(String language) {
             return System.IO.Path.Combine(
                 Application.StartupPath,
                 "SHLs",
                 language + ".shl");
         }
-        public List<ColoredKeyword> GetKeywords(string splittedByColor) {
+        public static List<ColoredKeyword> GetKeywords(string splittedByColor) {
             List<ColoredKeyword> keywordsToReturn = new List<ColoredKeyword>();
             string firstLine = GetLine(splittedByColor, 1);
 
             Color color = Color.FromName(
                 RemoveWhiteSpaces(firstLine).Substring(1, RemoveWhiteSpaces(firstLine).Length - 2)
                 );
-            Debug.WriteLine(firstLine.Substring(1, firstLine.Length - 2));
             List<string> lines = splittedByColor.Replace("\r", "").Split('\n')
                 .Cast<string>().ToList();
             lines.RemoveAt(0);
@@ -136,13 +112,21 @@ namespace Clipboarder {
 
             return keywordsToReturn;
         }
-        public string GetLine(string text, int lineNo) {
+        public static string GetLine(string text, int lineNo) {
             string[] lines = text.Replace("\r", "").Split('\n');
             return lines.Length >= lineNo ? lines[lineNo - 1] : null;
         }
-
-        public string RemoveWhiteSpaces(string inputString) {
+        public static string RemoveWhiteSpaces(string inputString) {
             return Regex.Replace(inputString, @"\s+", "");
+        }
+    }
+    public class ColoredKeyword {
+        public string keyword;
+        public Color color;
+
+        public ColoredKeyword(string keyword, Color color) {
+            this.keyword = keyword;
+            this.color = color;
         }
     }
 }
