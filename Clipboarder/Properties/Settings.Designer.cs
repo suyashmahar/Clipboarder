@@ -156,5 +156,17 @@ namespace Clipboarder.Properties {
                 this["imagePreviewCollapsed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Consolas, 12pt")]
+        public global::System.Drawing.Font syntaxHighlightingFont {
+            get {
+                return ((global::System.Drawing.Font)(this["syntaxHighlightingFont"]));
+            }
+            set {
+                this["syntaxHighlightingFont"] = value;
+            }
+        }
     }
 }

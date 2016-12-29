@@ -148,7 +148,8 @@ namespace Clipboarder {
             this.goToURLToolStripMenuItem,
             this.viewInSyntaxHighlightingToolStripMenuItem});
             this.mainGridContextMenu.Name = "mainGridContextMenu";
-            this.mainGridContextMenu.Size = new System.Drawing.Size(217, 76);
+            this.mainGridContextMenu.Size = new System.Drawing.Size(217, 98);
+            this.mainGridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.mainGridContextMenu_Opening);
             this.mainGridContextMenu.Opened += new System.EventHandler(this.mainGridContextMenu_Opened);
             // 
             // editToolStripMenuItem

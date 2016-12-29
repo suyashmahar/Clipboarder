@@ -35,5 +35,8 @@
     <Setting Name="imagePreviewCollapsed" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="syntaxHighlightingFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Consolas, 12pt</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

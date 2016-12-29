@@ -268,8 +268,8 @@ namespace Clipboarder {
                 textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);   // Adds row text content as string to TextEventArgs
                 textGridCheckURLAndSetStatus(sender, textEventArgs);
 
-                goToURLToolStripMenuItem.Enabled = true;
-                viewInSyntaxHighlightingToolStripMenuItem.Enabled = true;
+                //goToURLToolStripMenuItem.Enabled = true;
+                //viewInSyntaxHighlightingToolStripMenuItem.Enabled = true;
             } else {
                 goToURLToolStripMenuItem.Enabled = false;
                 viewInSyntaxHighlightingToolStripMenuItem.Enabled = false;
@@ -365,5 +365,9 @@ namespace Clipboarder {
             Show();
         }
         #endregion
+
+        private void mainGridContextMenu_Opening(Object sender, CancelEventArgs e) {
+
+        }
     }
 }
