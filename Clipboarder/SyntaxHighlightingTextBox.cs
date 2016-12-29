@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Clipboarder {
     class SyntaxHighlightingTextBox : RichTextBox{
-        Dictionary<string, Color> syntaxList = new Dictionary<string, Color>();
+        List<ColoredKeyword> syntaxList = new List<ColoredKeyword>();
         private bool isSyntaxHighlightingEnabled;
 
         public void BeginUpdate() {
@@ -38,7 +38,7 @@ namespace Clipboarder {
 
         }
 
-        public SyntaxHighlightingTextBox(Dictionary<string, Color> syntaxList) {
+        public SyntaxHighlightingTextBox(List<ColoredKeyword> syntaxList) {
             this.syntaxList = syntaxList;
         }
         #endregion
@@ -47,13 +47,17 @@ namespace Clipboarder {
         public Int32 AddKeyword(string keyword, Color color) {
             try {
                 Regex regex = new Regex(keyword);
-                syntaxList.Add(keyword, color);
+                syntaxList.Add(new ColoredKeyword(keyword, color));
+                Debug.WriteLine(0);
                 return 0;
             } catch (ArgumentNullException) {
+                Debug.WriteLine(1);
                 return 1;
             } catch (ArgumentException) {
+                Debug.WriteLine(2);
                 return 2;
             } catch (Exception) {
+                Debug.WriteLine(3);
                 return 3;
             }
         }
@@ -64,7 +68,7 @@ namespace Clipboarder {
             foreach (string keyword in keywords) {
                 try {
                     Regex regex = new Regex(keyword);
-                    syntaxList.Add(keyword, color);
+                    syntaxList.Add(new ColoredKeyword(keyword, color));
                 } catch (ArgumentNullException) {
                     Debug.WriteLine(1);
                     return 1;
@@ -89,7 +93,7 @@ namespace Clipboarder {
             if (EnableSyntaxHiglighting) {
                 BeginUpdate();
                 for (int i = 0; i < syntaxList.Count; i++) {
-                    Regex regex = new Regex(syntaxList.Keys.ElementAt(i));
+                    Regex regex = new Regex(syntaxList.ElementAt(i).keyword);
                     MatchCollection matches = regex.Matches(this.Text);
                     foreach (Match match in matches) {
                         Color initColor = this.ForeColor;
@@ -97,7 +101,7 @@ namespace Clipboarder {
                         int initPosition = this.SelectionStart;
                         this.SelectionStart = match.Index;
                         this.SelectionLength = match.Length;
-                        this.SelectionColor = syntaxList.Values.ElementAt(i);
+                        this.SelectionColor = syntaxList.ElementAt(i).color;
                         this.Select(initPosition, initPosition);
                         this.DeselectAll();
                         this.ForeColor = initColor;
