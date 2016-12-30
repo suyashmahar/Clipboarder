@@ -227,9 +227,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="SHLs\Java.shl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -246,6 +243,9 @@
     <None Include="Resources\Clipboarder-Clean-Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SHLs\sample-java.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Clipboarder-Show.png" />
     <None Include="Resources\Clipboarder-Expand-Arrow.png" />
     <None Include="Resources\Clipboarder-Close-Icon.png" />

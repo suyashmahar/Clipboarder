@@ -37,7 +37,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(587, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -56,13 +56,14 @@
             // 
             // syntaxHighlightingTextBox
             // 
+            this.syntaxHighlightingTextBox.BackColor = System.Drawing.Color.White;
             this.syntaxHighlightingTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.syntaxHighlightingTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.syntaxHighlightingTextBox.EnableSyntaxHiglighting = false;
             this.syntaxHighlightingTextBox.Location = new System.Drawing.Point(0, 24);
             this.syntaxHighlightingTextBox.Name = "syntaxHighlightingTextBox";
             this.syntaxHighlightingTextBox.ReadOnly = true;
-            this.syntaxHighlightingTextBox.Size = new System.Drawing.Size(284, 237);
+            this.syntaxHighlightingTextBox.Size = new System.Drawing.Size(587, 320);
             this.syntaxHighlightingTextBox.TabIndex = 1;
             this.syntaxHighlightingTextBox.Text = "";
             // 
@@ -70,7 +71,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(587, 344);
             this.Controls.Add(this.syntaxHighlightingTextBox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
