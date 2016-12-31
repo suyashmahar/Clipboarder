@@ -3,7 +3,7 @@ using Clipboarder.Extension;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,14 +16,13 @@ using System.Windows.Forms;
 namespace Clipboarder {
     public partial class MainForm : Form, IMainDataLayer {
         private MainFormPresenter presenter;
-        bool isFormVisible = true;
+        bool isFormVisible = true;  // Stores state of visibility of MainForm
 
         #region Properties
         public int TaskProgress {
             get {
                 return progressBar.Value;
             }
-
             set {
                 progressBar.Value = value;
             }
@@ -32,7 +31,6 @@ namespace Clipboarder {
             get {
                 return progressBar.Visible;
             }
-
             set {
                 progressBar.Visible = value;
             }
@@ -55,6 +53,7 @@ namespace Clipboarder {
                 statusLabel.Text = value;
             }
         }
+        // Returns text content from row currently selected in textDataGrid
         public TextContent SelectedRowTextContent {
             get {
                 if (textDataGrid.SelectedRows.Count == 1) {
@@ -62,7 +61,7 @@ namespace Clipboarder {
                     return new TextContent(
                         (int)textDataGrid.Rows[index].Cells[0].Value,
                         (string)textDataGrid.Rows[index].Cells[1].Value,
-                        (string)textDataGrid.Rows[index].Cells[2].Value);    
+                        (string)textDataGrid.Rows[index].Cells[2].Value);
                 }
                 return null;
             }
@@ -79,14 +78,16 @@ namespace Clipboarder {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
+            // Changes expanded state of preview panel to that in which Clipboarder last exited 
             splitContainer2.Panel2Collapsed = Properties.Settings.Default.imagePreviewCollapsed;
             if (Properties.Settings.Default.imagePreviewCollapsed) {
                 collapseExpandButton.Image = Properties.Resources.Clipboarder_Collapse_Arrow;
             } else {
                 collapseExpandButton.Image = Properties.Resources.Clipboarder_Expand_Arrow;
             }
+
             presenter = new MainFormPresenter(this);
-        }      
+        }
 
         public event EventHandler<EventArgs> LoadContent;
         public event EventHandler<EventArgs> SaveContent;
@@ -95,18 +96,19 @@ namespace Clipboarder {
         public event EventHandler<EventArgs> URLCalled;
         public event EventHandler<TextEventArgs> textGridCheckURLAndSetStatus;
         public event EventHandler<EventArgs> EditTextContent;
+        public event EventHandler<EventArgs> CopySelectedTextToClipboard;
 
         public void AddNewImageRow(ImageContent contentToAdd) {
             DataGridViewRow NewRow = new DataGridViewRow();
             NewRow.CreateCells(imageDataGrid);
-            
+
             NewRow.Cells[0].Value = contentToAdd.index;
             NewRow.Cells[1].Value = contentToAdd.image;
             NewRow.Cells[2].Value = contentToAdd.time;
 
             //Adjusts height of a row
             NewRow.Height = contentToAdd.image.Height;
-            
+
             imageDataGrid.Rows.Insert(imageDataGrid.RowCount, NewRow);
             MainTabControl.SelectedIndex = 1;
         }
@@ -249,8 +251,16 @@ namespace Clipboarder {
         }
         #endregion
 
+        /// <summary>
+        /// OnClosing method exits application if Close Reaseon is 
+        /// either of Windows shutdown or manual using Menu > Exit
+        /// / NotificationIcon > Exit.
+        /// 
+        /// If CloseReason is neither of the above then MainForm 
+        /// visibility is set to false
+        /// </summary>
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-            if (e.CloseReason != CloseReason.WindowsShutDown && 
+            if (e.CloseReason != CloseReason.WindowsShutDown &&
                     e.CloseReason != CloseReason.ApplicationExitCall) { // To identify close method request
                 Hide();
                 isFormVisible = false;
@@ -265,11 +275,9 @@ namespace Clipboarder {
             // Checks and Enable/Disables Go to URL menu item
             if (textDataGrid.SelectedRows.Count == 1) {
                 TextEventArgs textEventArgs = new TextEventArgs();    // Declares new TextEventArg
-                textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);   // Adds row text content as string to TextEventArgs
+                // Adds row text content as string to TextEventArgs
+                textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);
                 textGridCheckURLAndSetStatus(sender, textEventArgs);
-
-                //goToURLToolStripMenuItem.Enabled = true;
-                //viewInSyntaxHighlightingToolStripMenuItem.Enabled = true;
             } else {
                 goToURLToolStripMenuItem.Enabled = false;
                 viewInSyntaxHighlightingToolStripMenuItem.Enabled = false;
@@ -278,7 +286,7 @@ namespace Clipboarder {
             // Checks and Enable/Disable Edit Context menu item5
             if (textDataGrid.SelectedRows.Count != 1) {
                 goToURLToolStripMenuItem.Enabled = false;
-            } 
+            }
         }
 
         private void editToolStripMenuItem_Click(Object sender, EventArgs e) {
@@ -289,13 +297,16 @@ namespace Clipboarder {
             TextPreview textPreview = new TextPreview((string)textDataGrid.SelectedRows[0].Cells[1].Value);
             textPreview.Show();
         }
+        private void copyToClipboardToolStripMenuItem_Click(Object sender, EventArgs e) {
+            CopySelectedTextToClipboard(sender, e);
+        }
         #endregion
         private void goToURLToolStripMenuItem_Click(object sender, EventArgs e) {
             URLCalled(sender, e);
         }
 
         private void textDataGrid_MouseClick(object sender, MouseEventArgs e) {
-            
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e) {
@@ -357,7 +368,7 @@ namespace Clipboarder {
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e) {
-            Application.Exit();           
+            Application.Exit();
         }
 
         private void NotificationMenuContextMenuStrip_MouseDoubleClick(object sender, MouseEventArgs e) {
@@ -369,5 +380,18 @@ namespace Clipboarder {
         private void mainGridContextMenu_Opening(Object sender, CancelEventArgs e) {
 
         }
+
+        private void MainMenuStrip_ItemClicked(Object sender, ToolStripItemClickedEventArgs e) {
+
+        }
+
+        private void toolStripStatusLabel2_Click(Object sender, EventArgs e) {
+            Process.Start("https://github.com/Suyash12mahar/Clipboarder/issues/new");
+        }
+
+        private void toolStripStatusLabel1_Click(Object sender, EventArgs e) {
+            Process.Start("https://github.com/Suyash12mahar/Clipboarder/");
+        }
+
     }
 }

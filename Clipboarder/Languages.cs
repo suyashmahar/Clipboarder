@@ -11,6 +11,13 @@ using System.Xml;
 
 namespace Clipboarder.SyntaxHighlighting {
     public class Languages {
+        /// <summary>
+        /// Returns List of ColoredKeyword after parsing XML 
+        /// from the file of which name is supplied
+        /// </summary>
+        /// <param name="language">Name of language to comile from</param>
+        /// <returns>List of Colored keywords from file</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static List<ColoredKeyword> CompileFromFile(string language) {
             if (!doesLanguageExists(language))
                 throw new ArgumentException("Language file for the specified language does not exist at default path");
@@ -18,29 +25,33 @@ namespace Clipboarder.SyntaxHighlighting {
             XmlTextReader reader = new XmlTextReader(getLanguagePath(language));
 
             List<ColoredKeyword> keywords = new List<ColoredKeyword>();
+
+            //Stores color while reading words from XML
             Color currentColor = Color.White;
+
+            //Reads XML file
             while (reader.Read()) {
                 switch (reader.NodeType) {
-                    case XmlNodeType.Element: 
+                    case XmlNodeType.Element:
                         if (reader.Name.ToLower() == "words") {
                             reader.MoveToFirstAttribute();
                             currentColor = Color.FromName(reader.Value);
                             break;
                         }
                         break;
-                    case XmlNodeType.Text: 
+                    case XmlNodeType.Text:
                         keywords.Add(new ColoredKeyword(reader.Value, currentColor));
                         break;
                 }
             }
-            
+
             return keywords;
         }
         public static List<string> GetLanguages() {
             string filePath = System.IO.Path.Combine(Application.StartupPath, "SHLs");
             string[] languages = Directory.GetFiles(filePath, "*.xml");
 
-            // Removes path and leaves names
+            // Removes path and extension from language files
             for (int i = 0; i < languages.Length; i++) {
                 languages[i] = Path.GetFileNameWithoutExtension(languages[i]);
             }
@@ -52,6 +63,11 @@ namespace Clipboarder.SyntaxHighlighting {
 
             return languagesToReturn;
         }
+        /// <summary>
+        /// Checks SHLs directory for specified file
+        /// </summary>
+        /// <param name="language">Name of language to search file for</param>
+        /// <returns></returns>
         public static bool doesLanguageExists(string language) {
             List<string> languages = GetLanguages();
 
@@ -63,6 +79,9 @@ namespace Clipboarder.SyntaxHighlighting {
 
             return result;
         }
+        /// <summary>
+        /// Returns file path for the language specified
+        /// </summary>
         public static string getLanguagePath(String language) {
             return System.IO.Path.Combine(
                 Application.StartupPath,
@@ -70,13 +89,5 @@ namespace Clipboarder.SyntaxHighlighting {
                 language + ".xml");
         }
     }
-    public class ColoredKeyword {
-        public string keyword;
-        public Color color;
 
-        public ColoredKeyword(string keyword, Color color) {
-            this.keyword = keyword;
-            this.color = color;
-        }
-    }
 }

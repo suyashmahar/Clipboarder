@@ -32,7 +32,9 @@ namespace Clipboarder {
             if (listBox1.SelectedItem != null) {
                 Process.Start(ContentIdentifier.CheckAndAppendHTTP(listBox1.SelectedItem.ToString()));
             } else {
-                MessageBox.Show("Please select a URL to open.", "Clipboarder - Display URL", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Please select a URL to open.",
+                    "Clipboarder - Display URL",
+                    MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Text;
 namespace Clipboarder {
     public interface IMainDataLayer {
         int TaskProgress { get; set; } // Progress of any task being processed
-        bool ProgressVisibility { get; set; }
+        bool ProgressVisibility { get; set; } // Visibility state of task progress 
         int TextRowCount { get; }
         int ImageRowCount { get; }
         string status { get; set; }
@@ -20,6 +20,7 @@ namespace Clipboarder {
         event EventHandler<EventArgs> URLCalled;
         event EventHandler<EventArgs> EditTextContent;
         event EventHandler<TextEventArgs> textGridCheckURLAndSetStatus;
+        event EventHandler<EventArgs> CopySelectedTextToClipboard;
 
         void AddNewTextRow(TextContent contentToAdd);
         void AddNewImageRow(ImageContent contentToAdd);

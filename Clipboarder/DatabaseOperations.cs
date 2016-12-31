@@ -19,11 +19,20 @@ namespace Clipboarder {
         /// </summary>
         /// <param name="databaseName">Path or name of new database.</param>
         public static void CreatesNewDatabase(string databaseName) {
-            string createUsersTableQuery = String.Format("CREATE TABLE \"{0}\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"userName\" TEXT NOT NULL  UNIQUE , \"password\" TEXT);", userNameTable);
-            string createTextEntriesTableQuery = String.Format("CREATE TABLE \"{0}\" (id INTEGER PRIMARY KEY  AUTOINCREMENT, indexNumber INTEGER, content TEXT, time TEXT, byUser TEXT NOT NULL, FOREIGN KEY(byUser) REFERENCES users(id));", textEntriesTable);
-            string createImageEntriesTableQuery = String.Format("CREATE TABLE \"{0}\" (id INTEGER PRIMARY KEY  AUTOINCREMENT, indexNumber INTEGER, content TEXT, time TEXT, byUser TEXT NOT NULL, FOREIGN KEY(byUser) REFERENCES users(id));", imageEntriesTable);
+            string createUsersTableQuery = String.Format(
+                "CREATE TABLE \"{0}\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"userName\" TEXT NOT NULL  UNIQUE , \"password\" TEXT);",
+                userNameTable);
 
-            // Description of connection string at : http://adodotnetsqlite.sourceforge.net/documentation/SQLiteConnection/ConnectionString.php.
+            string createTextEntriesTableQuery = String.Format(
+                "CREATE TABLE \"{0}\" (id INTEGER PRIMARY KEY  AUTOINCREMENT, indexNumber INTEGER, content TEXT, time TEXT, byUser TEXT NOT NULL, FOREIGN KEY(byUser) REFERENCES users(id));",
+                textEntriesTable);
+
+            string createImageEntriesTableQuery = String.Format(
+                "CREATE TABLE \"{0}\" (id INTEGER PRIMARY KEY  AUTOINCREMENT, indexNumber INTEGER, content TEXT, time TEXT, byUser TEXT NOT NULL, FOREIGN KEY(byUser) REFERENCES users(id));",
+                imageEntriesTable);
+
+            // Description of connection string at : 
+            // http://adodotnetsqlite.sourceforge.net/documentation/SQLiteConnection/ConnectionString.php.
             // Creating new file with compression turned off.
             try {
                 SQLiteConnection newConnection = new SQLiteConnection("Data Source=\"" + databaseName + "\";Version=3;New=True;");
@@ -32,10 +41,12 @@ namespace Clipboarder {
                 SQLiteCommand newCommand = new SQLiteCommand(createUsersTableQuery, newConnection);
                 newCommand.ExecuteNonQuery();
 
-                newCommand = new SQLiteCommand(createTextEntriesTableQuery, newConnection); // Creates table for text content
+                // Creates table for text content
+                newCommand = new SQLiteCommand(createTextEntriesTableQuery, newConnection);
                 newCommand.ExecuteNonQuery();
 
-                newCommand = new SQLiteCommand(createImageEntriesTableQuery, newConnection);// Creates table for storing image in Base64 format
+                // Creates table for storing image in Base64 format
+                newCommand = new SQLiteCommand(createImageEntriesTableQuery, newConnection);
                 newCommand.ExecuteNonQuery();
 
                 newConnection.Close();
@@ -65,7 +76,8 @@ namespace Clipboarder {
         /// </summary>
         /// <param name="databaseName">Path or name of database to connect</param>
         public void ConnectDatabase(string databaseName) {
-            // Description of connection string at : http://adodotnetsqlite.sourceforge.net/documentation/SQLiteConnection/ConnectionString.php.
+            // Description of connection string at : 
+            // http://adodotnetsqlite.sourceforge.net/documentation/SQLiteConnection/ConnectionString.php.
             // Using here old file with compression turned off.
             try {
                 databaseConnection = new SQLiteConnection("Data Source=\"" + databaseName + "\";Version=3;");
@@ -83,12 +95,12 @@ namespace Clipboarder {
                 databaseCommand.ExecuteNonQuery();
             }
         }
-        
+
         /// <summary>
         /// Returns SQLiteDataReader object for query passed as parameter
         /// </summary>
         public SQLiteDataReader GetDataReader(string query) {
-            databaseCommand = new SQLiteCommand(query,databaseConnection);
+            databaseCommand = new SQLiteCommand(query, databaseConnection);
             return databaseCommand.ExecuteReader();
         }
     }

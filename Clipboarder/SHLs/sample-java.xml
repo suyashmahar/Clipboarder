@@ -24,12 +24,12 @@
         <word>\bthis\s</word>
         <word>new\n</word>
     </words>
-    <words color="green">
-        <word>//.+</word>
-        <word>/\*.+\*/</word>
-    </words>
     <words color="maroon">
         <word>".+"</word>
         <word>'.+'/</word>
+    </words>
+    <words color="green">
+        <word>//.+</word>
+        <word>/\*.+\*/</word>
     </words>
 </collection>
