@@ -70,6 +70,8 @@ namespace Clipboarder {
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collapseExpandButton = new System.Windows.Forms.PictureBox();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.copyToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.mainGridContextMenu.SuspendLayout();
             this.textPage.SuspendLayout();
@@ -144,11 +146,12 @@ namespace Clipboarder {
             // 
             this.mainGridContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
+            this.copyToClipboardToolStripMenuItem,
             this.toolStripSeparator4,
             this.goToURLToolStripMenuItem,
             this.viewInSyntaxHighlightingToolStripMenuItem});
             this.mainGridContextMenu.Name = "mainGridContextMenu";
-            this.mainGridContextMenu.Size = new System.Drawing.Size(217, 98);
+            this.mainGridContextMenu.Size = new System.Drawing.Size(217, 120);
             this.mainGridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.mainGridContextMenu_Opening);
             this.mainGridContextMenu.Opened += new System.EventHandler(this.mainGridContextMenu_Opened);
             // 
@@ -292,8 +295,8 @@ namespace Clipboarder {
             // 
             // MainTabControl
             // 
-            this.MainTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.MainTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTabControl.Controls.Add(this.textPage);
             this.MainTabControl.Controls.Add(this.imagePage);
@@ -318,6 +321,7 @@ namespace Clipboarder {
             this.MainMenuStrip.Size = new System.Drawing.Size(622, 45);
             this.MainMenuStrip.TabIndex = 12;
             this.MainMenuStrip.Text = "MainMenuStrip";
+            this.MainMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MainMenuStrip_ItemClicked);
             // 
             // ToolsToolStripMenuItem
             // 
@@ -406,7 +410,7 @@ namespace Clipboarder {
             this.ClearClipboarderMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_Clipboarder_clear_Icon;
             this.ClearClipboarderMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.ClearClipboarderMenuItem.Name = "ClearClipboarderMenuItem";
-            this.ClearClipboarderMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.ClearClipboarderMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
             | System.Windows.Forms.Keys.Delete)));
             this.ClearClipboarderMenuItem.Size = new System.Drawing.Size(251, 26);
             this.ClearClipboarderMenuItem.Text = "Clear clipboarder";
@@ -427,6 +431,7 @@ namespace Clipboarder {
             this.statusLabel,
             this.springStatusStripLabel,
             this.progressBar,
+            this.toolStripStatusLabel2,
             this.toolStripStatusLabel1});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 349);
             this.MainStatusStrip.Name = "MainStatusStrip";
@@ -454,10 +459,16 @@ namespace Clipboarder {
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.toolStripStatusLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.toolStripStatusLabel1.IsLink = true;
+            this.toolStripStatusLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.toolStripStatusLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(34, 17);
             this.toolStripStatusLabel1.Text = "BETA";
+            this.toolStripStatusLabel1.ToolTipText = "Open GitHub Repository";
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // mainNotifyIcon
             // 
@@ -539,6 +550,25 @@ namespace Clipboarder {
             this.collapseExpandButton.TabStop = false;
             this.collapseExpandButton.Visible = false;
             this.collapseExpandButton.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.toolStripStatusLabel2.IsLink = true;
+            this.toolStripStatusLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(75, 17);
+            this.toolStripStatusLabel2.Text = "Report a bug";
+            this.toolStripStatusLabel2.Click += new System.EventHandler(this.toolStripStatusLabel2_Click);
+            // 
+            // copyToClipboardToolStripMenuItem
+            // 
+            this.copyToClipboardToolStripMenuItem.Name = "copyToClipboardToolStripMenuItem";
+            this.copyToClipboardToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.copyToClipboardToolStripMenuItem.Text = "Copy to clipboard";
+            this.copyToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyToClipboardToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -624,5 +654,7 @@ namespace Clipboarder {
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem viewInSyntaxHighlightingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
     }
 }

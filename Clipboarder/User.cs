@@ -16,7 +16,11 @@ namespace Clipboarder {
         }
 
         public Boolean CurrentUserHasID() {
-            string command = String.Format("SELECT id FROM {0} WHERE userName='{1}';", DatabaseOperations.userNameTable, Environment.UserName);
+            string command = String.Format(
+                "SELECT id FROM {0} WHERE userName='{1}';",
+                DatabaseOperations.userNameTable,
+                Environment.UserName
+            );
  
             SQLiteDataReader reader = dbOperations.GetDataReader(command);
             
@@ -27,7 +31,11 @@ namespace Clipboarder {
         /// Returns id in table 'userNameTable' corresponding to user logged-in.
         /// </summary>
         public int GetCurrentUserID() {
-            string command = String.Format("SELECT id FROM {0} WHERE userName='{1}';", DatabaseOperations.userNameTable, Environment.UserName);
+            string command = String.Format(
+                "SELECT id FROM {0} WHERE userName='{1}';",
+                DatabaseOperations.userNameTable, 
+                Environment.UserName
+            );
             
             SQLiteDataReader reader = dbOperations.GetDataReader(command);
             reader.Read();
@@ -38,7 +46,12 @@ namespace Clipboarder {
         /// Removes user name entry along with password from userNameTable
         /// </summary>
         public void DeleteEntry() {
-            string query = String.Format("DELETE FROM {0} WHERE id=\"{1}\"", DatabaseOperations.userNameTable, GetCurrentUserID());
+            string query = String.Format(
+                "DELETE FROM {0} WHERE id=\"{1}\"",
+                DatabaseOperations.userNameTable,
+                GetCurrentUserID()
+            );
+
             dbOperations.ExecuteNonQueryCommand(query);
         }
 
@@ -48,13 +61,24 @@ namespace Clipboarder {
         /// <param name="hashedPassword">Hash of password supplied by the user.</param>
         public void CreateEntry(string hashedPassword) {
             if (!CurrentUserHasID()) {
-                string command = String.Format("INSERT INTO {0}(userName,password) VALUES(\'{1}\',\'{2}\');", DatabaseOperations.userNameTable, Environment.UserName, hashedPassword);
+                string command = String.Format(
+                    "INSERT INTO {0}(userName,password) VALUES(\'{1}\',\'{2}\');", 
+                    DatabaseOperations.userNameTable, 
+                    Environment.UserName, 
+                    hashedPassword
+                );
+
                 dbOperations.ExecuteNonQueryCommand(command);
             }
         }
 
         public string GetUserPassword() {
-            string query = String.Format("SELECT * FROM {0} where id='{1}';", DatabaseOperations.userNameTable, GetCurrentUserID());
+            string query = String.Format(
+                "SELECT * FROM {0} where id='{1}';", 
+                DatabaseOperations.userNameTable, 
+                GetCurrentUserID()
+            );
+
             SQLiteDataReader databaseDataReader = dbOperations.GetDataReader(query);
 
             databaseDataReader.Read();

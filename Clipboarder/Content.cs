@@ -1,17 +1,20 @@
 ﻿using System.Drawing;
 
 namespace Clipboarder {
-
+    /// <summary>
+    /// Content class and its derivative classes are used to return content
+    /// from one method to another
+    /// </summary>
     public class Content {
         public int index;
         public string time;
     }
 
-    public class TextContent : Content{
+    public class TextContent : Content {
         public string text;
-        
+
         public TextContent() {
-            
+
         }
 
         public TextContent(int index, string text, string time) {
@@ -37,7 +40,7 @@ namespace Clipboarder {
 
     public class ImageContent : Content {
         public Image image;
-        
+
         public ImageContent() {
 
         }
@@ -62,6 +65,4 @@ namespace Clipboarder {
             this.time = time;
         }
     }
-
-    
 }

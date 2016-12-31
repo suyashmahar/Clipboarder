@@ -124,6 +124,7 @@
     <Compile Include="ClipboardMonitor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ColoredKeyword.cs" />
     <Compile Include="Content.cs" />
     <Compile Include="ContentEncryption.cs" />
     <Compile Include="ContentIdentifier.cs" />

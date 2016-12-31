@@ -23,7 +23,7 @@ namespace Clipboarder {
         private IMainDataLayer view;            // MainForm view
         private string databaseName = "contents.db";
         public string password = null;          // Field for temporarily storing password
-        
+
         string LastClipboardText = null;        // Hold last image from clipboard
 
         // Stores hotkeys registered
@@ -51,6 +51,7 @@ namespace Clipboarder {
             view.URLCalled += URLCalled;
             view.textGridCheckURLAndSetStatus += textGridCheckURLAndSetStatus;
             view.EditTextContent += EditTextContent;
+            view.CopySelectedTextToClipboard += CopySelectedTextToClipboard;
 
             // Adds first content from clipboard
             if (Clipboard.ContainsText()) {
@@ -66,6 +67,11 @@ namespace Clipboarder {
             // Adds handler for clipboardContentChanged Event
             clipboardMonitor = new ClipboardMonitor();
             clipboardMonitor.ClipboardChanged += ClipboardMonitor_ClipboardChanged;
+        }
+
+        private void CopySelectedTextToClipboard(Object sender, EventArgs e) {
+            LastClipboardText = view.SelectedRowTextContent.text;
+            Clipboard.SetText(LastClipboardText);
         }
 
         private void EditTextContent(Object sender, EventArgs e) {
@@ -89,7 +95,7 @@ namespace Clipboarder {
 
         private void URLCalled(object sender, EventArgs e) {
             if (view.SelectedRowTextContent != null) {
-                UrlListDisplay urlListDisplay = new UrlListDisplay(this, 
+                UrlListDisplay urlListDisplay = new UrlListDisplay(this,
                     ContentIdentifier.GetURLs(view.SelectedRowTextContent.text));
                 urlListDisplay.ShowDialog();
             }
@@ -163,15 +169,15 @@ namespace Clipboarder {
             } else {
                 // Creates DatabaseOperations object to perform operations on specified database
                 DatabaseOperations dbOperations = new DatabaseOperations();
-                
+
                 // Connects to database and opens connection
                 try {
                     dbOperations = new DatabaseOperations();
                     dbOperations.ConnectDatabase(databaseName);
                     dbOperations.OpenConnection();
                 } catch (Exception ex) {
-                    MessageBox.Show("Error connecting database, database does not exists or is unreachable." 
-                        + ex.Message + "\n\nOperation aborted.\n" , "Clipboarder Error", 
+                    MessageBox.Show("Error connecting database, database does not exists or is unreachable."
+                        + ex.Message + "\n\nOperation aborted.\n", "Clipboarder Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     view.status = "Error";
                     dbOperations.CloseConnection();
@@ -207,7 +213,7 @@ namespace Clipboarder {
                         view.status = "Reading text from database";
                         List<EncryptedTextContent> encryptedList = dbContent.GetTextData();
                         List<TextContent> outputList = new List<TextContent>();
-                        
+
                         // Resets progress
                         view.ProgressVisibility = true;
                         view.TaskProgress = 0;
@@ -242,7 +248,7 @@ namespace Clipboarder {
                         // Decrypts image content
                         encryptedList.ForEach(encryptedContent => {
                             view.TaskProgress = (100 / encryptedList.Count) * encryptedContent.index;
-                            ImageContent contentToAdd = 
+                            ImageContent contentToAdd =
                                 ContentEncryption.DecryptImageContent(encryptedContent, password);
                             view.AddNewImageRow(contentToAdd);
                         });
@@ -298,7 +304,7 @@ namespace Clipboarder {
                         dbOperations.CloseConnection();
                         return;
                     }
-                    
+
                     User user = new User(dbOperations);
                     if (user.CurrentUserHasID())
                         user.GetCurrentUserID();
@@ -313,20 +319,20 @@ namespace Clipboarder {
                             user.CreateEntry(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
                             user.GetCurrentUserID();
                         } catch (Exception ex) {
-                           DialogResult messageResult = MessageBox.Show("Error deleting existing records from database.\n"
-                               + ex.ToString() + "\n\nDo you want to continue?.", "Clipboarder Error",
-                               MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                            DialogResult messageResult = MessageBox.Show("Error deleting existing records from database.\n"
+                                + ex.ToString() + "\n\nDo you want to continue?.", "Clipboarder Error",
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                             dbOperations.CloseConnection();
                             if (messageResult == DialogResult.No) return;
                         }
                     } else {
                         // Hashes password using BCrypt Class and adds new record to userName table in database
                         try {
-                            
+
                             user.CreateEntry(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
                             user.GetCurrentUserID();
                         } catch (Exception ex) {
-                            MessageBox.Show("Error adding current user record to database." + ex.ToString() 
+                            MessageBox.Show("Error adding current user record to database." + ex.ToString()
                                 + "\n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                             dbOperations.CloseConnection();
                             return;
@@ -376,15 +382,15 @@ namespace Clipboarder {
                             return;
                         }
                     });
-                        view.TaskProgress = 0;
-                        view.ProgressVisibility = false;
+                    view.TaskProgress = 0;
+                    view.ProgressVisibility = false;
                     view.status = "Export Completed";
                     dbOperations.CloseConnection();
-                    }
+                }
                 password = null;
             }
         }
-        
+
         #endregion
 
         #region HotKey Bindings
