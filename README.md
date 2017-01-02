@@ -17,9 +17,9 @@ Clipboarder uses cutom `RichTextBox`, `SyntaxHighlightingTextBox` to highlight t
 
 ## Instruction for Building Solution
 1. Open project is in Visual Studio 2015.
+2. Change **Active Solution Configuration** in **Configuration Manager** to **x86**
 3. Build Solution. 
 
 ### Fixing common build errors
 * If build shows reference errors in `Clipboarder` add manually reference to `System.Data.SQlite.dll` and `PasswordControlBox.dll` from packages directory to `Clipboarder`. Then rebuild the solution.
 * If Visual Studio fails to recognize `ClipboardControl` in `MainForm.Desginer.cs` try adding `using Clipboarder;` directive.
-* If `AssemblyNotFound` or similar exception is thrown during runtime try rebuilding solution by Changing **Active Solution Configuration** in **Configuration Manager** to **x86**.

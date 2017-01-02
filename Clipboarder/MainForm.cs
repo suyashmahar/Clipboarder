@@ -278,15 +278,21 @@ namespace Clipboarder {
                 // Adds row text content as string to TextEventArgs
                 textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);
                 textGridCheckURLAndSetStatus(sender, textEventArgs);
+
+                if (ContentIdentifier.containsURL((string)textDataGrid.SelectedRows[0].Cells[1].Value)) {
+                    if (Properties.Settings.Default.isURLIdentificationEnabled) {
+                        goToURLToolStripMenuItem.Enabled = true;
+                    }
+                }
             } else {
                 goToURLToolStripMenuItem.Enabled = false;
                 viewInSyntaxHighlightingToolStripMenuItem.Enabled = false;
             }
-
             // Checks and Enable/Disable Edit Context menu item5
             if (textDataGrid.SelectedRows.Count != 1) {
                 goToURLToolStripMenuItem.Enabled = false;
             }
+
         }
 
         private void editToolStripMenuItem_Click(Object sender, EventArgs e) {
@@ -376,10 +382,6 @@ namespace Clipboarder {
             Show();
         }
         #endregion
-
-        private void mainGridContextMenu_Opening(Object sender, CancelEventArgs e) {
-
-        }
 
         private void MainMenuStrip_ItemClicked(Object sender, ToolStripItemClickedEventArgs e) {
 
