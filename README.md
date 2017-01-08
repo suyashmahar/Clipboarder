@@ -19,12 +19,3 @@ Clipboarder uses cutom `RichTextBox`, `SyntaxHighlightingTextBox` to highlight t
 * Language name displayed in Text Preview are same as XML file in the SHLs directory.
 * XML file should follow pattern similar to that of `sample-java.xml`
 * Coloring of keywords in `SyntaxHighlightingTextBox` is in the order they are defined in XML file.
-
-## Instruction for Building Solution
-1. Open project is in Visual Studio 2015.
-2. Change **Active Solution Configuration** in **Configuration Manager** to **x86**
-3. Build Solution. 
-
-### Fixing common build errors
-* If build shows reference errors in `Clipboarder` add manually reference to `System.Data.SQlite.dll` and `PasswordControlBox.dll` from packages directory to `Clipboarder`. Then rebuild the solution.
-* If Visual Studio fails to recognize `ClipboardControl` in `MainForm.Desginer.cs` try adding `using Clipboarder;` directive.
