@@ -9,8 +9,12 @@
 4. Identification of multiple URLs in text content (turned off by default).
 5. Syntax Highlighting for languages defined in SHLs directory
 
-## Screenshot
-<img src="Images/screenshot.png" width="450">
+## Screenshots  
+<img src="Images/screenshot.png" width="450"/>  
+#### Syntax highlighting  
+<img src="Images/syntax_highlighting.png" width="450"/>  
+#### UI details  
+<img src="Images/ui_description.png" width="450"/>  
 
 ## Syntax Highlighting
 Clipboarder uses cutom `RichTextBox`, `SyntaxHighlightingTextBox` to highlight text. Keywords for coloring are stored in XML files within the 'SHLs' directory.
