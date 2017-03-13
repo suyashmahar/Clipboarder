@@ -11,13 +11,13 @@
 
 ## Screenshots  
 <img src="Images/screenshot.png" width="450"/>  
-#### Syntax highlighting  
-<img src="Images/syntax_highlighting.png" width="450"/>  
 #### UI details  
 <img src="Images/ui_description.png" width="450"/>  
 
 ## Syntax Highlighting
 Clipboarder uses cutom `RichTextBox`, `SyntaxHighlightingTextBox` to highlight text. Keywords for coloring are stored in XML files within the 'SHLs' directory.
+
+<img src="Images/syntax_highlighting.png" width="450"/>  
 
 ### Note:
 * Language name displayed in Text Preview are same as XML file in the SHLs directory.
