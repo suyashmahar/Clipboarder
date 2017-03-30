@@ -1,36 +1,26 @@
-﻿using Clipboarder;
-using Clipboarder.Encryption;
-using Clipboarder.Extension;
+﻿using Clipboarder.Encryption;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using static System.Threading.Tasks.Task;
 using System.Windows.Forms;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 
 namespace Clipboarder {
 
     public class MainFormPresenter {
-        ClipboardMonitor clipboardMonitor;      // Monitors Clipboard for change in its content
+        ClipboardMonitor clipboardMonitor;
 
-        private IMainDataLayer view;            // MainForm view
+        private IMainDataLayer view;
         private string databaseName = "contents.db";
-        public string password = null;          // Field for temporarily storing password
+        public string password = null;
 
-        string LastClipboardText = null;        // Hold last image from clipboard
+        string LastClipboardText = null;
 
         // Stores hotkeys registered
         List<Hotkey> textHotkeys = new List<Hotkey>();
         List<Hotkey> imageHotkeys = new List<Hotkey>();
 
-        Keys[] numKeys = {                      // Array for number keys on top row of keyboard
+        // Array for number keys on top row of keyboard
+        Keys[] numKeys = {                      
             Keys.D1, Keys.D2, Keys.D3,
             Keys.D4, Keys.D5, Keys.D6,
             Keys.D7, Keys.D8, Keys.D9
@@ -81,7 +71,6 @@ namespace Clipboarder {
 
         private void textGridCheckURLAndSetStatus(object sender, TextEventArgs e) {
             if (Properties.Settings.Default.isURLIdentificationEnabled) {
-
                 if (Properties.Settings.Default.isCutomRegexEnabled) {
                     view.ShowURLStatus = ContentIdentifier.containsURL(e.GetAll[0],
                         Properties.Settings.Default.regex);
@@ -162,7 +151,7 @@ namespace Clipboarder {
         /// using DatabaseOperations, DatabaseReadWrite and User class
         /// </summary>
         private void ImportAndDisplayEntries() {
-            if (!File.Exists(System.IO.Path.Combine(Application.StartupPath, "contents.db"))) {
+            if (!File.Exists(Path.Combine(Application.StartupPath, "contents.db"))) {
                 MessageBox.Show("No content to load." + "\n\n" + "Use Menu > Save Content to save entries.",
                     "Clipboarder", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -228,7 +217,7 @@ namespace Clipboarder {
                         view.TaskProgress = 0;
 
                     } catch (Exception ex) {
-                        MessageBox.Show("Error filling table with values.\n\n\nOperation aborted.\n",
+                        MessageBox.Show("Error filling table with values.\n\n\nOperation aborted." + Environment.NewLine,
                             "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         view.status = "Error";
                         dbOperations.CloseConnection();
@@ -319,9 +308,11 @@ namespace Clipboarder {
                             user.CreateEntry(BCrypt.HashPassword(password, BCrypt.GenerateSalt(10)));
                             user.GetCurrentUserID();
                         } catch (Exception ex) {
-                            DialogResult messageResult = MessageBox.Show("Error deleting existing records from database.\n"
-                                + ex.ToString() + "\n\nDo you want to continue?.", "Clipboarder Error",
+                            DialogResult messageResult = 
+                                MessageBox.Show("Error deleting existing records from database.\n"
+                                + "\n\nDo you want to continue?.", "Clipboarder Error",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+
                             dbOperations.CloseConnection();
                             if (messageResult == DialogResult.No) return;
                         }
@@ -333,7 +324,8 @@ namespace Clipboarder {
                             user.GetCurrentUserID();
                         } catch (Exception ex) {
                             MessageBox.Show("Error adding current user record to database." + ex.ToString()
-                                + "\n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                + "\n\nOperation aborted.\n", "Clipboarder Error", MessageBoxButtons.OK,
+                                MessageBoxIcon.Stop);
                             dbOperations.CloseConnection();
                             return;
                         }
@@ -349,7 +341,8 @@ namespace Clipboarder {
                     textContents.ForEach(content => {
                         // Sets task progress
                         view.TaskProgress = (100 / textContents.Count) * (content.index);
-                        EncryptedTextContent encryptedContent = ContentEncryption.EncryptTextContent(content, password);
+                        EncryptedTextContent encryptedContent = 
+                            ContentEncryption.EncryptTextContent(content, password);
 
                         // Inserts content to database
                         try {
@@ -370,7 +363,8 @@ namespace Clipboarder {
                     imageContents.ForEach(content => {
                         // Sets task progress
                         view.TaskProgress = (100 / imageContents.Count) * (content.index);
-                        EncryptedImageContent encryptedContent = ContentEncryption.EncryptImageContent(content, password);
+                        EncryptedImageContent encryptedContent = 
+                            ContentEncryption.EncryptImageContent(content, password);
 
                         // Inserts content to database
                         try {
@@ -431,7 +425,8 @@ namespace Clipboarder {
                     try {
                         newHotkey.Register((MainForm)view);
                     } catch (Exception ex) {
-                        MessageBox.Show("Error registering hotkeys. \n\nOperation aborted.\n\nError:" + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        MessageBox.Show("Error registering hotkeys. \n\nOperation aborted.\n\nError:" 
+                            + ex.ToString(), "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
                     textHotkeys.Add(newHotkey);
@@ -455,7 +450,8 @@ namespace Clipboarder {
                 if (Clipboard.ContainsText())
                     temp = Clipboard.GetText();
 
-                LastClipboardText = view.GetTextContentAt(view.TextRowCount - Array.IndexOf(numKeys, key.KeyCode) - 1).text;
+                LastClipboardText = view.GetTextContentAt(
+                    view.TextRowCount - Array.IndexOf(numKeys, key.KeyCode) - 1).text;
                 Clipboard.SetText(LastClipboardText);
                 SendKeys.SendWait("^v");
 

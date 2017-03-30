@@ -69,7 +69,7 @@ namespace Clipboarder.Encryption {
             var randomBytes = new byte[size];
             using (var rngCsp = new RNGCryptoServiceProvider()) {
                 rngCsp.GetBytes(randomBytes);
-            }
+            }   
             return randomBytes;
         }
     }

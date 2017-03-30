@@ -156,8 +156,8 @@ namespace Clipboarder {
         }
         private void UpdateFontDescription() {
             fontDescriptionLabel.Text =
-                "Font: " + syntaxHiglightingFont.Name + "\n" +
-                "Size:" + syntaxHiglightingFont.Size + "\n" +
+                "Font: " + syntaxHiglightingFont.Name + Environment.NewLine +
+                "Size:" + syntaxHiglightingFont.Size + Environment.NewLine +
                 "Style: " + syntaxHiglightingFont.Style;
         }
     }
