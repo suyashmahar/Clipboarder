@@ -86,6 +86,7 @@ namespace Clipboarder {
                 collapseExpandButton.Image = Properties.Resources.Clipboarder_Expand_Arrow;
             }
 
+            this.toolStripStatusLabel3.Text = Application.ProductVersion.ToString() + " BETA";
             presenter = new MainFormPresenter(this);
         }
 

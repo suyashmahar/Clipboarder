@@ -15,6 +15,9 @@
 ## Syntax Highlighting
 Clipboarder uses cutom `RichTextBox`, `SyntaxHighlightingTextBox` to highlight text. Keywords for coloring are stored in XML files within the 'SHLs' directory.
 
+## Relases
+__0.9.0-beta__  
+Latest release for Clipboarder is 0.9.0-beta. Release notes and binary for this release is [here](https://github.com/suyashmahar/Clipboarder/releases/tag/v0.9.0-beta).
 ### Note:
 * Language name displayed in Text Preview are same as XML file in the SHLs directory.
 * XML file should follow pattern similar to that of `sample-java.xml`
