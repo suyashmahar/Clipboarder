@@ -108,92 +108,92 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AskPasswordDecrypt.cs">
+    <Compile Include="Forms\AskPasswordDecrypt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AskPasswordDecrypt.Designer.cs">
+    <Compile Include="Forms\AskPasswordDecrypt.Designer.cs">
       <DependentUpon>AskPasswordDecrypt.cs</DependentUpon>
     </Compile>
-    <Compile Include="AskPasswordEncrypt.cs">
+    <Compile Include="Forms\AskPasswordEncrypt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AskPasswordEncrypt.Designer.cs">
+    <Compile Include="Forms\AskPasswordEncrypt.Designer.cs">
       <DependentUpon>AskPasswordEncrypt.cs</DependentUpon>
     </Compile>
-    <Compile Include="BCrypt.cs" />
-    <Compile Include="ClipboardMonitor.cs">
+    <Compile Include="Encryption\BCrypt.cs" />
+    <Compile Include="Controls\ClipboardMonitor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ColoredKeyword.cs" />
+    <Compile Include="SyntaxHighlighting\ColoredKeyword.cs" />
     <Compile Include="Content.cs" />
-    <Compile Include="ContentEncryption.cs" />
-    <Compile Include="ContentIdentifier.cs" />
-    <Compile Include="DatabaseReadWrite.cs" />
-    <Compile Include="DatabaseOperations.cs" />
-    <Compile Include="EditText.cs">
+    <Compile Include="Encryption\ContentEncryption.cs" />
+    <Compile Include="Utilities\ContentIdentifier.cs" />
+    <Compile Include="Models\DatabaseReadWrite.cs" />
+    <Compile Include="Models\DatabaseOperations.cs" />
+    <Compile Include="Forms\EditText.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditText.Designer.cs">
+    <Compile Include="Forms\EditText.Designer.cs">
       <DependentUpon>EditText.cs</DependentUpon>
     </Compile>
-    <Compile Include="HotKey.cs" />
-    <Compile Include="ImageConversion.cs" />
+    <Compile Include="Utilities\HotKey.cs" />
+    <Compile Include="Utilities\ImageOperations.cs" />
     <Compile Include="IMainDataLayer.cs" />
-    <Compile Include="Languages.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="SyntaxHighlighting\Languages.cs" />
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainFormPresenter.cs" />
-    <Compile Include="PasswordBox.cs">
+    <Compile Include="Controls\PasswordBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PasswordStrength.cs" />
+    <Compile Include="Utilities\PasswordStrength.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SettingsForm.cs">
+    <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForm.Designer.cs">
+    <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="StringCipher.cs" />
-    <Compile Include="SyntaxHighlightingTextBox.cs">
+    <Compile Include="Encryption\StringCipher.cs" />
+    <Compile Include="Controls\SyntaxHighlightingTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TextEventArgs.cs" />
-    <Compile Include="TextForm.cs">
+    <Compile Include="Forms\TextForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TextForm.Designer.cs">
+    <Compile Include="Forms\TextForm.Designer.cs">
       <DependentUpon>TextForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TextPreview.cs">
+    <Compile Include="Forms\TextPreview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TextPreview.Designer.cs">
+    <Compile Include="Forms\TextPreview.Designer.cs">
       <DependentUpon>TextPreview.cs</DependentUpon>
     </Compile>
-    <Compile Include="UrlListDisplay.cs">
+    <Compile Include="Forms\UrlListDisplay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UrlListDisplay.Designer.cs">
+    <Compile Include="Forms\UrlListDisplay.Designer.cs">
       <DependentUpon>UrlListDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
-    <EmbeddedResource Include="AskPasswordDecrypt.resx">
+    <Compile Include="Models\User.cs" />
+    <EmbeddedResource Include="Forms\AskPasswordDecrypt.resx">
       <DependentUpon>AskPasswordDecrypt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AskPasswordEncrypt.resx">
+    <EmbeddedResource Include="Forms\AskPasswordEncrypt.resx">
       <DependentUpon>AskPasswordEncrypt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditText.resx">
+    <EmbeddedResource Include="Forms\EditText.resx">
       <DependentUpon>EditText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -206,16 +206,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SettingsForm.resx">
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TextForm.resx">
+    <EmbeddedResource Include="Forms\TextForm.resx">
       <DependentUpon>TextForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TextPreview.resx">
+    <EmbeddedResource Include="Forms\TextPreview.resx">
       <DependentUpon>TextPreview.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UrlListDisplay.resx">
+    <EmbeddedResource Include="Forms\UrlListDisplay.resx">
       <DependentUpon>UrlListDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram.cd" />
