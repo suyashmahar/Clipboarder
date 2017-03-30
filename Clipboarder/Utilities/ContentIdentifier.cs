@@ -5,11 +5,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Clipboarder {
-    class ContentIdentifier {
+    public class ContentIdentifier {
         public const string DefaultURLregex = @"((([A - Za - z]{ 3, 9 }:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)";
 
 
-        public static bool containsURL(string inputString, string URLregex = DefaultURLregex) {
+        public static bool ContainsURL(string inputString, string URLregex = DefaultURLregex) {
             Regex regex = new Regex(URLregex);
             MatchCollection match = regex.Matches(inputString);
             if (match.Count > 0) return true;

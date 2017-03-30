@@ -280,7 +280,7 @@ namespace Clipboarder {
                 textEventArgs.Add((string)textDataGrid.SelectedRows[0].Cells[1].Value);
                 textGridCheckURLAndSetStatus(sender, textEventArgs);
 
-                if (ContentIdentifier.containsURL((string)textDataGrid.SelectedRows[0].Cells[1].Value)) {
+                if (ContentIdentifier.ContainsURL((string)textDataGrid.SelectedRows[0].Cells[1].Value)) {
                     if (Properties.Settings.Default.isURLIdentificationEnabled) {
                         goToURLToolStripMenuItem.Enabled = true;
                     }

@@ -72,10 +72,10 @@ namespace Clipboarder {
         private void textGridCheckURLAndSetStatus(object sender, TextEventArgs e) {
             if (Properties.Settings.Default.isURLIdentificationEnabled) {
                 if (Properties.Settings.Default.isCutomRegexEnabled) {
-                    view.ShowURLStatus = ContentIdentifier.containsURL(e.GetAll[0],
+                    view.ShowURLStatus = ContentIdentifier.ContainsURL(e.GetAll[0],
                         Properties.Settings.Default.regex);
                 } else {
-                    view.ShowURLStatus = ContentIdentifier.containsURL(e.GetAll[0]);
+                    view.ShowURLStatus = ContentIdentifier.ContainsURL(e.GetAll[0]);
                 }
             } else {
                 view.ShowURLStatus = false;
