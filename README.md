@@ -22,3 +22,6 @@ Latest release for Clipboarder is 0.9.0-beta. Release notes and binary for this 
 * Language name displayed in Text Preview are same as XML file in the SHLs directory.
 * XML file should follow pattern similar to that of `sample-java.xml`
 * Coloring of keywords in `SyntaxHighlightingTextBox` is in the order they are defined in XML file.
+
+## Acknowledgement
+I would like to thank [@DhavalKapil](https://github.com/DhavalKapil) for his mentoring and support during [SDSLabs](https://sdslabs.co/) Winter of Code.
