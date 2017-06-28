@@ -75,6 +75,15 @@ namespace Clipboarder {
 
         public MainForm() {
             InitializeComponent();
+            ReadCommandLineArguments();
+        }
+
+        private void ReadCommandLineArguments() {
+            // Minimize winodw on reading corresponding flags
+            String[] cmdArgs = Environment.GetCommandLineArgs();
+            if (cmdArgs.Contains("-m") | cmdArgs.Contains("--start-minimized")) {
+                this.WindowState = FormWindowState.Minimized;
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
