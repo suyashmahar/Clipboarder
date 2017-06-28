@@ -378,8 +378,9 @@ namespace Clipboarder {
             this.exitMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.exitMenuItem.Name = "exitMenuItem";
             this.exitMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.exitMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.exitMenuItem.Size = new System.Drawing.Size(193, 24);
-            this.exitMenuItem.Text = "Exit";
+            this.exitMenuItem.Text = "&Quit";
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
             // settingsMenuItem
@@ -504,9 +505,10 @@ namespace Clipboarder {
             this.toolStripSeparator3,
             this.closeToolStripMenuItem});
             this.NotificationMenuContextMenuStrip.Name = "NotificationMenuContextMenuStrip";
-            this.NotificationMenuContextMenuStrip.Size = new System.Drawing.Size(171, 120);
+            this.NotificationMenuContextMenuStrip.Size = new System.Drawing.Size(171, 142);
             this.NotificationMenuContextMenuStrip.Opened += new System.EventHandler(this.NotificationMenuContextMenuStrip_Opened);
-            this.NotificationMenuContextMenuStrip.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotificationMenuContextMenuStrip_MouseDoubleClick);
+            this.NotificationMenuContextMenuStrip.DoubleClick += new System.EventHandler(this.showToolStripMenuItem_Click);
+            this.NotificationMenuContextMenuStrip.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.showToolStripMenuItem_Click);
             // 
             // showToolStripMenuItem
             // 
