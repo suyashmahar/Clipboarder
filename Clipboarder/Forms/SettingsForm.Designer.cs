@@ -41,28 +41,32 @@
             this.textShortcutsNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.generalSettingsPage = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.syntaxHiglightingSettings = new System.Windows.Forms.Button();
+            this.fontDescriptionLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.RegexLinkLabel = new System.Windows.Forms.LinkLabel();
             this.CustomRegexCheckBox = new System.Windows.Forms.CheckBox();
             this.URLCheckBox = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.fontDescriptionLabel = new System.Windows.Forms.Label();
-            this.syntaxHiglightingSettings = new System.Windows.Forms.Button();
+            this.startupOptions = new System.Windows.Forms.GroupBox();
+            this.startOnBootCheckBox = new System.Windows.Forms.CheckBox();
+            this.minimizeOnBoot = new System.Windows.Forms.CheckBox();
             this.textSettingsPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textShortcutsNumericUpDown)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.generalSettingsPage.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.startupOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(137, 266);
+            this.okButton.Location = new System.Drawing.Point(145, 332);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 1;
@@ -74,7 +78,7 @@
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(218, 266);
+            this.closeButton.Location = new System.Drawing.Point(226, 332);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 2;
@@ -89,7 +93,7 @@
             this.textSettingsPage.Location = new System.Drawing.Point(4, 22);
             this.textSettingsPage.Name = "textSettingsPage";
             this.textSettingsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.textSettingsPage.Size = new System.Drawing.Size(318, 231);
+            this.textSettingsPage.Size = new System.Drawing.Size(292, 231);
             this.textSettingsPage.TabIndex = 0;
             this.textSettingsPage.Text = "Text";
             this.textSettingsPage.UseVisualStyleBackColor = true;
@@ -247,19 +251,53 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(300, 257);
+            this.tabControl1.Size = new System.Drawing.Size(308, 323);
             this.tabControl1.TabIndex = 0;
             // 
             // generalSettingsPage
             // 
+            this.generalSettingsPage.Controls.Add(this.startupOptions);
             this.generalSettingsPage.Controls.Add(this.groupBox4);
             this.generalSettingsPage.Controls.Add(this.groupBox3);
             this.generalSettingsPage.Location = new System.Drawing.Point(4, 22);
             this.generalSettingsPage.Name = "generalSettingsPage";
-            this.generalSettingsPage.Size = new System.Drawing.Size(292, 231);
+            this.generalSettingsPage.Size = new System.Drawing.Size(300, 297);
             this.generalSettingsPage.TabIndex = 1;
             this.generalSettingsPage.Text = "General";
             this.generalSettingsPage.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.syntaxHiglightingSettings);
+            this.groupBox4.Controls.Add(this.fontDescriptionLabel);
+            this.groupBox4.Location = new System.Drawing.Point(6, 164);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(291, 130);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Syntax Highlighting";
+            // 
+            // syntaxHiglightingSettings
+            // 
+            this.syntaxHiglightingSettings.Location = new System.Drawing.Point(6, 19);
+            this.syntaxHiglightingSettings.Name = "syntaxHiglightingSettings";
+            this.syntaxHiglightingSettings.Size = new System.Drawing.Size(75, 23);
+            this.syntaxHiglightingSettings.TabIndex = 1;
+            this.syntaxHiglightingSettings.Text = "Edit";
+            this.syntaxHiglightingSettings.UseVisualStyleBackColor = true;
+            this.syntaxHiglightingSettings.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // fontDescriptionLabel
+            // 
+            this.fontDescriptionLabel.AutoSize = true;
+            this.fontDescriptionLabel.Location = new System.Drawing.Point(6, 45);
+            this.fontDescriptionLabel.Name = "fontDescriptionLabel";
+            this.fontDescriptionLabel.Size = new System.Drawing.Size(117, 13);
+            this.fontDescriptionLabel.TabIndex = 0;
+            this.fontDescriptionLabel.Text = "Current Font : lakndflna";
             // 
             // groupBox3
             // 
@@ -270,7 +308,7 @@
             this.groupBox3.Controls.Add(this.URLCheckBox);
             this.groupBox3.Location = new System.Drawing.Point(6, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(283, 69);
+            this.groupBox3.Size = new System.Drawing.Size(291, 69);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "URL Identification";
@@ -311,42 +349,44 @@
             this.URLCheckBox.UseVisualStyleBackColor = true;
             this.URLCheckBox.CheckedChanged += new System.EventHandler(this.URLCheckBox_CheckedChanged);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.syntaxHiglightingSettings);
-            this.groupBox4.Controls.Add(this.fontDescriptionLabel);
-            this.groupBox4.Location = new System.Drawing.Point(6, 79);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(283, 149);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Syntax Highlighting";
-            // 
             // fontDialog1
             // 
             this.fontDialog1.ShowEffects = false;
             // 
-            // fontDescriptionLabel
+            // startupOptions
             // 
-            this.fontDescriptionLabel.AutoSize = true;
-            this.fontDescriptionLabel.Location = new System.Drawing.Point(6, 45);
-            this.fontDescriptionLabel.Name = "fontDescriptionLabel";
-            this.fontDescriptionLabel.Size = new System.Drawing.Size(117, 13);
-            this.fontDescriptionLabel.TabIndex = 0;
-            this.fontDescriptionLabel.Text = "Current Font : lakndflna";
+            this.startupOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startupOptions.Controls.Add(this.minimizeOnBoot);
+            this.startupOptions.Controls.Add(this.startOnBootCheckBox);
+            this.startupOptions.Location = new System.Drawing.Point(6, 80);
+            this.startupOptions.Name = "startupOptions";
+            this.startupOptions.Size = new System.Drawing.Size(287, 78);
+            this.startupOptions.TabIndex = 4;
+            this.startupOptions.TabStop = false;
+            this.startupOptions.Text = "Startup Options";
             // 
-            // syntaxHiglightingSettings
+            // startOnBootCheckBox
             // 
-            this.syntaxHiglightingSettings.Location = new System.Drawing.Point(6, 19);
-            this.syntaxHiglightingSettings.Name = "syntaxHiglightingSettings";
-            this.syntaxHiglightingSettings.Size = new System.Drawing.Size(75, 23);
-            this.syntaxHiglightingSettings.TabIndex = 1;
-            this.syntaxHiglightingSettings.Text = "Edit";
-            this.syntaxHiglightingSettings.UseVisualStyleBackColor = true;
-            this.syntaxHiglightingSettings.Click += new System.EventHandler(this.button1_Click);
+            this.startOnBootCheckBox.AutoSize = true;
+            this.startOnBootCheckBox.Location = new System.Drawing.Point(6, 20);
+            this.startOnBootCheckBox.Name = "startOnBootCheckBox";
+            this.startOnBootCheckBox.Size = new System.Drawing.Size(173, 17);
+            this.startOnBootCheckBox.TabIndex = 0;
+            this.startOnBootCheckBox.Text = "Start Clipboarder with Windows";
+            this.startOnBootCheckBox.UseVisualStyleBackColor = true;
+            this.startOnBootCheckBox.CheckedChanged += new System.EventHandler(this.startOnBootCheckBox_CheckedChanged);
+            // 
+            // minimizeOnBoot
+            // 
+            this.minimizeOnBoot.AutoSize = true;
+            this.minimizeOnBoot.Enabled = false;
+            this.minimizeOnBoot.Location = new System.Drawing.Point(6, 43);
+            this.minimizeOnBoot.Name = "minimizeOnBoot";
+            this.minimizeOnBoot.Size = new System.Drawing.Size(171, 17);
+            this.minimizeOnBoot.TabIndex = 1;
+            this.minimizeOnBoot.Text = "Minimize clipboarder on startup";
+            this.minimizeOnBoot.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -354,12 +394,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
-            this.ClientSize = new System.Drawing.Size(304, 301);
+            this.ClientSize = new System.Drawing.Size(312, 367);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.closeButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(320, 340);
+            this.MaximumSize = new System.Drawing.Size(328, 406);
+            this.MinimumSize = new System.Drawing.Size(328, 406);
             this.Name = "SettingsForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -373,10 +414,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.textShortcutsNumericUpDown)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.generalSettingsPage.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.startupOptions.ResumeLayout(false);
+            this.startupOptions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -407,5 +450,8 @@
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Button syntaxHiglightingSettings;
         private System.Windows.Forms.Label fontDescriptionLabel;
+        private System.Windows.Forms.GroupBox startupOptions;
+        private System.Windows.Forms.CheckBox minimizeOnBoot;
+        private System.Windows.Forms.CheckBox startOnBootCheckBox;
     }
 }

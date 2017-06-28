@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Clipboarder {
@@ -57,6 +58,8 @@ namespace Clipboarder {
 
             CustomRegexCheckBox.Checked = Properties.Settings.Default.isCutomRegexEnabled;
             URLCheckBox.Checked = Properties.Settings.Default.isURLIdentificationEnabled;
+            startOnBootCheckBox.Checked = Properties.Settings.Default.startOnLogon;
+            minimizeOnBoot.Checked = Properties.Settings.Default.minimizeOnLogon;
 
             //Fills font for syntaxhighlighting
             syntaxHiglightingFont = Properties.Settings.Default.syntaxHighlightingFont;
@@ -76,7 +79,35 @@ namespace Clipboarder {
             Properties.Settings.Default.isURLIdentificationEnabled = URLCheckBox.Checked;
             Properties.Settings.Default.isCutomRegexEnabled = CustomRegexCheckBox.Checked;
 
+            // -----------------------
+            // Procedure for controlling windows logon startup of Clipboarder
+            Properties.Settings.Default.startOnLogon = startOnBootCheckBox.Checked;
+
+            String scriptsDir = null;
+
+            // Using Reflection since Environment.CurrentDirectory returns path from 
+            // where application was called instead of its location
+            String curDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            if (startOnBootCheckBox.Checked) {
+                Properties.Settings.Default.minimizeOnLogon = minimizeOnBoot.Checked;
+                scriptsDir = Path.Combine(curDir, "addStartupItem.bat");
+            } else {
+                scriptsDir = Path.Combine(curDir, "removeStartupItem.bat");
+            }
+
             Properties.Settings.Default.Save();
+
+            try {
+                System.Diagnostics.Process.Start(scriptsDir);
+            } catch (FileNotFoundException) {
+                MessageBox.Show(this, "Unable to find scripts for e, check installation and file permissions", 
+                    "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            } catch (Exception) {
+                MessageBox.Show(this, "Unkown error, please try again",
+                    "Clipboarder Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Close();
         }
 
@@ -159,6 +190,10 @@ namespace Clipboarder {
                 "Font: " + syntaxHiglightingFont.Name + Environment.NewLine +
                 "Size:" + syntaxHiglightingFont.Size + Environment.NewLine +
                 "Style: " + syntaxHiglightingFont.Style;
+        }
+
+        private void startOnBootCheckBox_CheckedChanged(object sender, EventArgs e) {
+             minimizeOnBoot.Enabled = startOnBootCheckBox.Checked;
         }
     }
 }
