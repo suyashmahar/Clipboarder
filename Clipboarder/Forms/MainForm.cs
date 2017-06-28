@@ -17,6 +17,7 @@ namespace Clipboarder {
     public partial class MainForm : Form, IMainDataLayer {
         private MainFormPresenter presenter;
         bool isFormVisible = true;  // Stores state of visibility of MainForm
+        bool areCommandLineArgumentsRead = false;
 
         #region Properties
         public int TaskProgress {
@@ -75,15 +76,6 @@ namespace Clipboarder {
 
         public MainForm() {
             InitializeComponent();
-            ReadCommandLineArguments();
-        }
-
-        private void ReadCommandLineArguments() {
-            // Minimize winodw on reading corresponding flags
-            String[] cmdArgs = Environment.GetCommandLineArgs();
-            if (cmdArgs.Contains("-m") | cmdArgs.Contains("--start-minimized")) {
-                this.WindowState = FormWindowState.Minimized;
-            }
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
@@ -97,6 +89,32 @@ namespace Clipboarder {
 
             this.toolStripStatusLabel3.Text = Application.ProductVersion.ToString() + " BETA";
             presenter = new MainFormPresenter(this);
+        }
+
+        private void MainForm_Paint(object sender, PaintEventArgs e) {
+            ReadCommandLineArguments();
+        }
+
+        private void ReadCommandLineArguments() {
+            if (!areCommandLineArgumentsRead) {
+                String[] cmdArgs = Environment.GetCommandLineArgs();
+            
+                // Minimize winodw on reading corresponding flags
+                if (cmdArgs.Contains("-m") | cmdArgs.Contains("--start-minimized")) {
+                    isFormVisible = !isFormVisible;
+                    this.Hide();
+                }
+
+                // Check if Cliboarder process is triggered by user logon
+                if (cmdArgs.Contains("-u") | cmdArgs.Contains("--ulogon")) {
+                    // Minimize window if enabled in settings
+                    if (Properties.Settings.Default.minimizeOnLogon) {
+                        isFormVisible = !isFormVisible;
+                        this.Hide();
+                    }
+                }
+            }
+            areCommandLineArgumentsRead = true;
         }
 
         public event EventHandler<EventArgs> LoadContent;
@@ -367,12 +385,11 @@ namespace Clipboarder {
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e) {
             if (isFormVisible) {
-                isFormVisible = !isFormVisible;
                 Hide();
             } else {
-                isFormVisible = !isFormVisible;
                 Show();
             }
+            isFormVisible = !isFormVisible;
         }
 
         private void clearClipboarderToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -404,6 +421,5 @@ namespace Clipboarder {
         private void toolStripStatusLabel1_Click(Object sender, EventArgs e) {
             Process.Start("https://github.com/Suyash12mahar/Clipboarder/");
         }
-
     }
 }
