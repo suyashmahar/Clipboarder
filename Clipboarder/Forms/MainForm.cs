@@ -79,9 +79,14 @@ namespace Clipboarder {
 
         public MainForm() {
             InitializeComponent();
+
+            // Setup status life timer
             statusTextLifeTimer = new System.Windows.Forms.Timer();
             statusTextLifeTimer.Tick += StatusTextLifeTimer_Tick;
             statusTextLifeTimer.Interval = 5000;
+
+            // Hide Image page for Update/1
+            MainTabControl.TabPages.Remove(imagePage);
         }
 
         private void StatusTextLifeTimer_Tick(object sender, EventArgs e) {
