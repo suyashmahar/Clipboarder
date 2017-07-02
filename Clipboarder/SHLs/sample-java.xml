@@ -22,7 +22,8 @@
         <word>implements\b</word>
         <word>super</word>
         <word>\bthis\s</word>
-        <word>new\n</word>
+        <word>new</word>
+        <word>boolean</word>
     </words>
     <words color="maroon">
         <word>".+"</word>
@@ -30,6 +31,14 @@
     </words>
     <words color="green">
         <word>//.+</word>
-        <word>/\*.+\*/</word>
+        <word>/\*.*\*/</word>
+    </words>
+    <words color="orange">
+        <word>&lt;</word>
+        <word>&gt;</word>
+        <word>[</word>
+        <word>]</word>
+        <word>{</word>
+        <word>}</word>
     </words>
 </collection>

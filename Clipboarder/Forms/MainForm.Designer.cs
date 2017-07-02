@@ -72,6 +72,8 @@ namespace Clipboarder {
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collapseExpandButton = new System.Windows.Forms.PictureBox();
+            this.installSHLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.mainGridContextMenu.SuspendLayout();
             this.textPage.SuspendLayout();
@@ -335,6 +337,8 @@ namespace Clipboarder {
             this.ToolsToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ToolsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.installSHLToolStripMenuItem,
+            this.toolStripSeparator5,
             this.saveContentToolStripMenuItem,
             this.loadContentToolStripMenuItem,
             this.toolStripSeparator1,
@@ -505,7 +509,7 @@ namespace Clipboarder {
             this.toolStripSeparator3,
             this.closeToolStripMenuItem});
             this.NotificationMenuContextMenuStrip.Name = "NotificationMenuContextMenuStrip";
-            this.NotificationMenuContextMenuStrip.Size = new System.Drawing.Size(171, 142);
+            this.NotificationMenuContextMenuStrip.Size = new System.Drawing.Size(171, 120);
             this.NotificationMenuContextMenuStrip.Opened += new System.EventHandler(this.NotificationMenuContextMenuStrip_Opened);
             this.NotificationMenuContextMenuStrip.DoubleClick += new System.EventHandler(this.showToolStripMenuItem_Click);
             this.NotificationMenuContextMenuStrip.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.showToolStripMenuItem_Click);
@@ -569,6 +573,19 @@ namespace Clipboarder {
             this.collapseExpandButton.TabStop = false;
             this.collapseExpandButton.Visible = false;
             this.collapseExpandButton.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // installSHLToolStripMenuItem
+            // 
+            this.installSHLToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_SHL_Icon;
+            this.installSHLToolStripMenuItem.Name = "installSHLToolStripMenuItem";
+            this.installSHLToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.installSHLToolStripMenuItem.Text = "&Install SHL";
+            this.installSHLToolStripMenuItem.Click += new System.EventHandler(this.installSHLToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(190, 6);
             // 
             // MainForm
             // 
@@ -657,5 +674,7 @@ namespace Clipboarder {
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripMenuItem installSHLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }

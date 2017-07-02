@@ -124,6 +124,17 @@
     <Compile Include="Controls\ClipboardMonitor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="InstallShl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstallShl.Designer.cs">
+      <DependentUpon>InstallShl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SyntaxHighlighting\ColoredKeyword.cs" />
     <Compile Include="Content.cs" />
     <Compile Include="Encryption\ContentEncryption.cs" />
@@ -198,14 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -250,6 +256,7 @@
     <None Include="Resources\Clipboarder-Clean-Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Clipboarder-SHL-Icon.png" />
     <Content Include="SHLs\sample-java.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

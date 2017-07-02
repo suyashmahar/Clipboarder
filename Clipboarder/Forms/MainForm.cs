@@ -19,6 +19,8 @@ namespace Clipboarder {
         bool isFormVisible = true;  // Stores state of visibility of MainForm
         bool areCommandLineArgumentsRead = false;
 
+        System.Windows.Forms.Timer statusTextLifeTimer;
+
         #region Properties
         public int TaskProgress {
             get {
@@ -52,6 +54,7 @@ namespace Clipboarder {
             }
             set {
                 statusLabel.Text = value;
+                EnableStatusLifeTimer();
             }
         }
         // Returns text content from row currently selected in textDataGrid
@@ -76,6 +79,14 @@ namespace Clipboarder {
 
         public MainForm() {
             InitializeComponent();
+            statusTextLifeTimer = new System.Windows.Forms.Timer();
+            statusTextLifeTimer.Tick += StatusTextLifeTimer_Tick;
+            statusTextLifeTimer.Interval = 5000;
+        }
+
+        private void StatusTextLifeTimer_Tick(object sender, EventArgs e) {
+            statusLabel.Text = "Ready";
+            statusTextLifeTimer.Enabled = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
@@ -121,6 +132,7 @@ namespace Clipboarder {
         public event EventHandler<EventArgs> SaveContent;
         public event EventHandler<EventArgs> OnExiting;
         public event EventHandler<EventArgs> ShowSettings;
+        public event EventHandler<EventArgs> InstallSHLs;
         public event EventHandler<EventArgs> URLCalled;
         public event EventHandler<TextEventArgs> textGridCheckURLAndSetStatus;
         public event EventHandler<EventArgs> EditTextContent;
@@ -277,6 +289,10 @@ namespace Clipboarder {
         private void clearClipboardMenuItem_Click_1(Object sender, EventArgs e) {
             Clipboard.Clear();
         }
+
+        private void installSHLToolStripMenuItem_Click(object sender, EventArgs e) {
+            InstallSHLs(sender, e);
+        }
         #endregion
 
         /// <summary>
@@ -333,7 +349,18 @@ namespace Clipboarder {
         }
         private void copyToClipboardToolStripMenuItem_Click(Object sender, EventArgs e) {
             CopySelectedTextToClipboard(sender, e);
+            statusLabel.Text = "Copied to clipboard";
+            EnableStatusLifeTimer();
         }
+
+        // Enables/Re-enables timer controlling lifetime of status label
+        private void EnableStatusLifeTimer() {
+            if (statusTextLifeTimer.Enabled) {
+                statusTextLifeTimer.Enabled = false;
+            }
+            statusTextLifeTimer.Enabled = true;
+        }
+
         #endregion
         private void goToURLToolStripMenuItem_Click(object sender, EventArgs e) {
             URLCalled(sender, e);

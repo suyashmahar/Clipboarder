@@ -38,6 +38,7 @@ namespace Clipboarder {
             view.LoadContent += LoadContent;
             view.SaveContent += SaveContent;
             view.ShowSettings += ShowSettings;
+            view.InstallSHLs += InstallSHLs;
             view.URLCalled += URLCalled;
             view.textGridCheckURLAndSetStatus += textGridCheckURLAndSetStatus;
             view.EditTextContent += EditTextContent;
@@ -57,6 +58,55 @@ namespace Clipboarder {
             // Adds handler for clipboardContentChanged Event
             clipboardMonitor = new ClipboardMonitor();
             clipboardMonitor.ClipboardChanged += ClipboardMonitor_ClipboardChanged;
+        }
+
+        /// <summary>
+        /// Shows OpenFileDialog for letting user select SHLs to install
+        /// SHLs selected are installed in 'SHLs' sub directory within installation
+        /// directory
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InstallSHLs(object sender, EventArgs e) {
+            OpenFileDialog shlSelectDialog = new OpenFileDialog();
+
+            shlSelectDialog.Filter = "Syntax highlighting files (*.xml)|*.xml";
+            shlSelectDialog.RestoreDirectory = true;
+            shlSelectDialog.Multiselect = true;
+            DialogResult result = shlSelectDialog.ShowDialog();
+
+            if (result == DialogResult.OK) {
+                String curDir 
+                    = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                MessageBox.Show(curDir);
+                String shlDir = System.IO.Path.Combine(curDir, "SHLs");
+
+                if (!System.IO.Directory.Exists(shlDir)) {
+                    System.IO.Directory.CreateDirectory(shlDir);
+                }
+
+                for (int i = 0; i < shlSelectDialog.FileNames.Length; i++) {
+                    try {
+                        String sourceFile = shlSelectDialog.FileNames[i];
+                        String destFile = shlSelectDialog.SafeFileNames[i];
+                        destFile = System.IO.Path.Combine(shlDir, destFile);
+
+                        System.IO.File.Copy(sourceFile, destFile, true);
+                    } catch (UnauthorizedAccessException) {
+                        MessageBox.Show("Permission denied, check permissions and retry.",
+                            "Clipboarder - error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } catch (IOException) {
+                        MessageBox.Show("An I/O error has occurred.",
+                            "Clipboarder - error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } catch (NotSupportedException) {
+                        MessageBox.Show("Unable to process file name.",
+                            "Clipboarder - error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } catch (Exception) {
+                        MessageBox.Show("Unkown error.",
+                            "Clipboarder - error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void CopySelectedTextToClipboard(Object sender, EventArgs e) {
