@@ -1,3 +1,5 @@
+<image src="Images/clipboarder_banner.png">
+
 
 # Clipboarder
 **Clipboarder** is a clipboard management tool for Windows written in C# using .NET framework 4.0.  
