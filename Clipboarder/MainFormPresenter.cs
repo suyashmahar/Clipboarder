@@ -78,7 +78,6 @@ namespace Clipboarder {
             if (result == DialogResult.OK) {
                 String curDir 
                     = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                MessageBox.Show(curDir);
                 String shlDir = System.IO.Path.Combine(curDir, "SHLs");
 
                 if (!System.IO.Directory.Exists(shlDir)) {
@@ -96,7 +95,7 @@ namespace Clipboarder {
                         MessageBox.Show("Permission denied, check permissions and retry.",
                             "Clipboarder - error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     } catch (IOException) {
-                        MessageBox.Show("An I/O error has occurred.",
+                        MessageBox.Show("An I/O error has oFccurred.",
                             "Clipboarder - error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     } catch (NotSupportedException) {
                         MessageBox.Show("Unable to process file name.",

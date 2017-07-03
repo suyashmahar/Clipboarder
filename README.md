@@ -1,23 +1,34 @@
+<image src="Images/clipboarder_banner.png">
+
 
 # Clipboarder
-**Clipboarder** is a clipboard management tool for Windows written in C# using .NET framework 4.0.
+**Clipboarder** is a clipboard management tool for Windows written in C# using .NET framework 4.0.  
+Grab latest release (v1.0) of Clipboarder from [here](https://github.com/suyashmahar/Clipboarder/releases/tag/v1.0).
 
 ## Features:
-1. Clipboard management for text and image based content.
+1. Clipboard management for text based content.
 2. Ability to save contents of Clipboarder to database using password.
 3. Ability to access content in hierarchical order using customizable  keyboard shortcut, default: <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>NumberKeys</kbd>.
 4. Identification of multiple URLs in text content (turned off by default).
-5. Syntax Highlighting for languages defined in SHLs directory
+5. Syntax Highlighting for languages defined in SHLs directory.
+6. Support for UTF content.
 
 ## Screenshot
 <img src="Images/screenshot.png" width="450">
 
 ## Syntax Highlighting
-Clipboarder uses cutom `RichTextBox`, `SyntaxHighlightingTextBox` to highlight text. Keywords for coloring are stored in XML files within the 'SHLs' directory.
+Clipboarder uses custom `RichTextBox`, `SyntaxHighlightingTextBox` to highlight text. Keywords for coloring are stored in XML files within the 'SHLs' directory.
 
-## Relases
-__0.9.0-beta__  
-Latest release for Clipboarder is 0.9.0-beta. Release notes and binary for this release is [here](https://github.com/suyashmahar/Clipboarder/releases/tag/v0.9.0.0Beta).
+## Releases
+Latest release for Clipboarder is 1.0.0.  Release notes and binary for this release is [here](https://github.com/suyashmahar/Clipboarder/releases/tag/v1.0).  
+* __1.0.0__  
+Version 1.0 of Cliboarder brings lots of new features, some of them are:
+    * Starting Clipboarder with Windows
+    * Installation support for SHL files
+    * Several UX improvements
+
+* __0.9.0-beta__  
+0.9.0-beta release of Clipboarder brings first release of Clipboarder since moving to GitHub. Clipboarder currently does not include installer. Release notes and binary for this release is [here](https://github.com/suyashmahar/Clipboarder/releases/tag/v0.9.0.0Beta).
 ### Note:
 * Language name displayed in Text Preview are same as XML file in the SHLs directory.
 * XML file should follow pattern similar to that of `sample-java.xml`

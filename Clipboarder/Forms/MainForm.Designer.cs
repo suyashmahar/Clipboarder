@@ -49,6 +49,8 @@ namespace Clipboarder {
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.installSHLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.saveContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadContentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -57,6 +59,9 @@ namespace Clipboarder {
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearClipboarderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearClipboardMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.springStatusStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -72,8 +77,7 @@ namespace Clipboarder {
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collapseExpandButton = new System.Windows.Forms.PictureBox();
-            this.installSHLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.textDataGrid)).BeginInit();
             this.mainGridContextMenu.SuspendLayout();
             this.textPage.SuspendLayout();
@@ -323,7 +327,8 @@ namespace Clipboarder {
             this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolsToolStripMenuItem,
             this.settingsMenuItem,
-            this.toolStripMenuItem2});
+            this.toolStripMenuItem2,
+            this.helpToolStripMenu});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
             this.MainMenuStrip.Size = new System.Drawing.Size(622, 45);
@@ -350,6 +355,19 @@ namespace Clipboarder {
             this.ToolsToolStripMenuItem.Size = new System.Drawing.Size(50, 50);
             this.ToolsToolStripMenuItem.Text = "Tools";
             this.ToolsToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // installSHLToolStripMenuItem
+            // 
+            this.installSHLToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_SHL_Install_Icon;
+            this.installSHLToolStripMenuItem.Name = "installSHLToolStripMenuItem";
+            this.installSHLToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
+            this.installSHLToolStripMenuItem.Text = "&Install SHL";
+            this.installSHLToolStripMenuItem.Click += new System.EventHandler(this.installSHLToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(190, 6);
             // 
             // saveContentToolStripMenuItem
             // 
@@ -436,6 +454,32 @@ namespace Clipboarder {
             this.clearClipboardMenuItem.Size = new System.Drawing.Size(251, 26);
             this.clearClipboardMenuItem.Text = "Clear Clipboard";
             // 
+            // helpToolStripMenu
+            // 
+            this.helpToolStripMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpToolStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.helpToolStripMenu.Image = global::Clipboarder.Properties.Resources.Clipboarder_Help_Menu_Icon;
+            this.helpToolStripMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.helpToolStripMenu.Name = "helpToolStripMenu";
+            this.helpToolStripMenu.Size = new System.Drawing.Size(52, 41);
+            this.helpToolStripMenu.Text = "toolStripMenuItem1";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "A&bout";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem.Text = "H&elp";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
             // MainStatusStrip
             // 
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -443,6 +487,7 @@ namespace Clipboarder {
             this.springStatusStripLabel,
             this.progressBar,
             this.toolStripStatusLabel2,
+            this.toolStripSeparator,
             this.toolStripStatusLabel3});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 349);
             this.MainStatusStrip.Name = "MainStatusStrip";
@@ -459,7 +504,7 @@ namespace Clipboarder {
             // springStatusStripLabel
             // 
             this.springStatusStripLabel.Name = "springStatusStripLabel";
-            this.springStatusStripLabel.Size = new System.Drawing.Size(357, 17);
+            this.springStatusStripLabel.Size = new System.Drawing.Size(308, 17);
             this.springStatusStripLabel.Spring = true;
             // 
             // progressBar
@@ -488,8 +533,8 @@ namespace Clipboarder {
             this.toolStripStatusLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.toolStripStatusLabel3.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(34, 17);
-            this.toolStripStatusLabel3.Text = "BETA";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(73, 17);
+            this.toolStripStatusLabel3.Text = "version label";
             this.toolStripStatusLabel3.ToolTipText = "Open GitHub Repository";
             // 
             // mainNotifyIcon
@@ -574,18 +619,12 @@ namespace Clipboarder {
             this.collapseExpandButton.Visible = false;
             this.collapseExpandButton.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // installSHLToolStripMenuItem
+            // toolStripSeparator
             // 
-            this.installSHLToolStripMenuItem.Image = global::Clipboarder.Properties.Resources.Clipboarder_SHL_Icon;
-            this.installSHLToolStripMenuItem.Name = "installSHLToolStripMenuItem";
-            this.installSHLToolStripMenuItem.Size = new System.Drawing.Size(193, 26);
-            this.installSHLToolStripMenuItem.Text = "&Install SHL";
-            this.installSHLToolStripMenuItem.Click += new System.EventHandler(this.installSHLToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(190, 6);
+            this.toolStripSeparator.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(10, 17);
+            this.toolStripSeparator.Text = "|";
             // 
             // MainForm
             // 
@@ -673,8 +712,12 @@ namespace Clipboarder {
         private System.Windows.Forms.ToolStripMenuItem viewInSyntaxHighlightingToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripMenuItem installSHLToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripSeparator;
     }
 }

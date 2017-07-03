@@ -63,6 +63,26 @@ namespace Clipboarder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Clipboard_WF {
+            get {
+                object obj = ResourceManager.GetObject("Clipboard-WF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Clipboard_WF_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Clipboard-WF-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Clipboarder_Clean_Icon {
             get {
                 object obj = ResourceManager.GetObject("Clipboarder-Clean-Icon", resourceCulture);
@@ -153,6 +173,16 @@ namespace Clipboarder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Clipboarder_Help_Menu_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Clipboarder-Help-Menu-Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Clipboarder_Import_Icon {
             get {
                 object obj = ResourceManager.GetObject("Clipboarder-Import-Icon", resourceCulture);
@@ -186,6 +216,16 @@ namespace Clipboarder.Properties {
         internal static System.Drawing.Bitmap Clipboarder_SHL_Icon {
             get {
                 object obj = ResourceManager.GetObject("Clipboarder_SHL_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Clipboarder_SHL_Install_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Clipboarder-SHL-Install-Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

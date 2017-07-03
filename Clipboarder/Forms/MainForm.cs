@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -79,9 +80,14 @@ namespace Clipboarder {
 
         public MainForm() {
             InitializeComponent();
+
+            // Setup status life timer
             statusTextLifeTimer = new System.Windows.Forms.Timer();
             statusTextLifeTimer.Tick += StatusTextLifeTimer_Tick;
             statusTextLifeTimer.Interval = 5000;
+
+            // Hide Image page for Update/1
+            MainTabControl.TabPages.Remove(imagePage);
         }
 
         private void StatusTextLifeTimer_Tick(object sender, EventArgs e) {
@@ -98,7 +104,10 @@ namespace Clipboarder {
                 collapseExpandButton.Image = Properties.Resources.Clipboarder_Expand_Arrow;
             }
 
-            this.toolStripStatusLabel3.Text = Application.ProductVersion.ToString() + " BETA";
+            this.toolStripStatusLabel3.Text 
+                = "v" + Assembly.GetExecutingAssembly().GetName().Version.Major + "." 
+                    + Assembly.GetExecutingAssembly().GetName().Version.Minor;
+
             presenter = new MainFormPresenter(this);
         }
 
@@ -447,6 +456,15 @@ namespace Clipboarder {
 
         private void toolStripStatusLabel1_Click(Object sender, EventArgs e) {
             Process.Start("https://github.com/Suyash12mahar/Clipboarder/");
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            AboutBox aBox = new AboutBox();
+            aBox.Show();
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e) {
+            Process.Start("http://suyashmahar.me/Clipboarder/help");
         }
     }
 }
