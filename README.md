@@ -1,4 +1,4 @@
-<image src="Images/clipboarder_banner.png">
+<image src="Images/clipboarder_banner.png"/>
 
 
 # Clipboarder
