@@ -1,8 +1,8 @@
-<image src="Images/clipboarder_banner.png">
+<image src="Images/clipboarder_banner.png">  
 
 
 
-# Clipboarder
+# Clipboarder  
 **Clipboarder** is a clipboard management tool for Windows written in C# using .NET framework 4.0.  
 
 
@@ -21,7 +21,7 @@ Grab latest release (v1.0) of Clipboarder from [here](https://github.com/suyashm
 
 ## Releases
 Latest release for Clipboarder is 1.0.0.  Release notes and binary for this release is [here](https://github.com/suyashmahar/Clipboarder/releases/tag/v1.0).  
-* __1.0.0__  
+* [__1.0.0__](release-notes/ver-1.0.0.md)  
 Version 1.0 of Cliboarder brings lots of new features, some of them are:
     * Starting Clipboarder with Windows
     * Installation support for SHL files
